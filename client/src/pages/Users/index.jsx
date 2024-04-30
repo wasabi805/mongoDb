@@ -1,27 +1,16 @@
-import React, {useEffect} from "react";
-import axios from 'axios'
+import React from "react";
+import { useFetchAllUsersQuery } from '../../services/index'
 
 const Users = () => {
+  const { data, error, isLoading } = useFetchAllUsersQuery()
+  
+  return (
+    <div>
+        <h3>Users</h3>
+        {isLoading === false &&  
+            data.users.map(user=>user.name)}
 
-    const testServer = async()=>{
-        const response = await axios({
-            method: 'GET',
-            url: 'http://localhost:8080/api/users'
-        }).then(res=>res).catch(err=>{
-            console.log(err)
-        })
-
-        console.log('what is response', response)
-
-
-    }
-
-    useEffect(()=>{
-        testServer()
-    },[])
-
-
-  return <div>Users</div>;
+    </div>);
 };
 
 export default Users;
