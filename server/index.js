@@ -21,9 +21,11 @@ mongoose
 
 /* ROUTES */
 const userRoutes = require("./routes/User");
+const loginRoutes = require('./routes/Login')
 
 /* ROUTER */
 app.use("/api/users", userRoutes);
+app.use("/api/login", loginRoutes)
 
 app.get("/", (req, res) => {
   console.log(process.env.TEST_ME, "yee");
