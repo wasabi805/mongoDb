@@ -1,25 +1,26 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+/* post example from docs: https://redux-toolkit.js.org/rtk-query/api/createApi#how-endpoints-get-used, */
 
 export const loginApi = createApi({
-    reducerPath: 'loginApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8080/api/' }),
-    endpoints: ( builder ) => ({
-      postLoginHome: builder.query({
-        /* post example from docs: https://redux-toolkit.js.org/rtk-query/api/createApi#how-endpoints-get-used, */
-        query: ( body ) => {
-            console.log('what is body', body)
-            return {
-                url: `login/home`,
-                method: 'POST',
-            }
-        },
-      }),
-
-      // next post here
+  reducerPath: "loginApi",
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8080/api/" }),
+  endpoints: (builder) => ({
+    postLoginHome: builder.query({
+      query: ({ userName, password }) => {
+        return {
+          url: `login/home`,
+          method: "POST",
+          body: { userName, password },
+        };
+      },
     }),
-  })
 
-  console.log('what is loginApi', loginApi)
+    // next post here
+  }),
+});
 
-  //https://stackoverflow.com/a/75160992/7857134 : use Lazy so that post call can be made with button click
-  export const { useLazyPostLoginHomeQuery } = loginApi;
+console.log("what is loginApi", loginApi);
+
+//https://stackoverflow.com/a/75160992/7857134 : use Lazy so that post call can be made with button click
+export const { useLazyPostLoginHomeQuery } = loginApi;

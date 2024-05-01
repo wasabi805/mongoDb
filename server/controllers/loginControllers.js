@@ -1,8 +1,8 @@
+const verifyLoginHome = async (req, res) => {
+  console.log("verify user | backend", req.body);
+  res.send({ msg: "hit verifyLoginHome" });
+};
 
-const verifyLoginHome = async( req, res )=>{
-    res.send({msg: 'hit verifyLoginHome'})
-}
-
-module.exports={
-    verifyLoginHome
-}
+module.exports = {
+  verifyLoginHome,
+};

@@ -9,12 +9,11 @@ export const store = configureStore({
     userSlice,
     [fetchAllUsers.reducerPath]: fetchAllUsers.reducer,
     loginSlice,
-    [loginApi.reducerPath] : loginApi.reducer
+    [loginApi.reducerPath]: loginApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
-        fetchAllUsers.middleware,
-        loginApi.middleware
-        ),
-    
+      fetchAllUsers.middleware,
+      loginApi.middleware,
+    ),
 });

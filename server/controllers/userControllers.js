@@ -62,7 +62,7 @@ const getSingleUser = async (req, res) => {
       user: User,
     });
   } catch (error) {
-    res.send({message: 'getSingleUser - Error connecting to database'})
+    res.send({ message: "getSingleUser - Error connecting to database" });
   }
 };
 

@@ -2,7 +2,10 @@ import React from "react";
 import { useFetchAllUsersQuery } from "../../services/index";
 
 const Users = () => {
-  const { data, error, isLoading } = useFetchAllUsersQuery();
+  const { data, error, isLoading } = useFetchAllUsersQuery({
+    userName: "someName",
+    password: "somepW",
+  });
 
   return (
     <div>

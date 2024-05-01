@@ -1,13 +1,13 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-var cors = require('cors')
+var cors = require("cors");
 
 const app = express();
 
 /* middleware */
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 /* DB connect */
 mongoose
@@ -21,11 +21,11 @@ mongoose
 
 /* ROUTES */
 const userRoutes = require("./routes/User");
-const loginRoutes = require('./routes/Login')
+const loginRoutes = require("./routes/Login");
 
 /* ROUTER */
 app.use("/api/users", userRoutes);
-app.use("/api/login", loginRoutes)
+app.use("/api/login", loginRoutes);
 
 app.get("/", (req, res) => {
   console.log(process.env.TEST_ME, "yee");
