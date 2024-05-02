@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { setInput, setHomeAuth } from "../../store/slices/loginSlice";
-import { submitHomeAuthLogin } from "../../services/loginServices";
+import { submitHomeAuthLogin } from "../../thunks/login";
 
 import { TextField, Button } from "@mui/material";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { userName, password, homeAuth, test } = useSelector(
+  const { userName, password, isHomeAuth, test } = useSelector(
     (state) => state.loginSlice,
   );
 
@@ -20,10 +20,22 @@ const Home = () => {
   };
 
   const handeSubmitLogin = () => {
-    dispatch(submitHomeAuthLogin({ test: "mosdef" }));
+    dispatch(submitHomeAuthLogin());
   };
-  console.log("what is userName, password,", { userName, password });
-  console.log("whatis test", test);
+
+  const handleEnterSite = useCallback(
+    ({ isHomeAuth }) => {
+      if (isHomeAuth === true) {
+        navigate("users");
+      }
+    },
+    [navigate],
+  );
+
+  useEffect(() => {
+    handleEnterSite({ isHomeAuth });
+  }, [isHomeAuth, handleEnterSite]);
+
   return (
     <div style={{}}>
       <div>
@@ -45,8 +57,6 @@ const Home = () => {
         <Button variant="contained" onClick={() => handeSubmitLogin()}>
           Login
         </Button>
-
-        {homeAuth === false && userName !== "" && password !== "" && "ERROR"}
       </div>
     </div>
   );

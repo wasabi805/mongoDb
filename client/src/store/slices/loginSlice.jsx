@@ -1,9 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { submitHomeAuthLogin } from "../../thunks/login";
 
 const initialState = {
   userName: "",
   password: "",
   test: "",
+  loading: false,
+  isHomeAuth: false,
+  displayLoginError: false,
 };
 
 export const loginSlice = createSlice({
@@ -23,6 +27,27 @@ export const loginSlice = createSlice({
     setTest: (state, action) => {
       state.test = action.payload;
     },
+  },
+
+  extraReducers: (builder) => {
+    builder.addCase(submitHomeAuthLogin.pending, (state) => {
+      alert("fired now");
+      state.loading = true;
+    });
+
+    builder.addCase(submitHomeAuthLogin.fulfilled, (state, action) => {
+      state.loading = false;
+      state.isHomeAuth = action.payload?.data?.isHomeAuth;
+      state.displayLoginError = action.payload?.data?.isHomeAuth;
+
+      if (action.payload?.data?.isHomeAuth) {
+        (state.userName = ""), (state.password = "");
+      }
+    });
+
+    builder.addCase(submitHomeAuthLogin.rejected, (state, action) => {
+      state.loading = false;
+    });
   },
 });
 

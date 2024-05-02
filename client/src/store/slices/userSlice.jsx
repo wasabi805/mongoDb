@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 /* APIS */
-import { fetchUsers } from "../../services";
+import { getAllUsers } from "../../thunks/users";
 
 const initialState = {
   loading: false,
@@ -17,16 +17,16 @@ export const userSlice = createSlice({
 
   extraReducers: (builder) => {
     /* GET ALL USERS */
-    builder.addCase(fetchUsers.pending, (state) => {
+    builder.addCase(getAllUsers.pending, (state) => {
       state.loading = true;
     });
 
-    builder.addCase(fetchUsers.fulfilled, (state, action) => {
+    builder.addCase(getAllUsers.fulfilled, (state, action) => {
       state.users = action.payload?.data?.users;
       state.loading = false;
     });
 
-    builder.addCase(fetchUsers.rejected, (state, action) => {
+    builder.addCase(getAllUsers.rejected, (state, action) => {
       console.log("rejected", action);
       state.loading = false;
       (state.users = []), (state.error = action.error.message);
@@ -35,4 +35,4 @@ export const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const userApis = { fetchUsers };
+export const userApis = { fetchUsers: getAllUsers };
