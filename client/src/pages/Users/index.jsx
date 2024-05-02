@@ -1,16 +1,26 @@
-import React from "react";
-import { useFetchAllUsersQuery } from "../../services/index";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { userApis } from "../../store/slices/userSlice";
 
 const Users = () => {
-  const { data, error, isLoading } = useFetchAllUsersQuery({
-    userName: "someName",
-    password: "somepW",
-  });
+  const dispatch = useDispatch();
+  const { fetchUsers } = userApis;
 
+  const { users } = useSelector((state) => state.userSlice);
+  console.log("users - redux", users);
+
+  const handleFetchAllUsers = () => {
+    dispatch(fetchUsers());
+  };
+
+  useEffect(() => {
+    handleFetchAllUsers();
+  }, []);
   return (
     <div>
       <h3>Users</h3>
-      {isLoading === false && data.users.map((user) => user.name)}
+      {users.map((user) => user.name)}
     </div>
   );
 };

@@ -1,19 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "./slices/userSlice";
-import { fetchAllUsers } from "../services/index";
-import { loginApi } from "../services/loginServices";
-import loginSlice from "./slices/loginSlice";
 
+import { userApis } from "./slices/userSlice";
+import rootReducer from "./rootReducer";
+
+/*https://stackoverflow.com/a/68509710/7857134 ---> serializableCheck: false */
 export const store = configureStore({
-  reducer: {
-    userSlice,
-    [fetchAllUsers.reducerPath]: fetchAllUsers.reducer,
-    loginSlice,
-    [loginApi.reducerPath]: loginApi.reducer,
-  },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
-      fetchAllUsers.middleware,
-      loginApi.middleware,
-    ),
+    getDefaultMiddleware({ serializableCheck: false }),
 });
