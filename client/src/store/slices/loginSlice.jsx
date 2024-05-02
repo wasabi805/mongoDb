@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userName: "",
   password: "",
-  homeAuth: false,
+  test: "",
 };
 
 export const loginSlice = createSlice({
@@ -13,17 +13,20 @@ export const loginSlice = createSlice({
     setInput: (state, action) => {
       const [key, value] = Object.entries(action.payload)[0];
       state[key] = value;
-      state.homeAuth = false;
     },
     setHomeAuth: (state, action) => {
       console.log("********", action);
       const homeAuth = action.payload;
       state.homeAuth = homeAuth;
     },
+
+    setTest: (state, action) => {
+      state.test = action.payload;
+    },
   },
 });
 
 // Action creators
-export const { setInput, setHomeAuth } = loginSlice.actions;
+export const { setInput, setHomeAuth, setTest } = loginSlice.actions;
 
 export default loginSlice.reducer;

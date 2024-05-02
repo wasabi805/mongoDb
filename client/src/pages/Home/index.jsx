@@ -1,23 +1,18 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useLazyPostLoginHomeQuery } from "../../services/loginServices";
+
 import { setInput, setHomeAuth } from "../../store/slices/loginSlice";
+import { submitHomeAuthLogin } from "../../services/loginServices";
+
 import { TextField, Button } from "@mui/material";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { userName, password, homeAuth } = useSelector(
+  const { userName, password, homeAuth, test } = useSelector(
     (state) => state.loginSlice,
   );
-
-  //https://stackoverflow.com/a/75160992/7857134 : use Lazy so that post call can be made with button click
-  const [submitLoginCreds, { data, error, isLoading }] =
-    useLazyPostLoginHomeQuery();
-
-  const isHomeAuth = data?.isHomeAuth;
-  console.log("what is data, error, isLoading", isHomeAuth, error, isLoading);
 
   const handleUpdateInput = (e) => {
     const name = e.target?.name;
@@ -25,20 +20,10 @@ const Home = () => {
   };
 
   const handeSubmitLogin = () => {
-    // pass args, define them first in postLoginHome @ ../../services/loginServices
-    submitLoginCreds({ userName, password });
+    dispatch(submitHomeAuthLogin({ test: "mosdef" }));
   };
-
-  const handleLoginStatus = (isHomeAuth) => {
-    dispatch(setHomeAuth(isHomeAuth));
-    if (isHomeAuth) navigate("users");
-  };
-
-  useEffect(() => {
-    handleLoginStatus(isHomeAuth);
-  }, [isHomeAuth]);
-
-  console.log("what is homeAuth", homeAuth);
+  console.log("what is userName, password,", { userName, password });
+  console.log("whatis test", test);
   return (
     <div style={{}}>
       <div>

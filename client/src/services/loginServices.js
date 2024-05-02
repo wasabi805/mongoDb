@@ -1,26 +1,13 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { setHomeAuth, setTest } from "../store/slices/loginSlice";
 
-/* post example from docs: https://redux-toolkit.js.org/rtk-query/api/createApi#how-endpoints-get-used, */
+export const submitHomeAuthLogin = createAsyncThunk(
+  "submitHomeAuthLogin",
 
-export const loginApi = createApi({
-  reducerPath: "loginApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8080/api/" }),
-  endpoints: (builder) => ({
-    postLoginHome: builder.query({
-      query: ({ userName, password }) => {
-        return {
-          url: `login/home`,
-          method: "POST",
-          body: { userName, password },
-        };
-      },
-    }),
+  async ({ test }, { dispatch, getState }) => {
+    let state = getState();
+    console.log("verify state", state);
 
-    // next post here
-  }),
-});
-
-console.log("what is loginApi", loginApi);
-
-//https://stackoverflow.com/a/75160992/7857134 : use Lazy so that post call can be made with button click
-export const { useLazyPostLoginHomeQuery } = loginApi;
+    dispatch(setTest({ test }));
+  },
+);
