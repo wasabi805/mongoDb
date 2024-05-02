@@ -1,10 +1,17 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Home from "../pages/Home";
 import Users from "../pages/Users";
 
-export const AppRouter = createBrowserRouter([
-  { path: "/", element: <Home /> },
-  { path: "/users", element: <Users /> },
-]);
+
+export const AppRouter = ()=>{
+    return(
+        <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/users" element={<Users />} />
+        </Routes>
+      </Router>
+    )
+}

@@ -31,7 +31,6 @@ export const loginSlice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(submitHomeAuthLogin.pending, (state) => {
-      alert("fired now");
       state.loading = true;
     });
 

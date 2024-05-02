@@ -19,22 +19,15 @@ const Home = () => {
     dispatch(setInput({ [name]: e.target?.value }));
   };
 
-  const handeSubmitLogin = () => {
-    dispatch(submitHomeAuthLogin());
+  const handeSubmitLogin = async () => {
+    const loginReponse = await dispatch(submitHomeAuthLogin());
+    
+    if( loginReponse.payload.data.isHomeAuth === true ){
+        navigate('users')
+    }
   };
 
-  const handleEnterSite = useCallback(
-    ({ isHomeAuth }) => {
-      if (isHomeAuth === true) {
-        navigate("users");
-      }
-    },
-    [navigate],
-  );
-
-  useEffect(() => {
-    handleEnterSite({ isHomeAuth });
-  }, [isHomeAuth, handleEnterSite]);
+ 
 
   return (
     <div style={{}}>
