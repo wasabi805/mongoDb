@@ -7,7 +7,7 @@ const createNewUser = async (req, res) => {
   try {
     const newUser = {
       name: req.body?.name,
-      username: req.body?.username,
+      userName: req.body?.userName,
       email: req.body?.email,
     };
 
@@ -20,11 +20,12 @@ const createNewUser = async (req, res) => {
       },
       phone: req.body?.phone ? req.body?.phone : "",
     });
-
+    console.log('what is response | Add USer', response)
     res.send({
-      id: response._id,
+      _id: response._id,
       name: response.name,
       email: response.email,
+      userName: response.userName,
       address: {
         ...response.address,
       },
