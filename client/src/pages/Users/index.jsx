@@ -6,7 +6,6 @@ import { userApis } from "../../store/slices/userSlice";
 import AddUsers from "./AddUsers";
 // import AddUsers from "./AddUsers";
 
-
 const Users = () => {
   const dispatch = useDispatch();
   const { fetchUsers } = userApis;
@@ -24,26 +23,18 @@ const Users = () => {
     <div>
       <h3>Users</h3>
       {users.map((user) => {
-  
         return (
-        <div style={{display: 'flex'}}>
-             <span style={{marginRight: '1rem'}}>
-                {user._id}
-            </span >
-            
-            <span style={{marginRight: '1rem'}}>
-                {user.userName}
-            </span>
-            <span style={{marginRight: '1rem'}}>
-                {user.email}
-            </span>
-            <span style={{marginRight: '1rem'}}>
-                {user.name}
-            </span>
-        </div>)
+          <div style={{ display: "flex" }}>
+            <span style={{ marginRight: "1rem" }}>{user._id}</span>
+
+            <span style={{ marginRight: "1rem" }}>{user.userName}</span>
+            <span style={{ marginRight: "1rem" }}>{user.email}</span>
+            <span style={{ marginRight: "1rem" }}>{user.name}</span>
+          </div>
+        );
       })}
 
-      <AddUsers/>
+      <AddUsers />
     </div>
   );
 };

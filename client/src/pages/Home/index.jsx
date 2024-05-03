@@ -21,13 +21,11 @@ const Home = () => {
 
   const handeSubmitLogin = async () => {
     const loginReponse = await dispatch(submitHomeAuthLogin());
-    
-    if( loginReponse.payload.data.isHomeAuth === true ){
-        navigate('users')
+
+    if (loginReponse.payload.data.isHomeAuth === true) {
+      navigate("users");
     }
   };
-
- 
 
   return (
     <div style={{}}>

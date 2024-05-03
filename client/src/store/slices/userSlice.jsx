@@ -7,11 +7,11 @@ const initialState = {
   loading: false,
   users: [],
 
-  addUser:{
-    name: '',
-    userName: '',
-    email: '',
-  }
+  addUser: {
+    name: "",
+    userName: "",
+    email: "",
+  },
 };
 
 /* REDUCER */
@@ -19,11 +19,10 @@ export const userSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    addUserData( state, action ) {
-  
+    addUserData(state, action) {
       const [key, value] = Object.entries(action.payload)[0];
-    
-      state.addUser[key] = value
+
+      state.addUser[key] = value;
     },
   },
 
@@ -43,24 +42,24 @@ export const userSlice = createSlice({
       (state.users = []), (state.error = action.error.message);
     });
 
-     /* Create a new USER */
-    builder.addCase(submitNewUser.pending, (state)=>{
+    /* Create a new USER */
+    builder.addCase(submitNewUser.pending, (state) => {
       state.loading = true;
     });
 
-    builder.addCase(submitNewUser.fulfilled, (state, action)=>{
-      const newUserAdded = action.payload.data
-     
-      state.users = [...state.users, newUserAdded]
-      state.loading = false;
-    })
+    builder.addCase(submitNewUser.fulfilled, (state, action) => {
+      const newUserAdded = action.payload.data;
 
-    builder.addCase(submitNewUser.rejected,(state)=>{
-      state.loading = false
-    })
+      state.users = [...state.users, newUserAdded];
+      state.loading = false;
+    });
+
+    builder.addCase(submitNewUser.rejected, (state) => {
+      state.loading = false;
+    });
   },
 });
 
 export default userSlice.reducer;
-export const { addUserData, }= userSlice.actions
-export const userApis = { fetchUsers: getAllUsers, createUser:  submitNewUser};
+export const { addUserData } = userSlice.actions;
+export const userApis = { fetchUsers: getAllUsers, createUser: submitNewUser };

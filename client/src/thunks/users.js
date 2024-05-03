@@ -6,10 +6,12 @@ export const getAllUsers = createAsyncThunk("/users/get", async () => {
   return await fetchAllUsers();
 });
 
-export const submitNewUser = createAsyncThunk("/users/post", async (_, {dispatch, getState}) => {
+export const submitNewUser = createAsyncThunk(
+  "/users/post",
+  async (_, { dispatch, getState }) => {
+    const state = getState();
+    const { name, userName, email } = state.userSlice.addUser;
 
-  const state = getState();
-  const {name, userName, email} = state.userSlice.addUser
-  
-  return  await postNewUser({name, userName, email});
-});
+    return await postNewUser({ name, userName, email });
+  },
+);
