@@ -8,6 +8,8 @@ import {
   setCancelEditUser,
 } from "../../store/slices/userSlice";
 
+import { userApis } from "../../store/slices/userSlice";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -22,6 +24,8 @@ const style = {
 
 const EditUserModal = () => {
   const dispatch = useDispatch();
+const {sendEditUser} = userApis
+
   const { users, editUser } = useSelector((state) => state.userSlice);
   console.log(
     "in user modal",
@@ -83,7 +87,7 @@ const EditUserModal = () => {
             cancel
           </Button>
 
-          <Button onClick={() => handleEditUser()}>save</Button>
+          <Button onClick={() => dispatch(sendEditUser())}>save</Button>
         </div>
       </Box>
     </Modal>
