@@ -69,7 +69,7 @@ export const patchUpdateUser = async ({ userId, user }) => {
       url,
       headers: { "Content-Type": "application/json" },
       body: {
-        userId :'wuTang',
+        userId: "wuTang",
         user,
       },
     })

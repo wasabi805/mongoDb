@@ -7,7 +7,7 @@ const {
   getAllUsers,
   getSingleUser,
   createNewUser,
-  updateUser
+  updateUser,
 } = require("../controllers/userControllers");
 
 /* Delete a single user */

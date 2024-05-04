@@ -43,7 +43,6 @@ const createNewUser = async (req, res) => {
 /* -----    Delete a user -----*/
 
 const deleteUser = async (req, res) => {
-
   try {
     const User = await UserModel.deleteOne({ _id: req?.params?.userId });
     if (!User) {
@@ -65,15 +64,15 @@ const deleteUser = async (req, res) => {
 };
 
 /*----- update a new User -----  */
-const updateUser = async (req, res)=>{
+const updateUser = async (req, res) => {
   console.log("dupdateUser CONTROLER", req.params);
-  console.log("UPDATE USER BODY SENT ", req.body)
+  console.log("UPDATE USER BODY SENT ", req.body);
   try {
-    res.send({msg : 'updateUser route hit'})
+    res.send({ msg: "updateUser route hit" });
   } catch (err) {
-    res.send({msg : 'ERROR | updateUser route hit'})
+    res.send({ msg: "ERROR | updateUser route hit" });
   }
-}
+};
 
 /*----- Get a single new User -----  */
 
