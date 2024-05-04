@@ -55,7 +55,29 @@ export const postDeleteUser = async ({ userId }) => {
     console.log("respose delete", response);
     return response;
   } catch (err) {
-    console.log("tell me the error", err);
+    console.log("tell me the error", err.response);
     alert("failed postDeleteUser");
+  }
+};
+
+//use this name
+export const patchUpdateUser = async ({ userId, user }) => {
+  const url = `http://localhost:8080/api/users/${userId}`;
+  try {
+    const response = await axios({
+      method: "PATCH",
+      url,
+      headers: { "Content-Type": "application/json" },
+      body: {
+        userId :'wuTang',
+        user,
+      },
+    })
+      .then((res) => res)
+      .catch((err) => err);
+
+    return response;
+  } catch (err) {
+    alert("failed patchUpdateUser", err.response);
   }
 };
