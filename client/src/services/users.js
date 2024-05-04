@@ -50,7 +50,7 @@ export const postDeleteUser = async ({ userId }) => {
       .catch((err) => {
         console.log("tell me the err", err, userId);
       });
-   
+
     return response;
   } catch (err) {
     console.log("tell me the error", err.response);

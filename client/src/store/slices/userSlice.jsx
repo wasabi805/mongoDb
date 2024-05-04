@@ -128,7 +128,6 @@ export const userSlice = createSlice({
     });
 
     builder.addCase(submitDeleteUser.fulfilled, (state, action) => {
-     
       const users = action.payload?.users;
       state.users = users;
 
@@ -141,15 +140,14 @@ export const userSlice = createSlice({
 
     /* -----  Update a user   -----*/
     builder.addCase(submitEditUser.pending, (state, action) => {
-     
       state.loading = false;
     });
 
     builder.addCase(submitEditUser.fulfilled, (state, action) => {
-      console.log('respCheck', action.payload)
-      state.users = action.payload.data.users
+      console.log("respCheck", action.payload);
+      state.users = action.payload.data.users;
       state.loading = false;
-      state.editUser.toggleModal = false
+      state.editUser.toggleModal = false;
     });
 
     builder.addCase(submitEditUser.rejected, (state, action) => {

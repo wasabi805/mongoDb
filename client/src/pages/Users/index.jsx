@@ -38,7 +38,9 @@ const Users = () => {
   };
 
   /*Component mounted */
-  useEffect(() => { handleFetchAllUsers()}, [] );
+  useEffect(() => {
+    handleFetchAllUsers();
+  }, []);
 
   return (
     <div>
@@ -46,7 +48,7 @@ const Users = () => {
 
       <EditUserModal />
 
-      { users?.map((user, idx) => {
+      {users?.map((user, idx) => {
         return (
           <div
             style={{ display: "flex", alignSelf: "center" }}
