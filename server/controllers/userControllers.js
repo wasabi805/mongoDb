@@ -45,7 +45,23 @@ const createNewUser = async (req, res) => {
 const deleteUser = async(req, res)=>{
   console.log('delete user', req.params)
 
-  
+  try {
+    const User = await UserModel.deleteOne({_id: req?.params?.userId})
+    if(!User){
+      return res.send({ 
+        msg: `message: No User found with id of ${req?.params?.userId}`
+      })
+    }
+
+    return res.send({
+      msg: `delete sucess! `,
+      status: 200,
+      _id: req?.params?.userId,
+    })
+    
+  } catch (error) {
+    
+  }
 
   res.send({
     msg: 'will delete user'

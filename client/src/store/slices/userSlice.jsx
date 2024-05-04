@@ -59,9 +59,14 @@ export const userSlice = createSlice({
 
     builder.addCase(submitNewUser.fulfilled, (state, action) => {
     
-      const newUserAdded = action.payload.data;
-
+      const newUserAdded = action.payload?.newUserAdded;
+     
       state.users = [...state.users, newUserAdded];
+      state.addUser = {
+        name: action.payload?.addUser.name,
+        email: '',
+        userName:''
+      }
       state.loading = false;
     });
 
@@ -71,17 +76,20 @@ export const userSlice = createSlice({
 
     /* -----  Delete a user   -----*/
     builder.addCase(submitDeleteUser.pending, (state) => {
-      console.log('action when blows up',)
+  
       state.loading = true;
     });
 
     builder.addCase(submitDeleteUser.fulfilled, (state, action) => {
+      console.log('what is action DELETE REDUCER', action)
+      const users = action.payload?.users
+      state.users= users
+
       state.loading = false;
     });
 
     builder.addCase(submitDeleteUser.rejected, (state, action) => {
-      alert('blew up')
-      console.log('action when blows up', action)
+      
       state.loading = false;
     });
   },

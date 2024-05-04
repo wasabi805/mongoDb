@@ -8,7 +8,7 @@ const AddUsers = () => {
   const dispatch = useDispatch();
 
   const userSlice = useSelector((state) => state.userSlice);
-  const { name, userName, email, loading } = userSlice;
+ 
   const { createUser } = userApis;
 
   const handleUpdateAddUserForm = (e) => {
@@ -23,7 +23,7 @@ const AddUsers = () => {
       return res;
     });
   };
-
+  
   return (
     <div
       style={{
@@ -38,21 +38,21 @@ const AddUsers = () => {
         placeholder="user name"
         sx={{ width: "18rem" }}
         name={"userName"}
-        value={userName}
+        value={userSlice.addUser.userName}
         onChange={(e) => handleUpdateAddUserForm(e)}
       />
       <TextField
         placeholder="name"
         sx={{ width: "18rem" }}
         name={"name"}
-        value={name}
+        value={userSlice.addUser.name}
         onChange={(e) => handleUpdateAddUserForm(e)}
       />
       <TextField
         placeholder="email"
         sx={{ width: "18rem" }}
         name={"email"}
-        value={email}
+        value={userSlice.addUser.email}
         onChange={(e) => handleUpdateAddUserForm(e)}
       />
       <Button
@@ -62,8 +62,8 @@ const AddUsers = () => {
       >
         add user
       </Button>
-      {loading === false && "not loading"}
-      {loading === true && "is loading"}
+      {userSlice.loading === false && "not loading"}
+      {userSlice.loading === true && "is loading"}
     </div>
   );
 };

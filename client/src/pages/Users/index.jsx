@@ -23,11 +23,12 @@ const Users = () => {
 
   useEffect(() => {
     handleFetchAllUsers();
+    console.log(users)
   }, []);
   return (
     <div>
       <h3>Users</h3>
-      {users.map((user, idx) => {
+      {users?.map((user, idx) => {
         return (
           <div
             style={{ display: "flex", alignSelf: "center" }}
