@@ -3,10 +3,14 @@ const express = require("express");
 const router = express.Router();
 
 const {
+  deleteUser,
   getAllUsers,
   getSingleUser,
   createNewUser,
 } = require("../controllers/userControllers");
+
+/* Delete a single user */
+router.delete("/:userId", deleteUser)
 
 /* Get a Single User */
 router.get("/:id", getSingleUser);

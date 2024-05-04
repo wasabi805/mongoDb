@@ -42,6 +42,16 @@ const createNewUser = async (req, res) => {
 
 /* -----    Delete a user -----*/
 
+const deleteUser = async(req, res)=>{
+  console.log('delete user', req.params)
+
+  
+
+  res.send({
+    msg: 'will delete user'
+  })
+}
+
 /*----- update a new User -----  */
 
 /*----- Get a single new User -----  */
@@ -83,6 +93,7 @@ const getAllUsers = async (req, res) => {
 };
 
 module.exports = {
+  deleteUser,
   createNewUser,
   getAllUsers,
   getSingleUser,
