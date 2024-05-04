@@ -24,7 +24,7 @@ const style = {
 
 const EditUserModal = () => {
   const dispatch = useDispatch();
-const {sendEditUser} = userApis
+  const { sendEditUser } = userApis;
 
   const { users, editUser } = useSelector((state) => state.userSlice);
   console.log(

@@ -1,6 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { fetchAllUsers, postNewUser, postDeleteUser, patchUpdateUser } from "../services/users";
+import {
+  fetchAllUsers,
+  postNewUser,
+  postDeleteUser,
+  patchUpdateUser,
+} from "../services/users";
 import { clearUserData } from "../store/slices/userSlice";
 
 export const getAllUsers = createAsyncThunk("/users/get", async () => {
@@ -43,16 +48,14 @@ export const submitDeleteUser = createAsyncThunk(
 );
 
 export const submitEditUser = createAsyncThunk(
-  '/users/patch',
-  async (_, { dispatch, getState })=>{
+  "/users/patch",
+  async (_, { dispatch, getState }) => {
     const state = getState();
-   
-    const {user, userId} = state.userSlice.editUser;
-    
-    const response = await patchUpdateUser({ userId , user}).then(res=>res) 
 
+    const { user, userId } = state.userSlice.editUser;
 
+    const response = await patchUpdateUser({ userId, user }).then((res) => res);
 
-    return response
-  }
-)
+    return response;
+  },
+);
