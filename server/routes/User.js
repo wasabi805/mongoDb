@@ -10,7 +10,7 @@ const {
 } = require("../controllers/userControllers");
 
 /* Delete a single user */
-router.delete("/:userId", deleteUser)
+router.delete("/:userId", deleteUser);
 
 /* Get a Single User */
 router.get("/:id", getSingleUser);

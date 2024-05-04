@@ -20,7 +20,7 @@ const createNewUser = async (req, res) => {
       },
       phone: req.body?.phone ? req.body?.phone : "",
     });
-    console.log('what is response | Add USer', response)
+    console.log("what is response | Add USer", response);
     res.send({
       _id: response._id,
       name: response.name,
@@ -42,31 +42,28 @@ const createNewUser = async (req, res) => {
 
 /* -----    Delete a user -----*/
 
-const deleteUser = async(req, res)=>{
-  console.log('delete user', req.params)
+const deleteUser = async (req, res) => {
+  console.log("delete user", req.params);
 
   try {
-    const User = await UserModel.deleteOne({_id: req?.params?.userId})
-    if(!User){
-      return res.send({ 
-        msg: `message: No User found with id of ${req?.params?.userId}`
-      })
+    const User = await UserModel.deleteOne({ _id: req?.params?.userId });
+    if (!User) {
+      return res.send({
+        msg: `message: No User found with id of ${req?.params?.userId}`,
+      });
     }
 
     return res.send({
       msg: `delete sucess! `,
       status: 200,
       _id: req?.params?.userId,
-    })
-    
-  } catch (error) {
-    
-  }
+    });
+  } catch (error) {}
 
   res.send({
-    msg: 'will delete user'
-  })
-}
+    msg: "will delete user",
+  });
+};
 
 /*----- update a new User -----  */
 
