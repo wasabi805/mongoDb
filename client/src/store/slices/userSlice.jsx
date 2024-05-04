@@ -16,6 +16,17 @@ const initialState = {
     userName: "",
     email: "",
   },
+
+  editUser: {
+    userId: '',
+    toggleModal: false,
+
+    user: {
+      userName: "",
+      name: "",
+      email: "",
+    },
+  },
 };
 
 /* REDUCER */
@@ -29,9 +40,48 @@ export const userSlice = createSlice({
       state.addUser[key] = value;
     },
 
-    clearUserData : ( state, action)=>{
-      console.log('what is action here', action)
+    clearUserData: (state, action) => {
+      console.log("what is action here", action);
       state.loading = false;
+    },
+
+    toggleEditUserModal: (state, action) => {
+      state.editUser.toggleModal = !state.editUser.toggleModal;
+    },
+
+    setEditUser: (state, action) => {
+
+      const { user, userId } = action.payload;
+ 
+      state.editUser.userId = userId
+      state.editUser.user = user;
+    },
+
+    setEditUserInputs : (state, action)=> {
+      const {editedUser} = action.payload
+      const [name, value] = Object.entries(editedUser)[0]
+      
+      state.editUser = {
+        ...state.editUser,
+        user:{
+          ...state.editUser.user,
+          [name] : value
+        }
+      }
+      state.loading = false;
+    },
+
+    setCancelEditUser :(state, action)=>{
+      state.editUser={
+        userId: '',
+        toggleModal: false,
+
+        user: {
+          userName: "",
+          name: "",
+          email: "",
+        },
+      }
     }
 
   },
@@ -58,15 +108,14 @@ export const userSlice = createSlice({
     });
 
     builder.addCase(submitNewUser.fulfilled, (state, action) => {
-    
       const newUserAdded = action.payload?.newUserAdded;
-     
+
       state.users = [...state.users, newUserAdded];
       state.addUser = {
         name: action.payload?.addUser.name,
-        email: '',
-        userName:''
-      }
+        email: "",
+        userName: "",
+      };
       state.loading = false;
     });
 
@@ -76,25 +125,37 @@ export const userSlice = createSlice({
 
     /* -----  Delete a user   -----*/
     builder.addCase(submitDeleteUser.pending, (state) => {
-  
       state.loading = true;
     });
 
     builder.addCase(submitDeleteUser.fulfilled, (state, action) => {
-      console.log('what is action DELETE REDUCER', action)
-      const users = action.payload?.users
-      state.users= users
+      console.log("what is action DELETE REDUCER", action);
+      const users = action.payload?.users;
+      state.users = users;
 
       state.loading = false;
     });
 
     builder.addCase(submitDeleteUser.rejected, (state, action) => {
-      
       state.loading = false;
     });
   },
 });
 
 export default userSlice.reducer;
-export const { addUserData, clearUserData } = userSlice.actions;
-export const userApis = { fetchUsers: getAllUsers, createUser: submitNewUser, deleteUser : submitDeleteUser };
+
+export const { 
+  addUserData, 
+  clearUserData, 
+  toggleEditUserModal, 
+  setEditUser , 
+  setEditUserInputs,
+  setCancelEditUser,
+  
+} = userSlice.actions;
+
+export const userApis = {
+  fetchUsers: getAllUsers,
+  createUser: submitNewUser,
+  deleteUser: submitDeleteUser,
+};

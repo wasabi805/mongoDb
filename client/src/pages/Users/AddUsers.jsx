@@ -8,7 +8,7 @@ const AddUsers = () => {
   const dispatch = useDispatch();
 
   const userSlice = useSelector((state) => state.userSlice);
- 
+
   const { createUser } = userApis;
 
   const handleUpdateAddUserForm = (e) => {
@@ -23,7 +23,7 @@ const AddUsers = () => {
       return res;
     });
   };
-  
+
   return (
     <div
       style={{

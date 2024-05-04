@@ -6,7 +6,7 @@ export const fetchAllUsers = () => {
     const resposne = axios({
       method: "GET",
       url,
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json" },
     }).then((res) => res);
 
     return resposne;
@@ -35,26 +35,27 @@ export const postNewUser = ({ name, userName, email }) => {
   }
 };
 
-export const postDeleteUser = async({ userId }) => {
+export const postDeleteUser = async ({ userId }) => {
   const url = `http://localhost:8080/api/users/${userId}`;
 
   try {
     const response = await axios({
       method: "DELETE",
       url,
-      headers: { "Content-Type": "application/json" }
-    }).then((res) => {
-      console.log('what is the res from delete', res)
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => {
+        console.log("what is the res from delete", res);
 
-      return res}).catch(
-      err=>{
-        console.log('tell me the err', err, userId)
-      }
-    );
+        return res;
+      })
+      .catch((err) => {
+        console.log("tell me the err", err, userId);
+      });
     console.log("respose delete", response);
     return response;
   } catch (err) {
-    console.log('tell me the error', err)
+    console.log("tell me the error", err);
     alert("failed postDeleteUser");
   }
 };

@@ -14,33 +14,30 @@ export const submitNewUser = createAsyncThunk(
     const { name, userName, email } = state.userSlice.addUser;
 
     const response = await postNewUser({ name, userName, email });
-    
+
     // dispatch(clearUserData({name: 'foo', userName: '', email: ''}))
 
     return {
-      addUser : { name: "", userName: "", email: "", },
-      newUserAdded : response.data
-    }
+      addUser: { name: "", userName: "", email: "" },
+      newUserAdded: response.data,
+    };
   },
 );
 
 export const submitDeleteUser = createAsyncThunk(
   "/users/delete",
-  async({ userId }, {dispatch, getState})=>{
-  
-    const state = getState()
-    let users = state.userSlice.users
+  async ({ userId }, { dispatch, getState }) => {
+    const state = getState();
+    let users = state.userSlice.users;
 
-    const response = await postDeleteUser({userId}).then(res=>res)
+    const response = await postDeleteUser({ userId }).then((res) => res);
 
-    const _id = response?.data._id
+    const _id = response?.data._id;
 
-    users = users.filter(user =>{
-      return user._id !== _id
-    })
+    users = users.filter((user) => {
+      return user._id !== _id;
+    });
 
-    return { users }
-  }
-)
-
-
+    return { users };
+  },
+);
