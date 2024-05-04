@@ -27,10 +27,7 @@ const EditUserModal = () => {
   const { sendEditUser } = userApis;
 
   const { users, editUser } = useSelector((state) => state.userSlice);
-  console.log(
-    "in user modal",
-    useSelector((state) => state.userSlice),
-  );
+
   const handSetEditUserInputs = (e) => {
     e.preventDefault();
     console.log("what is e", e);

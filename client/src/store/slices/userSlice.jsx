@@ -128,7 +128,7 @@ export const userSlice = createSlice({
     });
 
     builder.addCase(submitDeleteUser.fulfilled, (state, action) => {
-      console.log("what is action DELETE REDUCER", action);
+     
       const users = action.payload?.users;
       state.users = users;
 
@@ -141,17 +141,18 @@ export const userSlice = createSlice({
 
     /* -----  Update a user   -----*/
     builder.addCase(submitEditUser.pending, (state, action) => {
-      alert("getting update");
+     
       state.loading = false;
     });
 
     builder.addCase(submitEditUser.fulfilled, (state, action) => {
-      alert(" update success");
-      state.loading = true;
+      console.log('respCheck', action.payload)
+      state.users = action.payload.data.users
+      state.loading = false;
+      state.editUser.toggleModal = false
     });
 
     builder.addCase(submitEditUser.rejected, (state, action) => {
-      alert(" update FAIL");
       state.loading = false;
     });
   },

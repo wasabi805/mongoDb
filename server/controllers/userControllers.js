@@ -1,4 +1,5 @@
 const UserModel = require("../models/User");
+var _ = require('lodash');
 
 /* Grab all Users */
 
@@ -64,11 +65,35 @@ const deleteUser = async (req, res) => {
 };
 
 /*----- update a new User -----  */
-const updateUser = async (req, res) => {
+const updateUser = async (req, res)=>{
   console.log("dupdateUser CONTROLER", req.params);
   console.log("UPDATE USER BODY SENT ", req.body);
+  const _id = req.body.userId
+  const userUpdate = req.body.user
+
   try {
-    res.send({ msg: "updateUser route hit" });
+
+    /* FIND user by ID and REPLACE */
+    const response = await UserModel.findOneAndUpdate({ _id: _id }, {
+      userName: userUpdate.userName,
+      name: userUpdate.name,
+      email:  userUpdate.email,
+    });
+
+     /* GET ALL USERS AFTER UPDATING */
+    const allUsers = await UserModel.find({}).sort({ createdAt: -1 });
+
+    if(!response){
+      return res.send({ 
+        msg: "ERROR | no user found to update"
+      })
+    }
+
+    res.send({
+        status: 200 ,
+        users : allUsers,
+      
+     });
   } catch (err) {
     res.send({ msg: "ERROR | updateUser route hit" });
   }
@@ -83,7 +108,6 @@ const getSingleUser = async (req, res) => {
 
   try {
     const User = await UserModel.findById(id);
-
     if (!User) {
       return res.send({ message: "No User found" });
     }

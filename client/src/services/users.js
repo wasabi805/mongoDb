@@ -45,14 +45,12 @@ export const postDeleteUser = async ({ userId }) => {
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => {
-        console.log("what is the res from delete", res);
-
         return res;
       })
       .catch((err) => {
         console.log("tell me the err", err, userId);
       });
-    console.log("respose delete", response);
+   
     return response;
   } catch (err) {
     console.log("tell me the error", err.response);

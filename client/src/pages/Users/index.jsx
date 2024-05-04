@@ -37,17 +37,16 @@ const Users = () => {
     dispatch(toggleEditUserModal());
   };
 
-  useEffect(() => {
-    handleFetchAllUsers();
-    console.log(users);
-  }, []);
+  /*Component mounted */
+  useEffect(() => { handleFetchAllUsers()}, [] );
+
   return (
     <div>
       <h3>Users</h3>
 
       <EditUserModal />
 
-      {users?.map((user, idx) => {
+      { users?.map((user, idx) => {
         return (
           <div
             style={{ display: "flex", alignSelf: "center" }}
