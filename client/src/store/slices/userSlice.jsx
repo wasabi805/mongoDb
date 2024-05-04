@@ -1,7 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 /* APIS */
-import { getAllUsers, submitNewUser } from "../../thunks/users";
+import {
+  getAllUsers,
+  submitNewUser,
+  submitDeleteUser,
+} from "../../thunks/users";
 
 const initialState = {
   loading: false,
@@ -24,10 +28,16 @@ export const userSlice = createSlice({
 
       state.addUser[key] = value;
     },
+
+    clearUserData : ( state, action)=>{
+      console.log('what is action here', action)
+      state.loading = false;
+    }
+
   },
 
   extraReducers: (builder) => {
-    /* GET ALL USERS */
+    /* ------ GET ALL USERS ------ */
     builder.addCase(getAllUsers.pending, (state) => {
       state.loading = true;
     });
@@ -42,12 +52,13 @@ export const userSlice = createSlice({
       (state.users = []), (state.error = action.error.message);
     });
 
-    /* Create a new USER */
+    /* -----  Create a new USER   ------*/
     builder.addCase(submitNewUser.pending, (state) => {
       state.loading = true;
     });
 
     builder.addCase(submitNewUser.fulfilled, (state, action) => {
+    
       const newUserAdded = action.payload.data;
 
       state.users = [...state.users, newUserAdded];
@@ -57,9 +68,25 @@ export const userSlice = createSlice({
     builder.addCase(submitNewUser.rejected, (state) => {
       state.loading = false;
     });
+
+    /* -----  Delete a user   -----*/
+    builder.addCase(submitDeleteUser.pending, (state) => {
+      console.log('action when blows up',)
+      state.loading = true;
+    });
+
+    builder.addCase(submitDeleteUser.fulfilled, (state, action) => {
+      state.loading = false;
+    });
+
+    builder.addCase(submitDeleteUser.rejected, (state, action) => {
+      alert('blew up')
+      console.log('action when blows up', action)
+      state.loading = false;
+    });
   },
 });
 
 export default userSlice.reducer;
-export const { addUserData } = userSlice.actions;
-export const userApis = { fetchUsers: getAllUsers, createUser: submitNewUser };
+export const { addUserData, clearUserData } = userSlice.actions;
+export const userApis = { fetchUsers: getAllUsers, createUser: submitNewUser, deleteUser : submitDeleteUser };
