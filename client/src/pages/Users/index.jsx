@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { userApis } from "../../store/slices/userSlice";
-import { toggleEditUserModal, setEditUser , setEditUserInputs} from "../../store/slices/userSlice";
+import {
+  toggleEditUserModal,
+  setEditUser,
+  setEditUserInputs,
+} from "../../store/slices/userSlice";
 
 import AddUsers from "./AddUsers";
 import EditUserModal from "./EditUserModal";
-import { Button, } from "@mui/material";
+import { Button } from "@mui/material";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -41,7 +45,7 @@ const Users = () => {
     <div>
       <h3>Users</h3>
 
-      <EditUserModal/>
+      <EditUserModal />
 
       {users?.map((user, idx) => {
         return (

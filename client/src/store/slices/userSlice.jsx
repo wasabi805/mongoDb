@@ -18,7 +18,7 @@ const initialState = {
   },
 
   editUser: {
-    userId: '',
+    userId: "",
     toggleModal: false,
 
     user: {
@@ -50,30 +50,29 @@ export const userSlice = createSlice({
     },
 
     setEditUser: (state, action) => {
-
       const { user, userId } = action.payload;
- 
-      state.editUser.userId = userId
+
+      state.editUser.userId = userId;
       state.editUser.user = user;
     },
 
-    setEditUserInputs : (state, action)=> {
-      const {editedUser} = action.payload
-      const [name, value] = Object.entries(editedUser)[0]
-      
+    setEditUserInputs: (state, action) => {
+      const { editedUser } = action.payload;
+      const [name, value] = Object.entries(editedUser)[0];
+
       state.editUser = {
         ...state.editUser,
-        user:{
+        user: {
           ...state.editUser.user,
-          [name] : value
-        }
-      }
+          [name]: value,
+        },
+      };
       state.loading = false;
     },
 
-    setCancelEditUser :(state, action)=>{
-      state.editUser={
-        userId: '',
+    setCancelEditUser: (state, action) => {
+      state.editUser = {
+        userId: "",
         toggleModal: false,
 
         user: {
@@ -81,9 +80,8 @@ export const userSlice = createSlice({
           name: "",
           email: "",
         },
-      }
-    }
-
+      };
+    },
   },
 
   extraReducers: (builder) => {
@@ -144,14 +142,13 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { 
-  addUserData, 
-  clearUserData, 
-  toggleEditUserModal, 
-  setEditUser , 
+export const {
+  addUserData,
+  clearUserData,
+  toggleEditUserModal,
+  setEditUser,
   setEditUserInputs,
   setCancelEditUser,
-  
 } = userSlice.actions;
 
 export const userApis = {
