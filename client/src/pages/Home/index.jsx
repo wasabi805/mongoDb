@@ -14,7 +14,7 @@ const Home = () => {
   const { userName, password, isHomeAuth, isSubmit } = useSelector(
     (state) => state.loginSlice,
   );
-    console.log('what is isHomeAuth', isHomeAuth)
+    
   const handleUpdateInput = (e) => {
     const name = e.target?.name;
     dispatch(setInput({ [name]: e.target?.value }));

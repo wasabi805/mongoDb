@@ -26,7 +26,6 @@ const Users = () => {
   };
 
   const handleDeleteUser = ({ userId }) => {
-    console.log("delete", userId);
     dispatch(deleteUser({ userId }));
   };
 

@@ -42,7 +42,7 @@ export const userSlice = createSlice({
     },
 
     clearUserData: (state, action) => {
-      console.log("what is action here", action);
+      
       state.loading = false;
     },
 
@@ -144,7 +144,7 @@ export const userSlice = createSlice({
     });
 
     builder.addCase(submitEditUser.fulfilled, (state, action) => {
-      // console.log("response fulfilled | submitEditUser ", action.payload);
+      
       state.users = action.payload.data.users;
       state.loading = false;
       state.editUser.toggleModal = false;

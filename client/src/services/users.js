@@ -48,12 +48,12 @@ export const postDeleteUser = async ({ userId }) => {
         return res;
       })
       .catch((err) => {
-        console.log("tell me the err", err, userId);
+        console.log("postDeleteUser | response err", err, userId);
       });
 
     return response;
   } catch (err) {
-    console.log("tell me the error", err.response);
+    console.log("postDeleteUser | ERROR", err.response);
     alert("failed postDeleteUser");
   }
 };
