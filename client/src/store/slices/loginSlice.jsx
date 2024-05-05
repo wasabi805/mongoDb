@@ -19,7 +19,6 @@ export const loginSlice = createSlice({
       state[key] = value;
     },
     setHomeAuth: (state, action) => {
-      console.log("********", action);
       const homeAuth = action.payload;
       state.homeAuth = homeAuth;
     },

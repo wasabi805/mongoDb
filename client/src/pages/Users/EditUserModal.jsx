@@ -30,7 +30,7 @@ const EditUserModal = () => {
 
   const handSetEditUserInputs = (e) => {
     e.preventDefault();
-    console.log("what is e", e);
+
     const name = e.target.name;
     const value = e.target.value;
     const editedUser = {

@@ -144,7 +144,7 @@ export const userSlice = createSlice({
     });
 
     builder.addCase(submitEditUser.fulfilled, (state, action) => {
-      console.log("respCheck", action.payload);
+      // console.log("response fulfilled | submitEditUser ", action.payload);
       state.users = action.payload.data.users;
       state.loading = false;
       state.editUser.toggleModal = false;

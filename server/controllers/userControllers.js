@@ -21,7 +21,7 @@ const createNewUser = async (req, res) => {
       },
       phone: req.body?.phone ? req.body?.phone : "",
     });
-    console.log("what is response | Add USer", response);
+
     res.send({
       _id: response._id,
       name: response.name,
@@ -66,8 +66,7 @@ const deleteUser = async (req, res) => {
 
 /*----- update a new User -----  */
 const updateUser = async (req, res) => {
-  console.log("dupdateUser CONTROLER", req.params);
-  console.log("UPDATE USER BODY SENT ", req.body);
+ 
   const _id = req.body.userId;
   const userUpdate = req.body.user;
 

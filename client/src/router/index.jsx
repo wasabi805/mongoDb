@@ -10,7 +10,6 @@ import { PrivateRoute } from "./PrivateRoute";
 
 export const AppRouter = () => {
   const { isHomeAuth } = useSelector((state) => state.loginSlice);
-  console.log("what is isHomeAuth", isHomeAuth);
 
   return (
     <Router>
