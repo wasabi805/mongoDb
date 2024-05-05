@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Alert } from "@mui/material";
 
 import { setInput, setHomeAuth } from "../../store/slices/loginSlice";
 import { submitHomeAuthLogin } from "../../thunks/login";
@@ -10,10 +11,10 @@ import { TextField, Button } from "@mui/material";
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { userName, password, isHomeAuth, test } = useSelector(
+  const { userName, password, isHomeAuth, isSubmit } = useSelector(
     (state) => state.loginSlice,
   );
-
+    console.log('what is isHomeAuth', isHomeAuth)
   const handleUpdateInput = (e) => {
     const name = e.target?.name;
     dispatch(setInput({ [name]: e.target?.value }));
@@ -23,7 +24,6 @@ const Home = () => {
     const loginReponse = await dispatch(submitHomeAuthLogin());
 
     if (loginReponse?.payload?.data?.isHomeAuth === true) {
-      console.log("what is this", loginReponse?.payload?.data?.isHomeAuth);
       navigate("users");
     }
   };
@@ -49,6 +49,15 @@ const Home = () => {
         <Button variant="contained" onClick={() => handeSubmitLogin()}>
           Login
         </Button>
+      </div>
+
+      <div>
+        {isHomeAuth === false && isSubmit &&
+          <Alert severity="error">
+            Incorrect User Name and or Password
+          </Alert>
+        } 
+        
       </div>
     </div>
   );

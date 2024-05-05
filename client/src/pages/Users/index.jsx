@@ -5,8 +5,9 @@ import { userApis } from "../../store/slices/userSlice";
 import {
   toggleEditUserModal,
   setEditUser,
-  setEditUserInputs,
 } from "../../store/slices/userSlice";
+
+import { setIsHomeAuth } from "../../store/slices/loginSlice";
 
 import AddUsers from "./AddUsers";
 import EditUserModal from "./EditUserModal";
@@ -19,7 +20,9 @@ const Users = () => {
   const { users, editUser } = useSelector((state) => state.userSlice);
 
   const handleFetchAllUsers = () => {
-    dispatch(fetchUsers());
+    if(users.length === 0){
+      dispatch(fetchUsers());
+    }
   };
 
   const handleDeleteUser = ({ userId }) => {
@@ -37,6 +40,8 @@ const Users = () => {
     dispatch(toggleEditUserModal());
   };
 
+  const handleLogOut = ()=> dispatch(setIsHomeAuth({bool : false}))
+
   /*Component mounted */
   useEffect(() => {
     handleFetchAllUsers();
@@ -44,7 +49,19 @@ const Users = () => {
 
   return (
     <div>
-      <h3>Users</h3>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+      <span>
+        <h3>
+        Users
+        </h3>
+        </span>
+      <span>
+        <Button onClick={()=> handleLogOut({bool: false})}>
+          Log Out
+        </Button >
+      </span>
+      </div>
+      
 
       <EditUserModal />
 

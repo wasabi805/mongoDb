@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setHomeAuth, setTest } from "../store/slices/loginSlice";
 import { postHomeLogin } from "../services/login";
 
 export const submitHomeAuthLogin = createAsyncThunk(
@@ -13,11 +12,9 @@ export const submitHomeAuthLogin = createAsyncThunk(
     const { userName, password } = state.loginSlice;
     const response = await postHomeLogin({ userName, password })
       .then((res) => {
-        console.log("res resturned", res);
         return res;
       })
-      .then((resAgain) => resAgain);
-    console.log("is this still a promise", response);
+
     return {
       data: response.data,
     };
