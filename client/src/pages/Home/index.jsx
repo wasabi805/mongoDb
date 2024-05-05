@@ -1,27 +1,32 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLazyPostLoginHomeQuery } from '../../services/loginServices'
-import { setInput } from "../../store/slices/loginSlice";
+import { useNavigate } from "react-router-dom";
+import { Alert } from "@mui/material";
+
+import { setInput, setHomeAuth } from "../../store/slices/loginSlice";
+import { submitHomeAuthLogin } from "../../thunks/login";
+
 import { TextField, Button } from "@mui/material";
 
 const Home = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  //https://stackoverflow.com/a/75160992/7857134 : use Lazy so that post call can be made with button click
-  const [ submitLoginCreds , { data, error, isLoading }] = useLazyPostLoginHomeQuery();
-    console.log('what is data, error, isLoading', data, error, isLoading)
-
-
+  const { userName, password, isHomeAuth, isSubmit } = useSelector(
+    (state) => state.loginSlice,
+  );
+    console.log('what is isHomeAuth', isHomeAuth)
   const handleUpdateInput = (e) => {
     const name = e.target?.name;
-    dispatch(setInput({ [ name ] : e.target?.value }));
+    dispatch(setInput({ [name]: e.target?.value }));
   };
 
-  const handeSubmitLogin =()=>{
-    submitLoginCreds()
-  }
+  const handeSubmitLogin = async () => {
+    const loginReponse = await dispatch(submitHomeAuthLogin());
 
-  const { userName, password } = useSelector((state) => state.loginSlice);
+    if (loginReponse?.payload?.data?.isHomeAuth === true) {
+      navigate("users");
+    }
+  };
 
   return (
     <div style={{}}>
@@ -41,12 +46,18 @@ const Home = () => {
       </div>
 
       <div>
-        <Button 
-            variant="contained"
-            onClick={ ()=> handeSubmitLogin()}
-        >
-            Login
-            </Button>
+        <Button variant="contained" onClick={() => handeSubmitLogin()}>
+          Login
+        </Button>
+      </div>
+
+      <div>
+        {isHomeAuth === false && isSubmit &&
+          <Alert severity="error">
+            Incorrect User Name and or Password
+          </Alert>
+        } 
+        
       </div>
     </div>
   );

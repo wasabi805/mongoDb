@@ -3,13 +3,18 @@ const express = require("express");
 const router = express.Router();
 
 const {
+  deleteUser,
   getAllUsers,
   getSingleUser,
   createNewUser,
+  updateUser,
 } = require("../controllers/userControllers");
 
+/* Delete a single user */
+router.delete("/:userId", deleteUser);
+
 /* Get a Single User */
-router.get("/:id", getSingleUser);
+router.get("/:userId", getSingleUser);
 
 /* Get All Users */
 router.get("/", getAllUsers);
@@ -18,8 +23,6 @@ router.get("/", getAllUsers);
 router.post("/", createNewUser);
 
 /*update user */
-router.patch("/:id", (req, res) => {
-  res.send("update user");
-});
+router.patch("/:userId", updateUser);
 
 module.exports = router;

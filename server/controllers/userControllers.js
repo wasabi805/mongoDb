@@ -1,4 +1,5 @@
 const UserModel = require("../models/User");
+var _ = require("lodash");
 
 /* Grab all Users */
 
@@ -7,7 +8,7 @@ const createNewUser = async (req, res) => {
   try {
     const newUser = {
       name: req.body?.name,
-      username: req.body?.username,
+      userName: req.body?.userName,
       email: req.body?.email,
     };
 
@@ -22,9 +23,10 @@ const createNewUser = async (req, res) => {
     });
 
     res.send({
-      id: response._id,
+      _id: response._id,
       name: response.name,
       email: response.email,
+      userName: response.userName,
       address: {
         ...response.address,
       },
@@ -41,7 +43,60 @@ const createNewUser = async (req, res) => {
 
 /* -----    Delete a user -----*/
 
+const deleteUser = async (req, res) => {
+  try {
+    const User = await UserModel.deleteOne({ _id: req?.params?.userId });
+    if (!User) {
+      return res.send({
+        msg: `message: No User found with id of ${req?.params?.userId}`,
+      });
+    }
+
+    return res.send({
+      msg: `delete sucess! `,
+      status: 200,
+      _id: req?.params?.userId,
+    });
+  } catch (error) {}
+
+  res.send({
+    msg: "will delete user",
+  });
+};
+
 /*----- update a new User -----  */
+const updateUser = async (req, res) => {
+  const _id = req.body.userId;
+  const userUpdate = req.body.user;
+
+  try {
+    /* FIND user by ID and REPLACE */
+    const response = await UserModel.findOneAndUpdate(
+      { _id: _id },
+      {
+        userName: userUpdate.userName,
+        name: userUpdate.name,
+        email: userUpdate.email,
+      },
+    );
+
+    /* GET ALL USERS AFTER UPDATING */
+    const allUsers = await UserModel.find({}).sort({ createdAt: -1 });
+
+    if (!response) {
+      return res.send({
+        msg: "ERROR | no user found to update",
+      });
+    }
+
+    res.send({
+      status: 200,
+      users: allUsers,
+    });
+  } catch (err) {
+    res.send({ msg: "ERROR | updateUser route hit" });
+  }
+};
 
 /*----- Get a single new User -----  */
 
@@ -52,7 +107,6 @@ const getSingleUser = async (req, res) => {
 
   try {
     const User = await UserModel.findById(id);
-
     if (!User) {
       return res.send({ message: "No User found" });
     }
@@ -62,7 +116,7 @@ const getSingleUser = async (req, res) => {
       user: User,
     });
   } catch (error) {
-    res.send({message: 'getSingleUser - Error connecting to database'})
+    res.send({ message: "getSingleUser - Error connecting to database" });
   }
 };
 
@@ -82,7 +136,9 @@ const getAllUsers = async (req, res) => {
 };
 
 module.exports = {
+  deleteUser,
   createNewUser,
   getAllUsers,
+  updateUser,
   getSingleUser,
 };
