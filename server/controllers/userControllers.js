@@ -66,7 +66,6 @@ const deleteUser = async (req, res) => {
 
 /*----- update a new User -----  */
 const updateUser = async (req, res) => {
- 
   const _id = req.body.userId;
   const userUpdate = req.body.user;
 

@@ -6,7 +6,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 
 /* Note need to use combine reducers with RTK and redux persist for persit to work correctly */
 // see Redux persist docs for set up : https://github.com/rt2zz/redux-persist?tab=readme-ov-file#quickstart
-// your config has some slight tweaks to the docs above, other parts from the docs are also in store/index.js 
+// your config has some slight tweaks to the docs above, other parts from the docs are also in store/index.js
 
 const rootReducer = combineReducers({
   loginSlice,

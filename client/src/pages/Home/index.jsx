@@ -20,11 +20,10 @@ const Home = () => {
   };
 
   const handeSubmitLogin = async () => {
-
     const loginReponse = await dispatch(submitHomeAuthLogin());
 
     if (loginReponse?.payload?.data?.isHomeAuth === true) {
-      console.log('what is this', loginReponse?.payload?.data?.isHomeAuth)
+      console.log("what is this", loginReponse?.payload?.data?.isHomeAuth);
       navigate("users");
     }
   };
