@@ -1,5 +1,3 @@
-import React from "react";
-import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "../pages/Home";
@@ -9,8 +7,6 @@ import { PrivateRoute } from "./PrivateRoute";
 // return <Navigate to="/login" state={{ from: history.location }} />
 
 export const AppRouter = () => {
-  const { isHomeAuth } = useSelector((state) => state.loginSlice);
-
   return (
     <Router>
       <Routes>

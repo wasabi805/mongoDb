@@ -1,9 +1,8 @@
-import React, { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "@mui/material";
 
-import { setInput, setHomeAuth } from "../../store/slices/loginSlice";
+import { setInput } from "../../store/slices/loginSlice";
 import { submitHomeAuthLogin } from "../../thunks/login";
 
 import { TextField, Button } from "@mui/material";
@@ -11,10 +10,11 @@ import { TextField, Button } from "@mui/material";
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { userName, password, isHomeAuth, isSubmit } = useSelector(
-    (state) => state.loginSlice,
-  );
-    
+  const { userName, password, isHomeAuth, isSubmit } = useSelector((state) => {
+    console.log("what is state", state);
+    return state.loginSlice;
+  });
+
   const handleUpdateInput = (e) => {
     const name = e.target?.name;
     dispatch(setInput({ [name]: e.target?.value }));
@@ -52,12 +52,9 @@ const Home = () => {
       </div>
 
       <div>
-        {isHomeAuth === false && isSubmit &&
-          <Alert severity="error">
-            Incorrect User Name and or Password
-          </Alert>
-        } 
-        
+        {isHomeAuth === false && isSubmit && (
+          <Alert severity="error">Incorrect User Name and or Password</Alert>
+        )}
       </div>
     </div>
   );

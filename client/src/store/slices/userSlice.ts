@@ -8,7 +8,35 @@ import {
   submitEditUser,
 } from "../../thunks/users";
 
-const initialState = {
+type User ={
+  userName?: string,
+  name?: string,
+  email?: string
+}
+
+type State={
+  loading: boolean,
+  users: User[],
+  addUser: {
+    userName: string,
+    name: string,
+    email: string
+  },
+
+  editUser: {
+    userId: string
+    toggleModal: boolean,
+
+    user: {
+      userName: string,
+      name: string,
+      email: string,
+    },
+  },
+}
+
+
+const initialState : State = {
   loading: false,
   users: [],
 
@@ -30,23 +58,26 @@ const initialState = {
   },
 };
 
+
 /* REDUCER */
 export const userSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {
-    addUserData(state, action) {
-      const [key, value] = Object.entries(action.payload)[0];
 
-      state.addUser[key] = value;
+  reducers: {
+    addUserData(state : State, action :{ payload:{ userName?: string |undefined, name?: string| undefined, email?: string |undefined }}) {
+      console.log('what is action.payload', action.payload)
+      console.log('Object.entries(action.payload)', Object.entries(action.payload))
+      const [key , value] =  Object.entries(action.payload)[0];
+      
+      state.addUser[key ]= value
     },
 
-    clearUserData: (state, action) => {
-      
+    clearUserData: (state) => {
       state.loading = false;
     },
 
-    toggleEditUserModal: (state, action) => {
+    toggleEditUserModal: (state) => {
       state.editUser.toggleModal = !state.editUser.toggleModal;
     },
 
@@ -71,7 +102,7 @@ export const userSlice = createSlice({
       state.loading = false;
     },
 
-    setCancelEditUser: (state, action) => {
+    setCancelEditUser: (state) => {
       state.editUser = {
         userId: "",
         toggleModal: false,
@@ -96,9 +127,9 @@ export const userSlice = createSlice({
       state.loading = false;
     });
 
-    builder.addCase(getAllUsers.rejected, (state, action) => {
+    builder.addCase(getAllUsers.rejected, (state) => {
       state.loading = false;
-      (state.users = []), (state.error = action.error.message);
+      state.users = []
     });
 
     /* -----  Create a new USER   ------*/
@@ -134,23 +165,22 @@ export const userSlice = createSlice({
       state.loading = false;
     });
 
-    builder.addCase(submitDeleteUser.rejected, (state, action) => {
+    builder.addCase(submitDeleteUser.rejected, (state) => {
       state.loading = false;
     });
 
     /* -----  Update a user   -----*/
-    builder.addCase(submitEditUser.pending, (state, action) => {
+    builder.addCase(submitEditUser.pending, (state) => {
       state.loading = false;
     });
 
     builder.addCase(submitEditUser.fulfilled, (state, action) => {
-      
       state.users = action.payload.data.users;
       state.loading = false;
       state.editUser.toggleModal = false;
     });
 
-    builder.addCase(submitEditUser.rejected, (state, action) => {
+    builder.addCase(submitEditUser.rejected, (state) => {
       state.loading = false;
     });
   },

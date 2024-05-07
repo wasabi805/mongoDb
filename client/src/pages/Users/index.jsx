@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { userApis } from "../../store/slices/userSlice";
-import {
-  toggleEditUserModal,
-  setEditUser,
-} from "../../store/slices/userSlice";
+import { toggleEditUserModal, setEditUser } from "../../store/slices/userSlice";
 
 import { setIsHomeAuth } from "../../store/slices/loginSlice";
 
@@ -20,7 +17,7 @@ const Users = () => {
   const { users, editUser } = useSelector((state) => state.userSlice);
 
   const handleFetchAllUsers = () => {
-    if(users.length === 0){
+    if (users.length === 0) {
       dispatch(fetchUsers());
     }
   };
@@ -39,7 +36,7 @@ const Users = () => {
     dispatch(toggleEditUserModal());
   };
 
-  const handleLogOut = ()=> dispatch(setIsHomeAuth({bool : false}))
+  const handleLogOut = () => dispatch(setIsHomeAuth({ bool: false }));
 
   /*Component mounted */
   useEffect(() => {
@@ -48,19 +45,20 @@ const Users = () => {
 
   return (
     <div>
-      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-      <span>
-        <h3>
-        Users
-        </h3>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <span>
+          <h3>Users</h3>
         </span>
-      <span>
-        <Button onClick={()=> handleLogOut({bool: false})}>
-          Log Out
-        </Button >
-      </span>
+        <span>
+          <Button onClick={() => handleLogOut({ bool: false })}>Log Out</Button>
+        </span>
       </div>
-      
 
       <EditUserModal />
 
