@@ -9,30 +9,28 @@ import {
 } from "../../thunks/users";
 
 type User ={
-  userName?: string,
-  name?: string,
-  email?: string
+  userName?: string | undefined,
+  name?: string | undefined,
+  email?: string | undefined,
+}
+type AddUser={
+  [key : string] : unknown | string
+  userName: string,
+  name: string,
+  email: string
+  
+}
+type EditUser={
+  userId: string
+  toggleModal: boolean,
+  user: User,
 }
 
 type State={
   loading: boolean,
   users: User[],
-  addUser: {
-    userName: string,
-    name: string,
-    email: string
-  },
-
-  editUser: {
-    userId: string
-    toggleModal: boolean,
-
-    user: {
-      userName: string,
-      name: string,
-      email: string,
-    },
-  },
+  addUser: AddUser,
+  editUser: EditUser,
 }
 
 
@@ -58,6 +56,15 @@ const initialState : State = {
   },
 };
 
+type Payload={
+    userName?: string | undefined, 
+    name?: string | undefined, 
+    email?: string | undefined
+    [key : string] : unknown 
+}
+type Action = { 
+  payload: Payload
+ }
 
 /* REDUCER */
 export const userSlice = createSlice({
@@ -65,12 +72,10 @@ export const userSlice = createSlice({
   initialState,
 
   reducers: {
-    addUserData(state : State, action :{ payload:{ userName?: string |undefined, name?: string| undefined, email?: string |undefined }}) {
-      console.log('what is action.payload', action.payload)
-      console.log('Object.entries(action.payload)', Object.entries(action.payload))
+    addUserData(state : State, action : Action) {
       const [key , value] =  Object.entries(action.payload)[0];
       
-      state.addUser[key ]= value
+      state.addUser[key]  = value
     },
 
     clearUserData: (state) => {
