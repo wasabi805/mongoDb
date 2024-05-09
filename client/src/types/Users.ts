@@ -41,3 +41,19 @@ type User_Payload = {
 export type User_Action = {
   payload: User_Payload;
 };
+
+/* */
+export type NewUserAdded = {
+  _id: string;
+  name: string;
+  email: string;
+  userName: string;
+  address: {
+    street: string;
+    city: string;
+    zipcode: string;
+  };
+  phone: string;
+  createdAt: string;
+  updatedAt: string;
+};

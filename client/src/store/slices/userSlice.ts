@@ -120,9 +120,7 @@ export const userSlice = createSlice({
       state.loading = false;
     });
 
-    builder.addCase(submitNewUser.rejected, (state, action) => {
-      console.log("what is rejected", action);
-      alert("rejected");
+    builder.addCase(submitNewUser.rejected, (state) => {
       state.loading = false;
     });
 

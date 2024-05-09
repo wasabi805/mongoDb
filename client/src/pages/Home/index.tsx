@@ -12,7 +12,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const { userName, password, isHomeAuth, isSubmit } = useSelector((state) => {
     console.log("what is state", state);
-    return state.loginSlice;
+    return state?.loginSlice;
   });
 
   const handleUpdateInput = (e) => {

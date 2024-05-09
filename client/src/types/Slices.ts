@@ -1,4 +1,3 @@
-import { Dispatch } from "@reduxjs/toolkit";
 import { User } from "../types/Users";
 export type UserSlice = {
   state:
@@ -22,6 +21,12 @@ export type RootState = {
     users: User[];
 
     editUser: User;
+  };
+
+  loginSlice: {
+    userName: string;
+    password: string;
+    isHomeAuth: boolean;
   };
 };
 

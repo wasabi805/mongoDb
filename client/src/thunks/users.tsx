@@ -1,5 +1,4 @@
 import { createAsyncThunk, Dispatch } from "@reduxjs/toolkit";
-import { AxiosResponse } from "axios";
 
 import {
   fetchAllUsers,
@@ -8,7 +7,7 @@ import {
   patchUpdateUser,
 } from "../services/users";
 
-import { AddUser, User } from "../types/Users";
+import { AddUser, User, NewUserAdded } from "../types/Users";
 import { RootState } from "../types/Slices";
 
 export const getAllUsers = createAsyncThunk("/users/get", async () => {
@@ -18,7 +17,7 @@ export const getAllUsers = createAsyncThunk("/users/get", async () => {
 // https://github.com/reduxjs/redux-toolkit/issues/793#issuecomment-722494109
 //https://redux-toolkit.js.org/usage/usage-with-typescript#typing-the-thunkapi-object
 export const submitNewUser = createAsyncThunk<
-  { addUser: AddUser; newUserAdded: AxiosResponse },
+  { addUser: AddUser; newUserAdded: NewUserAdded },
   object, //use object when passing in _ , ie no args into the async fn
   { state: RootState; dispatch: Dispatch }
 >("/users/post", async (_, thunkApi) => {
@@ -28,7 +27,7 @@ export const submitNewUser = createAsyncThunk<
   const response = await postNewUser({ name, userName, email });
 
   // dispatch(clearUserData({name: 'foo', userName: '', email: ''}))
-
+  console.log("what is response.data", response);
   return {
     addUser: { name: "", userName: "", email: "" },
     newUserAdded: response?.data,
@@ -55,7 +54,7 @@ export const submitDeleteUser = createAsyncThunk<
 });
 
 export const submitEditUser = createAsyncThunk<
-  { response: AxiosResponse },
+  { data: { users: User[] } }, //what this thunk returns
   object,
   { state: RootState; dispatch: Dispatch }
 >("/users/patch", async (_, { getState }) => {
