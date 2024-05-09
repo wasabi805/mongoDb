@@ -1,29 +1,28 @@
-export type UserSlice={
-    state:{
-        userSlice?:{
-            addUser:{
-                name: string
-            }
-        }
-    } | unknown
-}
+import { Dispatch } from "@reduxjs/toolkit";
+import { User } from "../types/Users";
+export type UserSlice = {
+  state:
+    | {
+        userSlice?: {
+          addUser: {
+            name: string;
+          };
+        };
+      }
+    | unknown;
+};
 
-export type State ={
-    userSlice:{
-        addUser:{
-            name: string,
-            userName: string,
-            email: string
-        }
-    }
-} 
+export type RootState = {
+  userSlice: {
+    addUser: {
+      name: string;
+      userName: string;
+      email: string;
+    };
+    users: User[];
 
-export type GetState = ()=> ({
-    userSlice:{
-        addUser: {
-            name: string,
-            userName: string,
-            email: string
-        }
-    }
-})
+    editUser: User;
+  };
+};
+
+export type GetState = () => RootState;
