@@ -8,33 +8,9 @@ import {
   submitEditUser,
 } from "../../thunks/users";
 
-type User ={
-  userName?: string | undefined,
-  name?: string | undefined,
-  email?: string | undefined,
-}
-type AddUser={
-  [key : string] : unknown | string
-  userName: string,
-  name: string,
-  email: string
-  
-}
-type EditUser={
-  userId: string
-  toggleModal: boolean,
-  user: User,
-}
+import { User_State, User_Action, User } from "../../types/Users";
 
-type State={
-  loading: boolean,
-  users: User[],
-  addUser: AddUser,
-  editUser: EditUser,
-}
-
-
-const initialState : State = {
+const initialState: User_State = {
   loading: false,
   users: [],
 
@@ -56,29 +32,19 @@ const initialState : State = {
   },
 };
 
-type Payload={
-    userName?: string | undefined, 
-    name?: string | undefined, 
-    email?: string | undefined
-    [key : string] : unknown 
-}
-type Action = { 
-  payload: Payload
- }
-
 /* REDUCER */
 export const userSlice = createSlice({
   name: "users",
   initialState,
 
   reducers: {
-    addUserData(state : State, action : Action) {
-      const [key , value] =  Object.entries(action.payload)[0];
-      
-      state.addUser[key]  = value
+    addUserData(state: User_State, action: User_Action) {
+      const [key, value] = Object.entries(action.payload)[0];
+
+      state.addUser[key] = value;
     },
 
-    clearUserData: (state) => {
+    clearUserData: (state: User_State) => {
       state.loading = false;
     },
 
@@ -86,28 +52,28 @@ export const userSlice = createSlice({
       state.editUser.toggleModal = !state.editUser.toggleModal;
     },
 
-    setEditUser: (state, action) => {
+    setEditUser: (state: User_State, action: User_Action) => {
       const { user, userId } = action.payload;
 
       state.editUser.userId = userId;
       state.editUser.user = user;
     },
 
-    setEditUserInputs: (state, action) => {
+    setEditUserInputs: (state: User_State, action) => {
       const { editedUser } = action.payload;
       const [name, value] = Object.entries(editedUser)[0];
 
       state.editUser = {
         ...state.editUser,
         user: {
-          ...state.editUser.user,
+          ...(state!.editUser!.user as User),
           [name]: value,
         },
       };
       state.loading = false;
     },
 
-    setCancelEditUser: (state) => {
+    setCancelEditUser: (state: User_State) => {
       state.editUser = {
         userId: "",
         toggleModal: false,
@@ -134,7 +100,7 @@ export const userSlice = createSlice({
 
     builder.addCase(getAllUsers.rejected, (state) => {
       state.loading = false;
-      state.users = []
+      state.users = [];
     });
 
     /* -----  Create a new USER   ------*/
@@ -154,7 +120,9 @@ export const userSlice = createSlice({
       state.loading = false;
     });
 
-    builder.addCase(submitNewUser.rejected, (state) => {
+    builder.addCase(submitNewUser.rejected, (state, action) => {
+      console.log('what is rejected', action)
+      alert('rejected')
       state.loading = false;
     });
 

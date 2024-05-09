@@ -39,7 +39,7 @@ export const loginSlice = createSlice({
   reducers: {
     setInput: (state: InitialState, action: XAction) => {
       const [key, value] = Object.entries(action.payload)[0];
-     
+
       state[key as keyof XState] = value;
     },
     setHomeAuth: (state, action) => {

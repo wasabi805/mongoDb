@@ -6,7 +6,8 @@ import {
   postDeleteUser,
   patchUpdateUser,
 } from "../services/users";
-import { clearUserData } from "../store/slices/userSlice";
+
+import { State, GetState} from "../types/Slices";
 
 export const getAllUsers = createAsyncThunk("/users/get", async () => {
   return await fetchAllUsers();
@@ -14,8 +15,8 @@ export const getAllUsers = createAsyncThunk("/users/get", async () => {
 
 export const submitNewUser = createAsyncThunk(
   "/users/post",
-  async (_, { dispatch, getState }) => {
-    const state = getState();
+  async (_,  { getState })  => {
+    const state  = getState()
     const { name, userName, email } = state.userSlice.addUser;
 
     const response = await postNewUser({ name, userName, email });
@@ -31,7 +32,7 @@ export const submitNewUser = createAsyncThunk(
 
 export const submitDeleteUser = createAsyncThunk(
   "/users/delete",
-  async ({ userId }, { dispatch, getState }) => {
+  async ({ userId }, { getState }) => {
     const state = getState();
     let users = state.userSlice.users;
 
@@ -49,7 +50,7 @@ export const submitDeleteUser = createAsyncThunk(
 
 export const submitEditUser = createAsyncThunk(
   "/users/patch",
-  async (_, { dispatch, getState }) => {
+  async (_, { getState }) => {
     const state = getState();
 
     const { user, userId } = state.userSlice.editUser;

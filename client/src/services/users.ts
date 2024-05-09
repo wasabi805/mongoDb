@@ -1,4 +1,5 @@
 import axios from "axios";
+import { User } from "../types/Users";
 
 export const fetchAllUsers = () => {
   const url = "http://localhost:8080/api/users";
@@ -7,7 +8,9 @@ export const fetchAllUsers = () => {
       method: "GET",
       url,
       headers: { "Content-Type": "application/json" },
-    }).then((res) => res);
+    }).then((res) => {
+      return res;
+    });
 
     return resposne;
   } catch (error) {
@@ -15,7 +18,7 @@ export const fetchAllUsers = () => {
   }
 };
 
-export const postNewUser = ({ name, userName, email }) => {
+export const postNewUser = ({ name, userName, email }: User) => {
   const url = "http://localhost:8080/api/users";
   try {
     const resposne = axios({
@@ -35,7 +38,7 @@ export const postNewUser = ({ name, userName, email }) => {
   }
 };
 
-export const postDeleteUser = async ({ userId }) => {
+export const postDeleteUser = async ({ userId }: User) => {
   const url = `http://localhost:8080/api/users/${userId}`;
 
   try {
@@ -53,13 +56,13 @@ export const postDeleteUser = async ({ userId }) => {
 
     return response;
   } catch (err) {
-    console.log("postDeleteUser | ERROR", err.response);
+    // console.log("postDeleteUser | ERROR", err.response);
     alert("failed postDeleteUser");
   }
 };
 
 //use this name
-export const patchUpdateUser = async ({ userId, user }) => {
+export const patchUpdateUser = async ({ userId, user }: User) => {
   const url = `http://localhost:8080/api/users/${userId}`;
   try {
     const response = await axios({
@@ -76,6 +79,6 @@ export const patchUpdateUser = async ({ userId, user }) => {
 
     return response;
   } catch (err) {
-    alert("failed patchUpdateUser", err.response);
+    // alert("failed patchUpdateUser", err.response);
   }
 };
