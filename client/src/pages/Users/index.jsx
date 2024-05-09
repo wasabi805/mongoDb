@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { fetchAllTest } from "../../services/testServices";
 import { userApis } from "../../store/slices/userSlice";
 import {
   toggleEditUserModal,
@@ -19,11 +19,46 @@ const Users = () => {
 
   const { users, editUser } = useSelector((state) => state.userSlice);
 
-  const handleFetchAllUsers = () => {
+  const handleFetchAllUsers = async() => {
     if(users.length === 0){
       dispatch(fetchUsers());
     }
+
+    // await the chain of calls 
+    const getAllTest = await fetchAllTest()
+
+    const setupDoc = ({res})=>console.log(`dispatch redux setupDoc`, res)
+    const setTags = ({res})=>console.log(`dispatch redux setTags`, res)
+    const setNotes = ({res})=>console.log(`dispatch redux setNotes`, res)
+
+    const setters ={
+      setupDoc : ({res})=> setupDoc({res}),
+      setTags: ({res})=> setTags({res}),
+      setNotes: ({res})=> setNotes({res})
+    }
+
+    // loop through response and dispatch
+    getAllTest.forEach(svc => {
+      setters[svc.value.name]({res : svc.value.data})
+    });
+
+    console.log('what is getAllTest', getAllTest)
+
   };
+  /*Component mounted */
+  useEffect(() => {
+    handleFetchAllUsers();
+  }, []);
+
+
+
+
+
+
+
+
+
+  
 
   const handleDeleteUser = ({ userId }) => {
     dispatch(deleteUser({ userId }));
@@ -41,10 +76,7 @@ const Users = () => {
 
   const handleLogOut = ()=> dispatch(setIsHomeAuth({bool : false}))
 
-  /*Component mounted */
-  useEffect(() => {
-    handleFetchAllUsers();
-  }, []);
+
 
   return (
     <div>
