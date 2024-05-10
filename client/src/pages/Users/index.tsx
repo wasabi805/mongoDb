@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../store";
 
 import { userApis } from "../../store/slices/userSlice";
 import { toggleEditUserModal, setEditUser } from "../../store/slices/userSlice";
@@ -11,10 +11,10 @@ import EditUserModal from "./EditUserModal";
 import { Button } from "@mui/material";
 
 const Users = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { fetchUsers, deleteUser } = userApis;
 
-  const { users } = useSelector((state) => state.userSlice);
+  const { users } = useAppSelector((state) => state.userSlice);
 
   const handleFetchAllUsers = async () => {
     if (users.length === 0) {

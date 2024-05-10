@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { useNavigate } from "react-router-dom";
 import { Alert } from "@mui/material";
 
@@ -9,11 +9,13 @@ import { TextField, Button } from "@mui/material";
 
 const Home = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { userName, password, isHomeAuth, isSubmit } = useSelector((state) => {
-    console.log("what is state", state);
-    return state?.loginSlice;
-  });
+  const dispatch = useAppDispatch();
+  const { userName, password, isHomeAuth, isSubmit } = useAppSelector(
+    (state) => {
+      console.log("what is state", state);
+      return state?.loginSlice;
+    },
+  );
 
   const handleUpdateInput = (e) => {
     const name = e.target?.name;

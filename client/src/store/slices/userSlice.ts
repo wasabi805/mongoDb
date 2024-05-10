@@ -137,6 +137,7 @@ export const userSlice = createSlice({
     });
 
     builder.addCase(submitDeleteUser.rejected, (state) => {
+      alert("failed");
       state.loading = false;
     });
 

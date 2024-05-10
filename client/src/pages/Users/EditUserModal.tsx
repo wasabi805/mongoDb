@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { Button, Modal, Box, Typography, Input } from "@mui/material";
 import {
-  toggleEditUserModal,
   setEditUser,
   setEditUserInputs,
   setCancelEditUser,
@@ -23,10 +21,10 @@ const style = {
 };
 
 const EditUserModal = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { sendEditUser } = userApis;
 
-  const { users, editUser } = useSelector((state) => state.userSlice);
+  const { editUser } = useAppSelector((state) => state.userSlice);
 
   const handSetEditUserInputs = (e) => {
     e.preventDefault();

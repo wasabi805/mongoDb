@@ -1,13 +1,12 @@
-import React from "react";
 import { TextField, Button } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { addUserData } from "../../store/slices/userSlice";
 import { userApis } from "../../store/slices/userSlice";
 
 const AddUsers = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const userSlice = useSelector((state) => state.userSlice);
+  const userSlice = useAppSelector((state) => state.userSlice);
 
   const { createUser } = userApis;
 
