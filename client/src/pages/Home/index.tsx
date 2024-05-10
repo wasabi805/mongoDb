@@ -12,7 +12,6 @@ const Home = () => {
   const dispatch = useAppDispatch();
   const { userName, password, isHomeAuth, isSubmit } = useAppSelector(
     (state) => {
-      console.log("what is state", state);
       return state?.loginSlice;
     },
   );

@@ -1,4 +1,4 @@
-import { createAsyncThunk, Dispatch } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import {
   fetchAllUsers,
@@ -7,8 +7,9 @@ import {
   patchUpdateUser,
 } from "../services/users";
 
-import { AddUser, User, NewUserAdded } from "../types/Users";
-import { RootState } from "../types/Slices";
+import { AddUser, User, NewUserAdded, EditUser } from "../types/Users";
+// import { RootState } from "../types/Slices";
+import { RootState, AppDispatch } from "../store";
 
 export const getAllUsers = createAsyncThunk("/users/get", async () => {
   return await fetchAllUsers();
@@ -16,10 +17,11 @@ export const getAllUsers = createAsyncThunk("/users/get", async () => {
 
 // https://github.com/reduxjs/redux-toolkit/issues/793#issuecomment-722494109
 //https://redux-toolkit.js.org/usage/usage-with-typescript#typing-the-thunkapi-object
+
 export const submitNewUser = createAsyncThunk<
   { addUser: AddUser; newUserAdded: NewUserAdded },
   object, //use object when passing in _ , ie no args into the async fn
-  { state: RootState; dispatch: Dispatch }
+  { state: RootState; dispatch: AppDispatch }
 >("/users/post", async (_, thunkApi) => {
   const state = thunkApi.getState();
   const { name, userName, email } = state.userSlice.addUser;
@@ -36,8 +38,8 @@ export const submitNewUser = createAsyncThunk<
 
 export const submitDeleteUser = createAsyncThunk<
   { users: User[] },
-  { userId: string },
-  { state: RootState; dispatch: Dispatch }
+  { userId: EditUser },
+  { state: RootState; dispatch: AppDispatch }
 >("/users/delete", async ({ userId }, thunkApi) => {
   const state = thunkApi.getState();
   let users = state.userSlice.users;
@@ -56,7 +58,7 @@ export const submitDeleteUser = createAsyncThunk<
 export const submitEditUser = createAsyncThunk<
   { data: { users: User[] } }, //what this thunk returns
   object,
-  { state: RootState; dispatch: Dispatch }
+  { state: RootState; dispatch: AppDispatch }
 >("/users/patch", async (_, { getState }) => {
   const state = getState();
 

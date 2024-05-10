@@ -10,6 +10,8 @@ import AddUsers from "./AddUsers";
 import EditUserModal from "./EditUserModal";
 import { Button } from "@mui/material";
 
+import { EditUser } from "../../types/Users";
+
 const Users = () => {
   const dispatch = useAppDispatch();
   const { fetchUsers, deleteUser } = userApis;
@@ -24,14 +26,17 @@ const Users = () => {
   /*Component mounted */
   useEffect(() => {
     handleFetchAllUsers();
-  }, []);
+  });
 
-  const handleDeleteUser = ({ userId }) => {
+  const handleDeleteUser = ({ userId }: EditUser) => {
     dispatch(deleteUser({ userId }));
   };
 
-  const handleEditUser = (e, { userId }) => {
-    const isEditUser = e.target.name === "edit-user";
+  const handleEditUser = (
+    e: React.FormEvent<HTMLInputElement>,
+    { userId }: EditUser,
+  ) => {
+    const isEditUser = e.currentTarget.name === "edit-user";
     if (isEditUser) {
       const user = users.find((user) => user._id === userId);
       dispatch(setEditUser({ user, userId }));
@@ -40,7 +45,8 @@ const Users = () => {
     dispatch(toggleEditUserModal());
   };
 
-  const handleLogOut = () => dispatch(setIsHomeAuth({ bool: false }));
+  const handleLogOut = ({ bool }: { bool: boolean }) =>
+    dispatch(setIsHomeAuth({ bool }));
 
   return (
     <div>
@@ -84,7 +90,7 @@ const Users = () => {
 
               <Button
                 variant="outlined"
-                onClick={() => handleDeleteUser({ userId: user._id })}
+                onClick={() => handleDeleteUser({ userId: user!._id! })}
               >
                 delete
               </Button>

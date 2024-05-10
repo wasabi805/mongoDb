@@ -1,8 +1,10 @@
 export type User = {
   [name: string]: string | unknown;
   userName?: string | undefined;
+  password?: string | undefined;
   name?: string | undefined;
   email?: string | undefined;
+  _id?: string | undefined;
 };
 export type AddUser = {
   [key: string]: unknown | string;
@@ -21,6 +23,7 @@ export type EditUser = {
 
 export type User_State = {
   loading: boolean;
+
   users: User[];
   addUser: AddUser;
   editUser: EditUser;

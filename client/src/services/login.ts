@@ -1,14 +1,7 @@
 import axios, { AxiosResponse } from "axios";
+import { User } from "../types/Users";
 
-type PostHomeLoginArgs = {
-  userName: string;
-  password: string;
-};
-
-export const postHomeLogin = async ({
-  userName,
-  password,
-}: PostHomeLoginArgs) => {
+export const postHomeLogin = async ({ userName, password }: User) => {
   const url = "http://localhost:8080/api/login/home";
   try {
     const resposne = await axios({

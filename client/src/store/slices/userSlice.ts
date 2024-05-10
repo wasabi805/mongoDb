@@ -22,6 +22,7 @@ const initialState: User_State = {
 
   editUser: {
     userId: "",
+    _id: "",
     toggleModal: false,
 
     user: {

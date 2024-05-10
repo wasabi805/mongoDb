@@ -1,3 +1,4 @@
+import React from "react";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { Button, Modal, Box, Typography, Input } from "@mui/material";
 import {
@@ -26,11 +27,11 @@ const EditUserModal = () => {
 
   const { editUser } = useAppSelector((state) => state.userSlice);
 
-  const handSetEditUserInputs = (e) => {
+  const handSetEditUserInputs = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
-    const name = e.target.name;
-    const value = e.target.value;
+    const name = e.currentTarget.name;
+    const value = e.currentTarget.value;
     const editedUser = {
       [name]: value,
     };
@@ -54,19 +55,19 @@ const EditUserModal = () => {
             placeholder="name"
             name="name"
             onChange={(e) => handSetEditUserInputs(e)}
-            value={editUser.user.name}
+            value={editUser!.user!.name}
           />
           <Input
             placeholder="userName"
             name="userName"
             onChange={(e) => handSetEditUserInputs(e)}
-            value={editUser.user.userName}
+            value={editUser!.user?.userName}
           />
           <Input
             placeholder="email"
             name="email"
             onChange={(e) => handSetEditUserInputs(e)}
-            value={editUser.user.email}
+            value={editUser!.user!.email}
           />
         </div>
 

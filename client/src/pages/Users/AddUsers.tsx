@@ -1,3 +1,4 @@
+import React from "react";
 import { TextField, Button } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { addUserData } from "../../store/slices/userSlice";
@@ -16,7 +17,7 @@ const AddUsers = () => {
   };
 
   const handleSubmitNewUser = () => {
-    dispatch(createUser()).then((res) => {
+    dispatch(createUser({})).then((res) => {
       /* you could potentialy dipatch here but avoid doing so*/
       // console.log('what is res', res)
       return res;
