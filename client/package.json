@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "build": "tsc && vite build",
-    "start" : "npm ci && npm run build && npm run vite",
+    "tsbuild": "tsc && vite build",
+    "install" : "npm ci && npm run build",
+    "start" : "vite",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "dev": "vite",
