@@ -29,7 +29,6 @@ export const submitNewUser = createAsyncThunk<
   const response = await postNewUser({ name, userName, email });
 
   // dispatch(clearUserData({name: 'foo', userName: '', email: ''}))
-  console.log("what is response.data", response);
   return {
     addUser: { name: "", userName: "", email: "" },
     newUserAdded: response?.data,

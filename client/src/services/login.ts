@@ -1,8 +1,9 @@
 import axios, { AxiosResponse } from "axios";
 import { User } from "../types/Users";
+import { getNodeUrl } from "../helpers.js";
 
 export const postHomeLogin = async ({ userName, password }: User) => {
-  const url = "http://localhost:8080/api/login/home";
+  const url = `${getNodeUrl}/api/login/home`;
   try {
     const resposne = await axios({
       method: "POST",
@@ -14,6 +15,8 @@ export const postHomeLogin = async ({ userName, password }: User) => {
 
     return resposne;
   } catch (err) {
+    console.log("failed login", err);
+
     // console.log("failed postHomeLogin", err.resposne);
     alert("failed postHomeLogin");
   }

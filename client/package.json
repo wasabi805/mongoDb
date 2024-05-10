@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "tsbuild": "tsc && vite build",
-    "start" : "vite",
+    "start": "vite",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "dev": "vite",
@@ -22,6 +22,7 @@
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.8",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

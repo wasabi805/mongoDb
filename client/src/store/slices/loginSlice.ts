@@ -35,7 +35,11 @@ const initialState: InitialState = {
 };
 
 type Action = {
-  payload: { userName?: string; data?: { isHomeAuth: boolean }, bool?: boolean };
+  payload: {
+    userName?: string;
+    data?: { isHomeAuth: boolean };
+    bool?: boolean;
+  };
 };
 
 export const loginSlice = createSlice({
@@ -81,7 +85,8 @@ export const loginSlice = createSlice({
       }
     });
 
-    builder.addCase(submitHomeAuthLogin.rejected, (state) => {
+    builder.addCase(submitHomeAuthLogin.rejected, (state, action) => {
+      console.log("rejected | submitHomeAuthLogin", { state, action });
       state.loading = false;
     });
   },

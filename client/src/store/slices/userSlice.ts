@@ -148,11 +148,14 @@ export const userSlice = createSlice({
     });
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    builder.addCase(submitEditUser.fulfilled, (state: User_State, action: any) => {
-      state.users = action.payload?.data?.users;
-      state.loading = false;
-      state.editUser.toggleModal = false;
-    });
+    builder.addCase(
+      submitEditUser.fulfilled,
+      (state: User_State, action: any) => {
+        state.users = action.payload?.data?.users;
+        state.loading = false;
+        state.editUser.toggleModal = false;
+      },
+    );
 
     builder.addCase(submitEditUser.rejected, (state) => {
       state.loading = false;

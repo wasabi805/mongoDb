@@ -4,9 +4,18 @@ const verifyLoginHome = async (req, res) => {
 
   const { userName, password } = req.body;
 
-  const isHomeAuth =
-    home_login_user_name === userName && home_login_password === password;
-  res.send({ isHomeAuth });
+  try {
+    const isHomeAuth =
+      home_login_user_name === userName && home_login_password === password;
+    return res.send({ isHomeAuth });
+  } catch (error) {
+    console.log("failed at login", error.response);
+
+    return res.send({
+      msg: "failed at login",
+      error: error.response,
+    });
+  }
 };
 
 module.exports = {

@@ -45,12 +45,9 @@ const Users = () => {
     dispatch(toggleEditUserModal());
   };
 
-
-  const handleLogOut = ()  =>{
-    return dispatch(setIsHomeAuth({ bool : false}))
-  }
-    ;
-
+  const handleLogOut = () => {
+    return dispatch(setIsHomeAuth({ bool: false }));
+  };
   return (
     <div>
       <div
