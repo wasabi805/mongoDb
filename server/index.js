@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 var cors = require("cors");
 const compression = require("compression");
-const helmet = require("helmet")
+const helmet = require("helmet");
 
 const app = express();
 
@@ -26,7 +26,6 @@ const limiter = RateLimit({
 });
 // Apply rate limiter to all requests
 app.use(limiter);
-
 
 /* DB connect */
 mongoose
