@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "tsbuild": "tsc && vite build",
-    "install" : "npm ci && npm run build",
+    "install" : "npm ci",
     "start" : "vite",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
