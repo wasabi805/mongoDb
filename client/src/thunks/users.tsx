@@ -56,9 +56,9 @@ export const submitDeleteUser = createAsyncThunk<
 });
 
 export const submitEditUser = createAsyncThunk<
-  { data: { users: User[] } }, //what this thunk returns
-  null,
-  { state: RootState; dispatch: AppDispatch }
+  RootState,
+  void,
+  { state: RootState }
 >("/users/patch", async (_, { getState }) => {
   const state = getState();
 
