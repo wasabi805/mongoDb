@@ -15,4 +15,16 @@ export default defineConfig({
       },
     },
   },
+
+  build: {
+    rollupOptions: {
+        output: {
+            dir: 'dist',
+            entryFileNames: 'mongoDb.js',
+            assetFileNames: 'mongoDb.css',
+            chunkFileNames: "mongoDb.js",
+            manualChunks: undefined,
+        }
+    }
+}
 });
