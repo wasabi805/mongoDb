@@ -147,8 +147,9 @@ export const userSlice = createSlice({
       state.loading = false;
     });
 
-    builder.addCase(submitEditUser.fulfilled, (state, action) => {
-      state.users = action.payload.data.users;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    builder.addCase(submitEditUser.fulfilled, (state: User_State, action: any) => {
+      state.users = action.payload?.data?.users;
       state.loading = false;
       state.editUser.toggleModal = false;
     });

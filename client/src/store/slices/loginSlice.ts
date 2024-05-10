@@ -7,7 +7,7 @@ export type Login_Action = {
     data?: {
       isHomeAuth: boolean;
     };
-    bool: boolean;
+    bool?: boolean;
   };
 };
 
@@ -35,7 +35,7 @@ const initialState: InitialState = {
 };
 
 type Action = {
-  payload: { userName?: string; data?: { isHomeAuth: boolean } };
+  payload: { userName?: string; data?: { isHomeAuth: boolean }, bool?: boolean };
 };
 
 export const loginSlice = createSlice({
@@ -59,7 +59,7 @@ export const loginSlice = createSlice({
     },
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    setIsHomeAuth: (state: any, action: Login_Action) => {
+    setIsHomeAuth: (state: any, action: Action) => {
       state.isHomeAuth = action?.payload?.bool;
       state.isSubmit = false;
     },

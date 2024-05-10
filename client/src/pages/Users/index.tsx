@@ -45,8 +45,11 @@ const Users = () => {
     dispatch(toggleEditUserModal());
   };
 
-  const handleLogOut = ({ bool }: { bool: boolean }) =>
-    dispatch(setIsHomeAuth({ bool }));
+
+  const handleLogOut = ()  =>{
+    return dispatch(setIsHomeAuth({ bool : false}))
+  }
+    ;
 
   return (
     <div>
@@ -61,7 +64,7 @@ const Users = () => {
           <h3>Users</h3>
         </span>
         <span>
-          <Button onClick={() => handleLogOut({ bool: false })}>Log Out</Button>
+          <Button onClick={() => handleLogOut()}>Log Out</Button>
         </span>
       </div>
 
