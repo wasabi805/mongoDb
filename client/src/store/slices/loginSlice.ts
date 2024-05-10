@@ -1,10 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { submitHomeAuthLogin } from "../../thunks/login";
 
+export type Login_Action = {
+  type: string;
+  payload?: {
+    data?: {
+      isHomeAuth: boolean;
+    };
+    bool: boolean;
+  };
+};
+
 type InitialState = {
+  [name: string]: string | unknown;
   userName?: string;
   password?: string;
-  test?: string;
+  test?: object;
   loading?: boolean;
   isHomeAuth?: boolean;
   isSubmit?: boolean;
@@ -15,7 +26,7 @@ type InitialState = {
 const initialState: InitialState = {
   userName: "",
   password: "",
-  test: "",
+  test: {},
   loading: false,
   isHomeAuth: false,
   isSubmit: false,
@@ -23,36 +34,33 @@ const initialState: InitialState = {
   homeAuth: false,
 };
 
-type XAction = {
-  payload: {
-    userName?: string;
-  };
-};
-
-type XState = {
-  userName: string;
+type Action = {
+  payload: { userName?: string; data?: { isHomeAuth: boolean } };
 };
 
 export const loginSlice = createSlice({
   name: "login",
   initialState,
   reducers: {
-    setInput: (state: InitialState, action: XAction) => {
+    setInput: (state: InitialState, action: Action) => {
       const [key, value] = Object.entries(action.payload)[0];
 
-      state[key as keyof XState] = value;
+      state[key as keyof InitialState] = value;
     },
-    setHomeAuth: (state, action) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setHomeAuth: (state: any, action: Action) => {
       const homeAuth = action.payload;
+
       state.homeAuth = homeAuth;
     },
 
-    setTest: (state, action) => {
+    setTest: (state: InitialState, action) => {
       state.test = action.payload;
     },
 
-    setIsHomeAuth: (state, action) => {
-      state.isHomeAuth = action.payload.bool;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setIsHomeAuth: (state: any, action: Login_Action) => {
+      state.isHomeAuth = action?.payload?.bool;
       state.isSubmit = false;
     },
   },

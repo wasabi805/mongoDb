@@ -41,7 +41,7 @@ const EditUserModal = () => {
   };
 
   return (
-    <Modal open={editUser.toggleModal}>
+    <Modal open={editUser.toggleModal!}>
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Edit this user

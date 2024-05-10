@@ -38,7 +38,7 @@ export const submitNewUser = createAsyncThunk<
 
 export const submitDeleteUser = createAsyncThunk<
   { users: User[] },
-  { userId: User },
+  { userId: string },
   { state: RootState; dispatch: AppDispatch }
 >("/users/delete", async ({ userId }, thunkApi) => {
   const state = thunkApi.getState();

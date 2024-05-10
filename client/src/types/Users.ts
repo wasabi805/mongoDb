@@ -14,8 +14,11 @@ export type AddUser = {
 };
 export type EditUser = {
   [name: string]: unknown | string;
+
   userId?: string;
-  toggleModal?: boolean;
+  _id?: string | undefined;
+  toggleModal?: boolean | undefined | false;
+
   user?: {
     [name: string]: string | unknown;
     userName?: string | undefined;
@@ -39,7 +42,7 @@ export type User_State = {
 /* USER ACTION */
 type User_Payload = {
   [key: string]: unknown;
-  user: User | undefined;
+  user?: User | undefined;
   userId?: string | undefined;
   userName?: string | undefined;
   name?: string | undefined;
@@ -54,16 +57,16 @@ export type User_Action = {
 
 /* */
 export type NewUserAdded = {
-  _id: string;
-  name: string;
-  email: string;
-  userName: string;
-  address: {
-    street: string;
-    city: string;
-    zipcode: string;
+  _id?: string;
+  name?: string;
+  email?: string;
+  userName?: string;
+  address?: {
+    street?: string;
+    city?: string;
+    zipcode?: string;
   };
-  phone: string;
-  createdAt: string;
-  updatedAt: string;
+  phone?: string;
+  createdAt?: string;
+  updatedAt?: string;
 };
