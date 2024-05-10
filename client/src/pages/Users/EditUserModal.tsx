@@ -27,11 +27,13 @@ const EditUserModal = () => {
 
   const { editUser } = useAppSelector((state) => state.userSlice);
 
-  const handSetEditUserInputs = (e: React.FormEvent<HTMLInputElement>) => {
+  const handSetEditUserInputs = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     e.preventDefault();
 
-    const name = e.currentTarget.name;
-    const value = e.currentTarget.value;
+    const name = e.currentTarget?.name;
+    const value = e.currentTarget?.value;
     const editedUser = {
       [name]: value,
     };

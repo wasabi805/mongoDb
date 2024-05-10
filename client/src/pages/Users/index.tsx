@@ -33,9 +33,9 @@ const Users = () => {
   };
 
   const handleEditUser = (
-    e: React.FormEvent<HTMLInputElement>,
+    e: React.MouseEvent<HTMLButtonElement>,
     { userId }: EditUser,
-  ) => {
+  ): void => {
     const isEditUser = e.currentTarget.name === "edit-user";
     if (isEditUser) {
       const user = users.find((user) => user._id === userId);

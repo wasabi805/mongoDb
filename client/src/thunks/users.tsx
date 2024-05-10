@@ -7,7 +7,7 @@ import {
   patchUpdateUser,
 } from "../services/users";
 
-import { AddUser, User, NewUserAdded, EditUser } from "../types/Users";
+import { AddUser, User, NewUserAdded } from "../types/Users";
 // import { RootState } from "../types/Slices";
 import { RootState, AppDispatch } from "../store";
 
@@ -38,7 +38,7 @@ export const submitNewUser = createAsyncThunk<
 
 export const submitDeleteUser = createAsyncThunk<
   { users: User[] },
-  { userId: EditUser },
+  { userId: User },
   { state: RootState; dispatch: AppDispatch }
 >("/users/delete", async ({ userId }, thunkApi) => {
   const state = thunkApi.getState();
@@ -57,7 +57,7 @@ export const submitDeleteUser = createAsyncThunk<
 
 export const submitEditUser = createAsyncThunk<
   { data: { users: User[] } }, //what this thunk returns
-  object,
+  null,
   { state: RootState; dispatch: AppDispatch }
 >("/users/patch", async (_, { getState }) => {
   const state = getState();

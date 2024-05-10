@@ -16,7 +16,14 @@ export type EditUser = {
   [name: string]: unknown | string;
   userId?: string;
   toggleModal?: boolean;
-  user?: User | unknown;
+  user?: {
+    [name: string]: string | unknown;
+    userName?: string | undefined;
+    password?: string | undefined;
+    name?: string | undefined;
+    email?: string | undefined;
+    _id?: string | undefined;
+  };
 };
 
 /* USER STATE */

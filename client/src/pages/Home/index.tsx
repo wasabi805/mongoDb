@@ -16,7 +16,9 @@ const Home = () => {
     },
   );
 
-  const handleUpdateInput = (e) => {
+  const handleUpdateInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const name = e.target?.name;
     dispatch(setInput({ [name]: e.target?.value }));
   };
@@ -30,7 +32,7 @@ const Home = () => {
   };
 
   return (
-    <div style={{}}>
+    <div>
       <div>
         <TextField
           placeholder="user"

@@ -11,7 +11,9 @@ const AddUsers = () => {
 
   const { createUser } = userApis;
 
-  const handleUpdateAddUserForm = (e) => {
+  const handleUpdateAddUserForm = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
     dispatch(addUserData({ [name]: value }));
   };
