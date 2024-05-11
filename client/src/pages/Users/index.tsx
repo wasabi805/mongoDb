@@ -18,12 +18,10 @@ const Users = () => {
 
   const { users } = useAppSelector((state) => state.userSlice);
 
-  console.log('what is users | USERS', users)
+  console.log("what is users | USERS", users);
 
   const handleFetchAllUsers = async () => {
-    if (users?.length === 0 
-      || users === undefined
-      ) {
+    if (users?.length === 0 || users === undefined) {
       dispatch(fetchUsers());
     }
   };

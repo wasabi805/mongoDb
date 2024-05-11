@@ -6,7 +6,7 @@ export const postHomeLogin = async ({ userName, password }: User) => {
 
   console.log(
     "what is url | postHomeLogin defined?",
-    import.meta.env.VITE_BACKEND ,
+    import.meta.env.VITE_BACKEND,
   );
   console.log("what is args send | postHomeLogin", { userName });
 
