@@ -26,7 +26,7 @@ const Home = () => {
   const handeSubmitLogin = async () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const loginReponse: any = await dispatch(submitHomeAuthLogin({}));
-
+    console.log('what is the login response', loginReponse)
     if (loginReponse.payload?.data?.isHomeAuth === true) {
       navigate("users");
     }

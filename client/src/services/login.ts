@@ -4,6 +4,11 @@ import { getNodeUrl } from "../helpers.js";
 
 export const postHomeLogin = async ({ userName, password }: User) => {
   const url = `${getNodeUrl}/api/login/home`;
+
+  console.log('what is url | postHomeLogin', url)
+  console.log('what is args send | postHomeLogin', { userName, password})
+ 
+
   try {
     const resposne = await axios({
       method: "POST",
