@@ -6,18 +6,18 @@ dotenv.config();
 // https://vitejs.dev/config/
 export default defineConfig({
   define: {
-    MODE: `"${process.env.MODE}"`,
+    MODE: `${process.env.MODE}`,
     VITE_BACKEND: `"${process.env.VITE_BACKEND}"`,
     VITE_PORT: `"${process.env.VITE_PORT}"`,
   },
 
   plugins: [react()],
   server: {
-    port: parseInt(`"${process.env.VITE_PORT}"`, 10),
+    port: parseInt(`${process.env.VITE_PORT}`, 10),
 
     proxy: {
       "/api": {
-        target: `"${process.env.VITE_BACKEND}"`,
+        target: `${process.env.VITE_BACKEND}`,
         changeOrigin: true,
         secure: false,
       },
