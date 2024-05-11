@@ -7,7 +7,14 @@ import { submitHomeAuthLogin } from "../../../thunks/login";
 import { OutlinedInput, Button } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { useNavigate } from "react-router-dom";
-import { Alert, FormControl, InputLabel, FormLabel } from "@mui/material";
+import {
+  Box,
+  Alert,
+  FormControl,
+  InputLabel,
+  FormLabel,
+  Typography,
+} from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,11 +22,11 @@ const Login = () => {
   const { userName, password, isHomeAuth, isSubmit } = useAppSelector(
     (state) => {
       return state?.loginSlice;
-    }
+    },
   );
 
   const handleUpdateInput = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const name = e.target?.name;
     dispatch(setInput({ [name]: e.target?.value }));
@@ -36,13 +43,7 @@ const Login = () => {
 
   return (
     <LoginForm className="login-form">
-      <div
-        style={{
-          margin: "2rem",
-          background: "blue",
-          border: " 6px solid lime",
-        }}
-      >
+      <Typography variant="body1" className="login-info" gutterBottom>
         Where does it come from? Contrary to popular belief, Lorem Ipsum is not
         simply random text. It has roots in a piece of classical Latin
         literature from 45 BC, making it over 2000 years old. Richard
@@ -59,10 +60,15 @@ const Login = () => {
         1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are
         also reproduced in their exact original form, accompanied by English
         versions from the 1914 translation by H. Rackham.
-      </div>
+      </Typography>
 
-      <div className="login-form-inputs">
+      <Box className="login-form-inputs">
         {/* in this mode : {import.meta.env.MODE} */}
+
+        <Typography className="nputs-title" variant="h4" gutterBottom>
+          Some Title
+        </Typography>
+
         <FormControl sx={{ marginBottom: "1rem" }}>
           <FormLabel>User Name</FormLabel>
           <InputLabel htmlFor="userName" />
@@ -90,12 +96,13 @@ const Login = () => {
             Login
           </Button>
         </div>
+
         <div>
           {isHomeAuth === false && isSubmit && (
             <Alert severity="error">Incorrect User Name and or Password</Alert>
           )}
         </div>
-      </div>
+      </Box>
     </LoginForm>
   );
 };

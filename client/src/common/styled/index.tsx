@@ -1,5 +1,6 @@
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 import { orange } from "@mui/material/colors";
+import { useMediaQuery, Box } from "@mui/material";
 
 //https://mui.com/material-ui/customization/theming/#typescript
 
@@ -29,3 +30,18 @@ const AppThemeProvider = ({ children }: any) => {
 };
 
 export default AppThemeProvider;
+
+export const AppContainer = styled(Box)(({ theme }) => {
+  const { breakpoints } = theme;
+
+  const isMobile = !useMediaQuery(breakpoints.up("sm"));
+  console.log("what is breakpoints", breakpoints, isMobile);
+  // const isTablet = useMediaQuery(breakpoints.up("md"));
+
+  return `
+        display: flex;
+        /* background: aquamarine; */
+        align-items: center;
+        height: 100vh;
+    `;
+});

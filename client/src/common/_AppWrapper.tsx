@@ -1,4 +1,5 @@
 import { FC, ReactElement } from "react";
+import { AppContainer } from "./styled";
 
 /* ref: https://blog.logrocket.com/react-children-prop-typescript/ */
 interface AppLayoutProps extends React.PropsWithChildren {
@@ -7,6 +8,8 @@ interface AppLayoutProps extends React.PropsWithChildren {
 }
 
 const AppLayout: FC<AppLayoutProps> = (props: AppLayoutProps) => {
-  return <div className="app-layout">{props.children}</div>;
+  return (
+    <AppContainer className="app-container">{props.children}</AppContainer>
+  );
 };
 export default AppLayout;
