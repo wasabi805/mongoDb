@@ -12,6 +12,7 @@ import { AddUser, User, NewUserAdded } from "../types/Users";
 import { RootState, AppDispatch } from "../store";
 
 export const getAllUsers = createAsyncThunk("/users/get", async () => {
+  console.log("verify back end", import.meta.env.VITE_BACKEND);
   return await fetchAllUsers();
 });
 

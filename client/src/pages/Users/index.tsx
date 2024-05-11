@@ -1,4 +1,4 @@
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../store";
 
 import { userApis } from "../../store/slices/userSlice";
@@ -6,7 +6,6 @@ import { toggleEditUserModal, setEditUser } from "../../store/slices/userSlice";
 
 import { setIsHomeAuth } from "../../store/slices/loginSlice";
 
-import AddUsers from "./AddUsers";
 import EditUserModal from "./EditUserModal";
 import { Button } from "@mui/material";
 
@@ -14,24 +13,19 @@ import { EditUser } from "../../types/Users";
 
 const Users = () => {
   const dispatch = useAppDispatch();
-  const {
-    // fetchUsers,
-    deleteUser,
-  } = userApis;
+  const { fetchUsers, deleteUser } = userApis;
 
   const { users } = useAppSelector((state) => state.userSlice);
 
-  console.log("what is users | USERS", users);
-
-  // const handleFetchAllUsers = async () => {
-  //   if (users?.length === 0) {
-  //     dispatch(fetchUsers());
-  //   }
-  // };
-  // /*Component mounted */
-  // useEffect(() => {
-  //   handleFetchAllUsers();
-  // }, []);
+  const handleFetchAllUsers = async () => {
+    if (users?.length === 0 || users === undefined) {
+      dispatch(fetchUsers());
+    }
+  };
+  /*Component mounted */
+  useEffect(() => {
+    handleFetchAllUsers();
+  }, []);
 
   const handleDeleteUser = ({ userId }: { userId: string }) => {
     dispatch(deleteUser({ userId }));
@@ -103,8 +97,6 @@ const Users = () => {
           </div>
         );
       })}
-
-      <AddUsers />
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { DashContentContainer } from "./styled/DashContentContainer";
 import { useAppSelector } from "../../../store";
 
 import Users from "../../Users";
+import AddUsers from "../../Users/AddUsers";
 
 interface DashContentProps extends React.PropsWithChildren {
   className: string;
@@ -17,6 +18,8 @@ const DashContent: FC<DashContentProps> = ({ className }) => {
     <DashContentContainer className={className}>
       DashContent Comp
       {currentTab === "users" && <Users />}
+      {currentTab === "addUser" && <AddUsers />}
+      {currentTab === "uploadDoc" && <div>Show Upload Doc</div>}
     </DashContentContainer>
   );
 };
