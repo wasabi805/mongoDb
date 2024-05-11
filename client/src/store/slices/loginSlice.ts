@@ -31,7 +31,7 @@ const initialState: InitialState = {
   isHomeAuth: false,
   isSubmit: false,
   displayLoginError: false,
-  homeAuth: false,
+  homeAuth: true,
 };
 
 type Action = {
@@ -52,10 +52,12 @@ export const loginSlice = createSlice({
       state[key as keyof InitialState] = value;
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    setHomeAuth: (state: any, action: Action) => {
-      const homeAuth = action.payload;
+    setHomeAuth: (state: any, 
+      // action: Action
+      ) => {
+      // const homeAuth = action.payload;
 
-      state.homeAuth = homeAuth;
+      state.homeAuth = true;
     },
 
     setTest: (state: InitialState, action) => {
