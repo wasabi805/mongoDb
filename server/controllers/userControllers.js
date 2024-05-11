@@ -5,6 +5,7 @@ var _ = require("lodash");
 
 /*  -----  Create a Single User ------ */
 const createNewUser = async (req, res) => {
+  console.log('creating a new user', req.body)
   try {
     const newUser = {
       name: req.body?.name,
@@ -21,7 +22,7 @@ const createNewUser = async (req, res) => {
       },
       phone: req.body?.phone ? req.body?.phone : "",
     });
-
+    
     res.send({
       _id: response._id,
       name: response.name,
@@ -35,6 +36,7 @@ const createNewUser = async (req, res) => {
       updatedAt: response.updatedAt,
     });
   } catch (err) {
+    console.log('failed to add a user', err.response)
     res.json({
       message: `Failed to add user - ${err.message}`,
     });
@@ -122,13 +124,21 @@ const getSingleUser = async (req, res) => {
 
 /*----- Get ALL Users -----  */
 const getAllUsers = async (req, res) => {
+  console.log('FETCH ALL USERS WAS HIT')
+  console.log('FECTHALL USERS REQ' , )
   try {
     const allUsers = await UserModel.find({}).sort({ createdAt: -1 });
-    return res.send({
+    const response = {
       message: "SUCCESS - retrieved all users",
       users: allUsers,
-    });
+    }
+    console.log('FETCH ALL USERS', response)
+
+    return res.send(response);
+
   } catch (error) {
+    console.log('there was an error fetching ', error.response)
+
     return res.send({
       message: "Failed to grab all users",
     });
