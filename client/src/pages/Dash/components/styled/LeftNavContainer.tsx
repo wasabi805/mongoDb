@@ -5,7 +5,7 @@ export const LeftNavContainer = styled(Box)(({ theme }) => {
   //   console.log("what is breakpoints", breakpoints);
   //   const isMobile = !useMediaQuery(breakpoints.up("sm"));
   //   const isTablet = useMediaQuery(breakpoints.up("md"));
-
+  const isDeskTop = useMediaQuery(breakpoints.up("lg"));
   //   console.log("what is isTablet", isTablet);
 
   return `
@@ -14,9 +14,9 @@ export const LeftNavContainer = styled(Box)(({ theme }) => {
 
         //make child flexy
 
+        display : ${isDeskTop === false ? `none` : `flex`};
         flex: 0 0 4rem;
-        
-        display: flex;
+
         position: relative;
         flex-direction: column;
     `;

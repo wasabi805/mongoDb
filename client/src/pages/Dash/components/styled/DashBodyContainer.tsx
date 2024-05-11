@@ -1,7 +1,7 @@
-import { styled, useMediaQuery, Box } from "@mui/material";
+import { styled, Box } from "@mui/material";
 
-export const DashBodyContainer = styled(Box)(({ theme }) => {
-  const { breakpoints } = theme;
+export const DashBodyContainer = styled(Box)(() => {
+  //   const { breakpoints } = theme;
   //   console.log("what is breakpoints", breakpoints);
   //   const isMobile = !useMediaQuery(breakpoints.up("sm"));
   //   const isTablet = useMediaQuery(breakpoints.up("md"));
@@ -14,9 +14,6 @@ export const DashBodyContainer = styled(Box)(({ theme }) => {
 
         position: relative;
         display: flex;
-        height: 93%;
-
-        
-       
+        height: 93%;       
     `;
 });

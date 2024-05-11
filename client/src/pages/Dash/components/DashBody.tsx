@@ -1,8 +1,12 @@
+import { FC } from "react";
 import { DashBodyContainer } from "./styled/DashBodyContainer";
 
-import React from "react";
+interface DashBodyProps extends React.PropsWithChildren {
+  className?: string;
+  children?: JSX.Element | JSX.Element[];
+}
 
-const DashBody = ({ children }) => {
+const DashBody: FC<DashBodyProps> = ({ children }) => {
   return <DashBodyContainer>{children}</DashBodyContainer>;
 };
 

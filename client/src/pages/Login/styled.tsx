@@ -6,8 +6,6 @@ export const LoginForm = styled(Box)(({ theme }) => {
   const isMobile = !useMediaQuery(breakpoints.up("sm"));
   const isTablet = useMediaQuery(breakpoints.up("md"));
 
-  console.log("what is isTablet", isTablet);
-
   return `
         display: flex;
         flex-direction: ${isMobile ? `column` : `row`};

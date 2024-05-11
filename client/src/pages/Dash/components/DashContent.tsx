@@ -1,5 +1,11 @@
+import { FC } from "react";
 import { DashContentContainer } from "./styled/DashContentContainer";
-const DashContent = ({ className }) => {
+
+interface DashContentProps extends React.PropsWithChildren {
+  className: string;
+}
+
+const DashContent: FC<DashContentProps> = ({ className }) => {
   //this is the comp that will more than likey be hooked up redux and dynamically change with left nav and url
 
   return (
