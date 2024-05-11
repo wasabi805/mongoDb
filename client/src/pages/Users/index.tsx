@@ -21,7 +21,9 @@ const Users = () => {
   console.log('what is users | USERS', users)
 
   const handleFetchAllUsers = async () => {
-    if (users?.length === 0 ) {
+    if (users?.length === 0 
+      || users === undefined
+      ) {
       dispatch(fetchUsers());
     }
   };
@@ -40,7 +42,7 @@ const Users = () => {
   ) => {
     const isEditUser = e.currentTarget.name === "edit-user";
     if (isEditUser) {
-      const user = users.find((user) => user._id === userId);
+      const user = users?.find((user) => user?._id === userId);
       dispatch(setEditUser({ user, userId }));
     }
     //pop open modal
@@ -75,17 +77,17 @@ const Users = () => {
             style={{ display: "flex", alignSelf: "center" }}
             key={`user-${idx}`}
           >
-            <span style={{ marginRight: "1rem" }}>{user._id}</span>
+            <span style={{ marginRight: "1rem" }}>{user?._id}</span>
 
-            <span style={{ marginRight: "1rem" }}>{user.userName}</span>
-            <span style={{ marginRight: "1rem" }}>{user.email}</span>
-            <span style={{ marginRight: "1rem" }}>{user.name}</span>
+            <span style={{ marginRight: "1rem" }}>{user?.userName}</span>
+            <span style={{ marginRight: "1rem" }}>{user?.email}</span>
+            <span style={{ marginRight: "1rem" }}>{user?.name}</span>
 
             <span>
               <Button
                 variant="outlined"
                 name={"edit-user"}
-                onClick={(e) => handleEditUser(e, { userId: user._id })}
+                onClick={(e) => handleEditUser(e, { userId: user?._id })}
               >
                 edit
               </Button>
