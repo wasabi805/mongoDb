@@ -14,21 +14,24 @@ import { EditUser } from "../../types/Users";
 
 const Users = () => {
   const dispatch = useAppDispatch();
-  const { fetchUsers, deleteUser } = userApis;
+  const {
+    // fetchUsers,
+    deleteUser,
+  } = userApis;
 
   const { users } = useAppSelector((state) => state.userSlice);
 
   console.log("what is users | USERS", users);
 
-  const handleFetchAllUsers = async () => {
-    if (users?.length === 0 || users === undefined) {
-      dispatch(fetchUsers());
-    }
-  };
-  /*Component mounted */
-  useEffect(() => {
-    handleFetchAllUsers();
-  });
+  // const handleFetchAllUsers = async () => {
+  //   if (users?.length === 0) {
+  //     dispatch(fetchUsers());
+  //   }
+  // };
+  // /*Component mounted */
+  // useEffect(() => {
+  //   handleFetchAllUsers();
+  // }, []);
 
   const handleDeleteUser = ({ userId }: { userId: string }) => {
     dispatch(deleteUser({ userId }));
@@ -36,7 +39,7 @@ const Users = () => {
 
   const handleEditUser = (
     e: React.MouseEvent<HTMLButtonElement>,
-    { userId }: EditUser,
+    { userId }: EditUser
   ) => {
     const isEditUser = e.currentTarget.name === "edit-user";
     if (isEditUser) {

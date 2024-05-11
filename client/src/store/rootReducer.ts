@@ -1,5 +1,6 @@
 import loginSlice from "./slices/loginSlice";
 import userSlice from "./slices/userSlice";
+import dashboardSlice from "./slices/dashboardSlice";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
 import { combineReducers } from "@reduxjs/toolkit";
@@ -10,6 +11,7 @@ import { combineReducers } from "@reduxjs/toolkit";
 
 const rootReducer = combineReducers({
   loginSlice,
+  dashboardSlice,
   userSlice,
 });
 
