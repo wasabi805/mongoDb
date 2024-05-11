@@ -39,9 +39,7 @@ export const AppContainer = styled(Box)(({ theme }) => {
   // const isTablet = useMediaQuery(breakpoints.up("md"));
 
   return `
-        display: flex;
-        /* background: aquamarine; */
-        align-items: center;
         height: 100vh;
+        position: relative;
     `;
 });

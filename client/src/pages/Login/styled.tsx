@@ -11,10 +11,12 @@ export const LoginForm = styled(Box)(({ theme }) => {
   return `
         display: flex;
         flex-direction: ${isMobile ? `column` : `row`};
-        // height: ${!isMobile && `100vh`};
-        border: 1px solid cyan;
-        padding : ${isTablet && `8rem`};
+        align-items: center;
+        height: 100%;
+        margin : ${isTablet && `auto 8rem`};
 
+        border: 1px solid cyan;
+        
         //ch1
         .login-info{
             flex: 1 0 0;

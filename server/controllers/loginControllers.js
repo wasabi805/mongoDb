@@ -1,5 +1,5 @@
 const verifyLoginHome = async (req, res) => {
-  console.log('trying to validate a user', req.body)
+  // console.log('trying to validate a user', req.body)
 
   const home_login_user_name = process.env.HOME_PAGE_LOGIN_USERNAME;
   const home_login_password = process.env.HOME_PAGE_LOGIN_PASSWORD;

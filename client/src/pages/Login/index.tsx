@@ -1,11 +1,11 @@
 // import React from "react";
 import { LoginForm } from "./styled";
 
-import { setInput } from "../../../store/slices/loginSlice";
-import { submitHomeAuthLogin } from "../../../thunks/login";
+import { setInput } from "../../store/slices/loginSlice";
+import { submitHomeAuthLogin } from "../../thunks/login";
 
 import { OutlinedInput, Button } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -22,11 +22,11 @@ const Login = () => {
   const { userName, password, isHomeAuth, isSubmit } = useAppSelector(
     (state) => {
       return state?.loginSlice;
-    },
+    }
   );
 
   const handleUpdateInput = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const name = e.target?.name;
     dispatch(setInput({ [name]: e.target?.value }));
@@ -37,7 +37,7 @@ const Login = () => {
     const loginReponse: any = await dispatch(submitHomeAuthLogin({}));
     console.log("what is the login response", loginReponse);
     if (loginReponse.payload?.data?.isHomeAuth === true) {
-      navigate("users");
+      navigate("dashboard");
     }
   };
 

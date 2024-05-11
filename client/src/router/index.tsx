@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Home from "../pages/Home";
+import Dash from "../pages/Dash";
 import Users from "../pages/Users";
+import Login from "../pages/Login";
 
 import { PrivateRoute } from "./PrivateRoute";
 
@@ -11,7 +12,15 @@ export const AppRouter = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dash />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="/users"
           element={
