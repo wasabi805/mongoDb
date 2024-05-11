@@ -7,22 +7,17 @@ dotenv.config();
 export default defineConfig({
   define: {
     MODE: `"${process.env.MODE}"`,
-    VITE_LOCAL_HOST: `"${process.env.VITE_LOCAL_HOST}"`,
-    VITE_PROD_URL: `"${process.env.VITE_PROD_URL}"`,
-    VITE_LOCAL_PORT: `"${process.env.VITE_LOCAL_PORT}"`,
+    VITE_BACKEND: `"${process.env.VITE_BACKEND}"`,
+    VITE_PORT: `"${process.env.VITE_PORT}"`,
   },
 
   plugins: [react()],
   server: {
-    port: 8082,
+    port: parseInt(`"${process.env.VITE_PORT}"`, 10),
 
     proxy: {
       "/api": {
-        // target: "http://localhost:8080",
-        target:
-          process.env.MODE === "development"
-            ? process.env.VITE_LOCAL_HOST
-            : process.env.VITE_PROD_URL,
+        target: `"${process.env.VITE_BACKEND}"`,
         changeOrigin: true,
         secure: false,
       },

@@ -15,7 +15,7 @@ export const AppRouter = () => {
           path="/users"
           element={
             // <PrivateRoute>
-              <Users />
+            <Users />
             // </PrivateRoute>
           }
         />

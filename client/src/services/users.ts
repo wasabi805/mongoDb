@@ -1,9 +1,8 @@
 import axios from "axios";
 import { User } from "../types/Users";
-import { getNodeUrl } from "../helpers.js";
 
 export const fetchAllUsers = () => {
-  const url = `${getNodeUrl}/api/users`;
+  const url = `${import.meta.env.VITE_BACKEND}/api/users`;
   try {
     const resposne = axios({
       method: "GET",
@@ -20,7 +19,7 @@ export const fetchAllUsers = () => {
 };
 
 export const postNewUser = ({ name, userName, email }: User) => {
-  const url = `${getNodeUrl}/api/users`;
+  const url = `${import.meta.env.VITE_BACKEND}/api/users`;
   try {
     const resposne = axios({
       method: "POST",
@@ -40,7 +39,7 @@ export const postNewUser = ({ name, userName, email }: User) => {
 };
 
 export const postDeleteUser = async ({ userId }: User) => {
-  const url = `${getNodeUrl}/api/users/${userId}`;
+  const url = `${import.meta.env.VITE_BACKEND}/api/users/${userId}`;
 
   try {
     const response = await axios({
@@ -64,7 +63,7 @@ export const postDeleteUser = async ({ userId }: User) => {
 
 //use this name
 export const patchUpdateUser = async ({ userId, user }: User) => {
-  const url = `${getNodeUrl}/api/users/${userId}`;
+  const url = `${import.meta.env.VITE_BACKEND}/api/users/${userId}`;
   try {
     const response = await axios({
       method: "PATCH",

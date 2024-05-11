@@ -52,9 +52,10 @@ export const loginSlice = createSlice({
       state[key as keyof InitialState] = value;
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    setHomeAuth: (state: any, 
+    setHomeAuth: (
+      state: any,
       // action: Action
-      ) => {
+    ) => {
       // const homeAuth = action.payload;
 
       state.homeAuth = true;

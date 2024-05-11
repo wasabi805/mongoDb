@@ -26,7 +26,7 @@ const Home = () => {
   const handeSubmitLogin = async () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const loginReponse: any = await dispatch(submitHomeAuthLogin({}));
-    console.log('what is the login response', loginReponse)
+    console.log("what is the login response", loginReponse);
     if (loginReponse.payload?.data?.isHomeAuth === true) {
       navigate("users");
     }
@@ -34,6 +34,7 @@ const Home = () => {
 
   return (
     <div>
+      in this mode : {import.meta.env.MODE}
       <div>
         <TextField
           placeholder="user"
@@ -48,13 +49,11 @@ const Home = () => {
           value={password}
         />
       </div>
-
       <div>
         <Button variant="contained" onClick={() => handeSubmitLogin()}>
           Login
         </Button>
       </div>
-
       <div>
         {isHomeAuth === false && isSubmit && (
           <Alert severity="error">Incorrect User Name and or Password</Alert>

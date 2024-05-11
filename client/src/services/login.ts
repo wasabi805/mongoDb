@@ -1,13 +1,14 @@
 import axios, { AxiosResponse } from "axios";
 import { User } from "../types/Users";
-import { getNodeUrl } from "../helpers.js";
 
 export const postHomeLogin = async ({ userName, password }: User) => {
-  const url = `${getNodeUrl}/api/login/home`;
+  const url = `${import.meta.env.VITE_BACKEND}/api/login/home`;
 
-  console.log('what is url | postHomeLogin', url)
-  console.log('what is args send | postHomeLogin', { userName, password})
- 
+  console.log(
+    "what is url | postHomeLogin defined?",
+    import.meta.env.VITE_BACKEND !== undefined,
+  );
+  console.log("what is args send | postHomeLogin", { userName });
 
   try {
     const resposne = await axios({
