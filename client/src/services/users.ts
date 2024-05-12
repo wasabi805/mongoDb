@@ -1,7 +1,7 @@
 import axios from "axios";
 import { User } from "../types/Users";
 
-export const fetchAllUsers = async() => {
+export const fetchAllUsers = async () => {
   const url = `${import.meta.env.VITE_BACKEND}/api/users`;
   try {
     const resposne = await axios({
@@ -14,7 +14,6 @@ export const fetchAllUsers = async() => {
 
     return resposne;
   } catch (error) {
-
     alert("failed fetch getUser");
   }
 };

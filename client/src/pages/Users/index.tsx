@@ -4,8 +4,6 @@ import { useAppDispatch, useAppSelector } from "../../store";
 import { userApis } from "../../store/slices/userSlice";
 import { toggleEditUserModal, setEditUser } from "../../store/slices/userSlice";
 
-import { setIsHomeAuth } from "../../store/slices/loginSlice";
-
 import EditUserModal from "./EditUserModal";
 import { Button } from "@mui/material";
 
@@ -33,7 +31,7 @@ const Users = () => {
 
   const handleEditUser = (
     e: React.MouseEvent<HTMLButtonElement>,
-    { userId }: EditUser
+    { userId }: EditUser,
   ) => {
     const isEditUser = e.currentTarget.name === "edit-user";
     if (isEditUser) {
@@ -44,9 +42,6 @@ const Users = () => {
     dispatch(toggleEditUserModal());
   };
 
-  const handleLogOut = () => {
-    return dispatch(setIsHomeAuth({ bool: false }));
-  };
   return (
     <div>
       <div
@@ -58,9 +53,6 @@ const Users = () => {
       >
         <span>
           <h3>Users</h3>
-        </span>
-        <span>
-          <Button onClick={() => handleLogOut()}>Log Out</Button>
         </span>
       </div>
 
