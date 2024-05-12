@@ -4,6 +4,14 @@ export type User = {
   password?: string | undefined;
   name?: string | undefined;
   email?: string | undefined;
+
+  address?: {
+    street: string;
+    city: string;
+    state: string;
+    zipcode: string;
+  };
+
   _id?: string | undefined;
 };
 export type AddUser = {
@@ -11,6 +19,14 @@ export type AddUser = {
   userName: string;
   name: string;
   email: string;
+  phone: string;
+
+  address?: {
+    street: string;
+    city: string;
+    state: string;
+    zipcode: string;
+  };
 };
 export type EditUser = {
   [name: string]: unknown | string;
@@ -26,6 +42,13 @@ export type EditUser = {
     name?: string | undefined;
     email?: string | undefined;
     _id?: string | undefined;
+
+    address?: {
+      street: string;
+      city: string;
+      state: string;
+      zipcode: string;
+    };
   };
 };
 

@@ -18,6 +18,14 @@ const initialState: User_State = {
     name: "",
     userName: "",
     email: "",
+    phone: "",
+
+    address: {
+      street: "",
+      city: "",
+      state: "",
+      zipcode: "",
+    },
   },
 
   editUser: {
@@ -29,6 +37,14 @@ const initialState: User_State = {
       userName: "",
       name: "",
       email: "",
+      phone: "",
+
+      address: {
+        street: "",
+        city: "",
+        state: "",
+        zipcode: "",
+      },
     },
   },
 };
@@ -40,9 +56,13 @@ export const userSlice = createSlice({
 
   reducers: {
     addUserData(state: User_State, action: User_Action) {
+      console.log("adding user", action.payload);
       const [key, value] = Object.entries(action.payload)[0];
-
-      state.addUser[key] = value;
+      
+      state.addUser = {
+        ...state.addUser,
+        [key]: value,
+      };
     },
 
     clearUserData: (state: User_State) => {
@@ -69,6 +89,9 @@ export const userSlice = createSlice({
         user: {
           ...(state!.editUser!.user as User),
           [name]: value,
+          address: {
+            ...state.editUser.address,
+          },
         },
       };
       state.loading = false;
@@ -83,6 +106,12 @@ export const userSlice = createSlice({
           userName: "",
           name: "",
           email: "",
+          address: {
+            street: "",
+            city: "",
+            state: "",
+            zipcode: "",
+          },
         },
       };
     },
@@ -117,6 +146,14 @@ export const userSlice = createSlice({
         name: action.payload?.addUser.name,
         email: "",
         userName: "",
+        phone: "",
+
+        address: {
+          street: "",
+          city: "",
+          state: "",
+          zipcode: "",
+        },
       };
       state.loading = false;
     });
@@ -146,9 +183,9 @@ export const userSlice = createSlice({
       state.loading = false;
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     builder.addCase(
       submitEditUser.fulfilled,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (state: User_State, action: any) => {
         state.users = action.payload?.data?.users;
         state.loading = false;

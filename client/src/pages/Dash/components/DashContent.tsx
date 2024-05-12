@@ -16,7 +16,6 @@ const DashContent: FC<DashContentProps> = ({ className }) => {
   console.log("what is currentTab", currentTab);
   return (
     <DashContentContainer className={className}>
-      DashContent Comp
       {currentTab === "users" && <Users />}
       {currentTab === "addUser" && <AddUsers />}
       {currentTab === "uploadDoc" && <div>Show Upload Doc</div>}
