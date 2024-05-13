@@ -10,12 +10,12 @@ export const HeaderBarContainer = styled(Box)(({ theme }) => {
   //   console.log("what is brs", { isMobile, isTablet });
 
   return `
-        border: 1px solid lime;
+
+        display: flex;
+        align-items: center;
         height: 4rem;
 
-        .hamburger{
-            display : ${isDeskTop && `none`};
-        }
+        border: 1px solid lime;
 
     `;
 });
