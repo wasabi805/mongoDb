@@ -39,11 +39,11 @@ export const LoginForm = styled(Box)(({ theme }) => {
             flex-direction: column;
         
 
-            padding: 3rem 1rem;
+            // padding: 3rem 1rem;
 
             .inputs-title{
                 display : ${isMobile && `none`};
-                margin-bottom: 3rem;
+                // margin-bottom: 3rem;
             }
 
 

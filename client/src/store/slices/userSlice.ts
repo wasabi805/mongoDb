@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import _ from 'lodash'
 
 /* APIS */
 import {
@@ -56,13 +57,8 @@ export const userSlice = createSlice({
 
   reducers: {
     addUserData(state: User_State, action: User_Action) {
-      console.log("adding user", action.payload);
-      const [key, value] = Object.entries(action.payload)[0];
-      
-      state.addUser = {
-        ...state.addUser,
-        [key]: value,
-      };
+      const path = action.payload.path
+      _.set(state.addUser, path, action.payload.value)  
     },
 
     clearUserData: (state: User_State) => {

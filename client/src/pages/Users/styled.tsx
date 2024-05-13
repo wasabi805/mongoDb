@@ -13,6 +13,12 @@ export const AddUsersContainer = styled(Box)(({ theme }) => {
       flex-direction: row;
       flex-wrap: wrap;
 
+      position: relative;
+    //   height: 90vh;
+      overflow: overlay;
+
+
+
       .inputs-title{
         flex-basis: 100%;
       }
@@ -51,7 +57,7 @@ export const AddUsersContainer = styled(Box)(({ theme }) => {
             flex-basis: 100%;
             display: flex;
             justify-content: center;
-            padding: 2rem 0;
+            padding: 5rem 0;
         }
 
       }

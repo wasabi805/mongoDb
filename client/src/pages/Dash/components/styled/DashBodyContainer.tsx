@@ -11,9 +11,8 @@ export const DashBodyContainer = styled(Box)(() => {
   return `
         border: 1px solid magenta;
         background: azure;
-
         position: relative;
         display: flex;
-        height: 93%;       
+         
     `;
 });
