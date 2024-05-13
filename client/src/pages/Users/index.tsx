@@ -8,6 +8,7 @@ import EditUserModal from "./EditUserModal";
 import { Button } from "@mui/material";
 
 import { EditUser } from "../../types/Users";
+import { AllUsersGrid } from "./UsersTable";
 
 const Users = () => {
   const dispatch = useAppDispatch();
@@ -31,7 +32,7 @@ const Users = () => {
 
   const handleEditUser = (
     e: React.MouseEvent<HTMLButtonElement>,
-    { userId }: EditUser,
+    { userId }: EditUser
   ) => {
     const isEditUser = e.currentTarget.name === "edit-user";
     if (isEditUser) {
@@ -57,7 +58,7 @@ const Users = () => {
       </div>
 
       <EditUserModal />
-
+      <AllUsersGrid />
       {users?.map((user, idx) => {
         return (
           <div
