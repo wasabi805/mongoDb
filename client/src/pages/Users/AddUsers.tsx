@@ -9,7 +9,10 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { addUserData } from "../../store/slices/userSlice";
+import {
+  addUserData,
+  addUserDataAddressInfo,
+} from "../../store/slices/userSlice";
 import { userApis } from "../../store/slices/userSlice";
 import { AddUsersContainer } from "./styled";
 
@@ -27,10 +30,20 @@ const AddUsers = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    dispatch(addUserData({ path: e.target.name, value }));
+    dispatch(addUserData({ [name]: value }));
   };
 
+  const handleAddUserDataAddressInfo = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    dispatch(addUserDataAddressInfo({ [name]: value }));
+  };
+
+  // addUserDataAddressInfo
+
   const handleSubmitNewUser = () => {
+    alert("submit clicked");
     dispatch(createUser({})).then((res) => {
       /* you could potentialy dipatch here but avoid doing so*/
       // console.log('what is res', res)
@@ -42,9 +55,9 @@ const AddUsers = () => {
     <div>
       <AddUsersContainer className="add-users-container">
         <div className="inputs-title">
-          <Typography>
-            <h2>Add a user</h2>
-            <p>Add a user to appear on the user table</p>
+          <Typography variant={"h4"}>Add a user</Typography>
+          <Typography variant="body1">
+            Add a user to appear on the user table
           </Typography>
         </div>
 
@@ -55,7 +68,7 @@ const AddUsers = () => {
               <InputLabel htmlFor="userName" />
               <OutlinedInput
                 onChange={(e) => handleUpdateAddUserForm(e)}
-                name={"addUser.userName"}
+                name={"userName"}
                 value={userSlice.addUser.userName}
                 error={false}
               />
@@ -66,7 +79,7 @@ const AddUsers = () => {
               <InputLabel htmlFor="userName" />
               <OutlinedInput
                 onChange={(e) => handleUpdateAddUserForm(e)}
-                name={"addUser.name"}
+                name={"name"}
                 value={userSlice.addUser.name}
                 error={false}
               />
@@ -77,7 +90,7 @@ const AddUsers = () => {
               <InputLabel htmlFor="userName" />
               <OutlinedInput
                 onChange={(e) => handleUpdateAddUserForm(e)}
-                name={"addUser.email"}
+                name={"email"}
                 value={userSlice.addUser.email}
                 error={false}
               />
@@ -88,7 +101,7 @@ const AddUsers = () => {
               <InputLabel htmlFor="phone" />
               <OutlinedInput
                 onChange={(e) => handleUpdateAddUserForm(e)}
-                name={"addUser.phone"}
+                name={"phone"}
                 value={userSlice.addUser.phone}
                 error={false}
               />
@@ -100,8 +113,8 @@ const AddUsers = () => {
               <FormLabel>Street</FormLabel>
               <InputLabel htmlFor="street" />
               <OutlinedInput
-                onChange={(e) => handleUpdateAddUserForm(e)}
-                name={"addUser.address.street"}
+                onChange={(e) => handleAddUserDataAddressInfo(e)}
+                name={"street"}
                 value={userSlice?.addUser?.address?.street}
                 error={false}
               />
@@ -110,8 +123,8 @@ const AddUsers = () => {
               <FormLabel>City</FormLabel>
               <InputLabel htmlFor="city" />
               <OutlinedInput
-                onChange={(e) => handleUpdateAddUserForm(e)}
-                name={"addUser.address.city"}
+                onChange={(e) => handleAddUserDataAddressInfo(e)}
+                name={"city"}
                 value={userSlice?.addUser?.address?.city}
                 error={false}
               />
@@ -120,16 +133,18 @@ const AddUsers = () => {
               <FormLabel>State</FormLabel>
               <InputLabel htmlFor="state" />
               <OutlinedInput
-                onChange={(e) => handleUpdateAddUserForm(e)}
+                onChange={(e) => handleAddUserDataAddressInfo(e)}
+                name={"state"}
                 value={userSlice?.addUser?.address?.state}
                 error={false}
               />
             </FormControl>
             <FormControl sx={{ marginBottom: "1rem" }}>
               <FormLabel>Zip Code</FormLabel>
-              <InputLabel htmlFor="email" />
+              <InputLabel htmlFor="zipcode" />
               <OutlinedInput
-                onChange={(e) => handleUpdateAddUserForm(e)}
+                onChange={(e) => handleAddUserDataAddressInfo(e)}
+                name={"zipcode"}
                 value={userSlice?.addUser?.address?.zipcode}
                 error={false}
               />
@@ -141,9 +156,9 @@ const AddUsers = () => {
               className={"submit-button"}
               variant={"contained"}
               // sx={{ width: "8rem" }}
-              onChange={(e) => handleUpdateAddUserForm(e)}
+              onClick={handleSubmitNewUser}
             >
-              add user
+              add user!
             </Button>
           </div>
         </Box>

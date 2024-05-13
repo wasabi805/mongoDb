@@ -57,8 +57,37 @@ export const userSlice = createSlice({
 
   reducers: {
     addUserData(state: User_State, action: User_Action) {
-      const path = action.payload.path
-      _.set(state.addUser, path, action.payload.value)  
+      const [key, value] = Object.entries(action.payload)[0]
+     
+      state.addUser={
+        ...state.addUser,
+        [key] : value,
+        // userName: "",
+        // name: "",
+        // email: "",
+        // phone: "",
+
+        address: {
+          ...state.addUser.address
+        },
+
+      }
+
+    },
+
+    addUserDataAddressInfo(state: User_State, action: User_Action){
+      const [key, value] = Object.entries(action.payload)[0]
+      state.addUser={
+        ...state.addUser,
+         // userName: "",
+        // name: "",
+        // email: "",
+        // phone: "",
+        address: {
+          ...state.addUser.address,
+          [key] : value,
+        },
+      }
     },
 
     clearUserData: (state: User_State) => {
@@ -199,6 +228,7 @@ export default userSlice.reducer;
 
 export const {
   addUserData,
+  addUserDataAddressInfo,
   clearUserData,
   toggleEditUserModal,
   setEditUser,

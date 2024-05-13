@@ -25,13 +25,30 @@ export const submitNewUser = createAsyncThunk<
   { state: RootState; dispatch: AppDispatch }
 >("/users/post", async (_, thunkApi) => {
   const state = thunkApi.getState();
-  const { name, userName, email } = state.userSlice.addUser;
-
-  const response = await postNewUser({ name, userName, email });
+  const { name, userName, email, phone, address } = state.userSlice.addUser;
+  alert("submitting new user");
+  const response = await postNewUser({
+    name,
+    userName,
+    email,
+    phone,
+    address,
+  });
 
   // dispatch(clearUserData({name: 'foo', userName: '', email: ''}))
   return {
-    addUser: { name: "", userName: "", email: "" },
+    addUser: {
+      name: "",
+      userName: "",
+      email: "",
+      phone: "",
+      address: {
+        street: "",
+        city: "",
+        state: "",
+        zipcode: "",
+      },
+    },
     newUserAdded: response?.data,
   };
 });
