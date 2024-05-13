@@ -18,7 +18,12 @@ export const fetchAllUsers = async () => {
   }
 };
 
-export const postNewUser = ({ name, userName, email }: User) => {
+export const postNewUser = ({  name,
+  userName,
+  email,
+  phone,
+  address,
+ }: User) => {
   const url = `${import.meta.env.VITE_BACKEND}/api/users`;
   try {
     const resposne = axios({
@@ -29,6 +34,8 @@ export const postNewUser = ({ name, userName, email }: User) => {
         name,
         userName,
         email,
+        phone,
+        address
       },
     }).then((res) => res);
 

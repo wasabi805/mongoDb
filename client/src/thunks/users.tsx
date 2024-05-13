@@ -27,6 +27,9 @@ export const submitNewUser = createAsyncThunk<
   const state = thunkApi.getState();
   const { name, userName, email, phone, address } = state.userSlice.addUser;
   alert("submitting new user");
+
+  console.log("SENDING TO NODE", { name, userName, email, phone, address });
+
   const response = await postNewUser({
     name,
     userName,

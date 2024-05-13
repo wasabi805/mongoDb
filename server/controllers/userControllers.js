@@ -11,16 +11,17 @@ const createNewUser = async (req, res) => {
       name: req.body?.name,
       userName: req.body?.userName,
       email: req.body?.email,
+      phone: req.body?.phone ? req.body?.phone : "",
     };
 
     const response = await UserModel.create({
       ...newUser,
       address: {
-        street: req.body?.street ? req.body?.street : "",
-        city: req.body?.city ? req.body?.city : "",
-        zipcode: req.body?.zipcode ? req.body?.zipcode : "",
+        street: req.body?.address?.street ? req.body?.address?.street : "",
+        city: req.body?.address?.city ? req.body?.address?.city : "",
+        zipcode: req.body?.address?.zipcode ? req.body?.address?.zipcode : "",
       },
-      phone: req.body?.phone ? req.body?.phone : "",
+     
     });
     
     res.send({
