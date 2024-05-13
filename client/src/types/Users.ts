@@ -6,10 +6,10 @@ export type User = {
   email?: string | undefined;
 
   address?: {
-    street: string;
-    city: string;
-    state: string;
-    zipcode: string;
+    street?: string;
+    city?: string;
+    state?: string;
+    zipcode?: string;
   };
 
   _id?: string | undefined;
@@ -22,10 +22,10 @@ export type AddUser = {
   phone: string;
 
   address?: {
-    street: string;
-    city: string;
-    state: string;
-    zipcode: string;
+    street?: string;
+    city?: string;
+    state?: string;
+    zipcode?: string;
   };
 };
 export type EditUser = {
@@ -44,10 +44,10 @@ export type EditUser = {
     _id?: string | undefined;
 
     address?: {
-      street: string;
-      city: string;
-      state: string;
-      zipcode: string;
+      street?: string;
+      city?: string;
+      state?: string;
+      zipcode?: string;
     };
   };
 };
@@ -64,7 +64,7 @@ export type User_State = {
 
 /* USER ACTION */
 type User_Payload = {
-  [key: string]: unknown;
+[key: string]: unknown;
   user?: User | undefined;
   userId?: string | undefined;
   userName?: string | undefined;
@@ -84,12 +84,15 @@ export type NewUserAdded = {
   name?: string;
   email?: string;
   userName?: string;
+  phone?: string;
+
   address?: {
     street?: string;
     city?: string;
+    state?: string;
     zipcode?: string;
   };
-  phone?: string;
+  
   createdAt?: string;
   updatedAt?: string;
 };

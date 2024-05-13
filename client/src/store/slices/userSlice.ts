@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import _ from 'lodash'
 
 /* APIS */
 import {
@@ -115,7 +114,7 @@ export const userSlice = createSlice({
           ...(state!.editUser!.user as User),
           [name]: value,
           address: {
-            ...state.editUser.address,
+            ...Object.assign({}, state.editUser?.address)
           },
         },
       };
@@ -166,7 +165,9 @@ export const userSlice = createSlice({
     builder.addCase(submitNewUser.fulfilled, (state, action) => {
       const newUserAdded = action.payload?.newUserAdded;
 
-      state.users = [...state.users, newUserAdded];
+      state.users.push(newUserAdded);
+      
+      //come here 
       state.addUser = {
         name: action.payload?.addUser.name,
         email: "",
