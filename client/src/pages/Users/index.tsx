@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store";
 
 import { userApis } from "../../store/slices/userSlice";
@@ -43,6 +43,18 @@ const Users = () => {
     dispatch(toggleEditUserModal());
   };
 
+  const [localState, setLocalState] = useState({
+    data: {},
+  });
+
+  const setViewAdditionalData = ({ data }) => {
+    console.log("what is data", data);
+    setLocalState({
+      ...localState,
+      data,
+    });
+  };
+
   return (
     <div>
       <div
@@ -58,8 +70,27 @@ const Users = () => {
       </div>
 
       <EditUserModal />
-      <AllUsersGrid />
-      {users?.map((user, idx) => {
+      <div className="experiment" style={{ display: "flex" }}>
+        <div>
+          <AllUsersGrid onRowClick={setViewAdditionalData} />
+        </div>
+
+        <div className="additional-user-data">
+          {Object.keys(localState.data).length > 0 && (
+            <div>
+              <div>id : {localState.data.id}</div>
+              <div>Street : {localState.data.address.Street}</div>
+              <div>City : {localState.data.address.city}</div>
+              <div>State : {localState.data.address.state}</div>
+              <div>Zipcode : {localState.data.address.zipcode}</div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* <AllUsersGrid /> */}
+
+      {/* {users?.map((user, idx) => {
         return (
           <div
             style={{ display: "flex", alignSelf: "center" }}
@@ -89,7 +120,9 @@ const Users = () => {
             </span>
           </div>
         );
-      })}
+      })} */}
+
+      {/* <div>show extra</div> */}
     </div>
   );
 };

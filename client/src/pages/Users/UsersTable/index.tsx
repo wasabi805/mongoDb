@@ -34,19 +34,7 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
   },
 ];
 
-const rows = [
-  { id: 1, userName: "John", name: "Snow", email: "Jon", phone: 14 },
-  { id: 2, userName: "Jamie", name: "Lannister", email: "Cersei", phone: 31 },
-  //   { id: 3, lastName: "Lannister", firstName: "Jaime", age: 31 },
-  //   { id: 4, lastName: "Stark", firstName: "Arya", age: 11 },
-  //   { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  //   { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  //   { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  //   { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  //   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
-
-export const AllUsersGrid = () => {
+export const AllUsersGrid = ({ onRowClick }) => {
   const { users } = useAppSelector((state) => state.userSlice);
   console.log("what is users from grid", users);
   const { userName, name, email, phone, address } = users;
@@ -73,6 +61,7 @@ export const AllUsersGrid = () => {
             },
           },
         }}
+        onRowClick={(e) => onRowClick({ data: e.row })}
         pageSizeOptions={[5]}
         checkboxSelection
         disableRowSelectionOnClick
