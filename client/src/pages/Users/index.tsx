@@ -5,10 +5,11 @@ import { userApis } from "../../store/slices/userSlice";
 import { toggleEditUserModal, setEditUser } from "../../store/slices/userSlice";
 
 import EditUserModal from "./EditUserModal";
-import { Button } from "@mui/material";
+import { Box, Button, Paper, Typography } from "@mui/material";
 
 import { EditUser } from "../../types/Users";
 import { AllUsersGrid } from "./UsersTable";
+import InlineKeyValue from "../../common/InlineKeyValue";
 
 const Users = () => {
   const dispatch = useAppDispatch();
@@ -48,7 +49,6 @@ const Users = () => {
   });
 
   const setViewAdditionalData = ({ data }) => {
-    console.log("what is data", data);
     setLocalState({
       ...localState,
       data,
@@ -75,17 +75,65 @@ const Users = () => {
           <AllUsersGrid onRowClick={setViewAdditionalData} />
         </div>
 
-        <div className="additional-user-data">
+        <Box
+          className="additional-user-data"
+          style={{
+            // background: "magenta",
+            display: "flex",
+            flex: "0 0 100%",
+          }}
+        >
           {Object.keys(localState.data).length > 0 && (
-            <div>
-              <div>id : {localState.data.id}</div>
-              <div>Street : {localState.data.address.Street}</div>
-              <div>City : {localState.data.address.city}</div>
-              <div>State : {localState.data.address.state}</div>
-              <div>Zipcode : {localState.data.address.zipcode}</div>
-            </div>
+            <Paper sx={{ padding: "4rem", minWidth: "20rem" }}>
+              <Box>
+                <div
+                  style={{
+                    paddingTop: "81.25%",
+                    borderRadius: "50%",
+                    margin: "28px",
+                    background: "#3333f7",
+                    display: "flex",
+                    position: "relative",
+                  }}
+                >
+                  <Typography
+                    variant="body1"
+                    style={{
+                      color: "white",
+                      position: "absolute",
+                      top: "10%",
+                      left: "38%",
+
+                      fontSize: "8rem",
+                    }}
+                  >
+                    {localState.data.userName.split("")[0]}
+                  </Typography>
+                </div>
+              </Box>
+
+              <Box>
+                <InlineKeyValue inlineKey={"ID"} value={localState.data.id} />
+                <InlineKeyValue
+                  inlineKey={"Street"}
+                  value={localState.data.address.street}
+                />
+                <InlineKeyValue
+                  inlineKey={"City"}
+                  value={localState.data.address.city}
+                />
+                <InlineKeyValue
+                  inlineKey={"State"}
+                  value={localState.data.address.state}
+                />
+                <InlineKeyValue
+                  inlineKey={"Zip Code"}
+                  value={localState.data.address.zipcode}
+                />
+              </Box>
+            </Paper>
           )}
-        </div>
+        </Box>
       </div>
 
       {/* <AllUsersGrid /> */}

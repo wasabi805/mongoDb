@@ -1,10 +1,10 @@
 // import * as React from "react";
-import Box from "@mui/material/Box";
+import { Box, Button } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useAppSelector } from "../../../store";
 
 const columns: GridColDef<(typeof rows)[number]>[] = [
-  { field: "userName", headerName: "User name", width: 90 },
+  { field: "userName", headerName: "User name", width: 120 },
   {
     field: "name",
     headerName: "Name",
@@ -21,7 +21,7 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
     field: "email",
     headerName: "Email",
     type: "number",
-    width: 110,
+    width: 250,
     // editable: true,
   },
   {
@@ -30,6 +30,43 @@ const columns: GridColDef<(typeof rows)[number]>[] = [
     description: "This column has a value getter and is not sortable.",
     sortable: false,
     width: 160,
+
+    // valueGetter: (value, row) => `${row.firstName || ""} ${row.lastName || ""}`,
+  },
+
+  {
+    field: "actions",
+    headerName: "actions",
+    description: "",
+    sortable: false,
+    width: 160,
+
+    renderCell: ({ id }) => {
+      return (
+        <>
+          <Button
+            name="edit"
+            onClick={(e) => {
+              e.stopPropagation();
+              console.log("what is name", e.target.name);
+              return console.log("what is id clicked", id);
+            }}
+          >
+            edit
+          </Button>
+          <Button
+            name="delete"
+            onClick={(e) => {
+              e.stopPropagation();
+              console.log("what is name", e.target.name);
+              return console.log("what is id clicked", id);
+            }}
+          >
+            delete
+          </Button>
+        </>
+      );
+    },
     // valueGetter: (value, row) => `${row.firstName || ""} ${row.lastName || ""}`,
   },
 ];
@@ -50,19 +87,19 @@ export const AllUsersGrid = ({ onRowClick }) => {
   console.log(newRows);
 
   return (
-    <Box sx={{ height: 400, width: "100%" }}>
+    <Box sx={{ width: "100%" }}>
       <DataGrid
         rows={newRows}
         columns={columns}
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5,
+              pageSize: 10,
             },
           },
         }}
         onRowClick={(e) => onRowClick({ data: e.row })}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[10]}
         checkboxSelection
         disableRowSelectionOnClick
       />
