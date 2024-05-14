@@ -33,7 +33,7 @@ const Users = () => {
 
   const handleEditUser = (
     e: React.MouseEvent<HTMLButtonElement>,
-    { userId }: EditUser
+    { userId }: EditUser,
   ) => {
     const isEditUser = e.currentTarget.name === "edit-user";
     if (isEditUser) {

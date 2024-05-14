@@ -27,14 +27,14 @@ const AddUsers = () => {
   }, []);
 
   const handleUpdateAddUserForm = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     dispatch(addUserData({ [name]: value }));
   };
 
   const handleAddUserDataAddressInfo = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     dispatch(addUserDataAddressInfo({ [name]: value }));

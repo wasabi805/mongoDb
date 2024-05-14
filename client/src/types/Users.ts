@@ -64,7 +64,7 @@ export type User_State = {
 
 /* USER ACTION */
 type User_Payload = {
-[key: string]: unknown;
+  [key: string]: unknown;
   user?: User | undefined;
   userId?: string | undefined;
   userName?: string | undefined;
@@ -92,7 +92,7 @@ export type NewUserAdded = {
     state?: string;
     zipcode?: string;
   };
-  
+
   createdAt?: string;
   updatedAt?: string;
 };

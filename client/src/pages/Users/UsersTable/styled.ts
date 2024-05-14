@@ -1,6 +1,8 @@
-import { styled, 
-  // useMediaQuery, 
-  Box } from "@mui/material";
+import {
+  styled,
+  // useMediaQuery,
+  Box,
+} from "@mui/material";
 
 export const LoginForm = styled(Box)(() => {
   // const { breakpoints } = theme;

@@ -56,37 +56,35 @@ export const userSlice = createSlice({
 
   reducers: {
     addUserData(state: User_State, action: User_Action) {
-      const [key, value] = Object.entries(action.payload)[0]
-     
-      state.addUser={
+      const [key, value] = Object.entries(action.payload)[0];
+
+      state.addUser = {
         ...state.addUser,
-        [key] : value,
+        [key]: value,
         // userName: "",
         // name: "",
         // email: "",
         // phone: "",
 
         address: {
-          ...state.addUser.address
+          ...state.addUser.address,
         },
-
-      }
-
+      };
     },
 
-    addUserDataAddressInfo(state: User_State, action: User_Action){
-      const [key, value] = Object.entries(action.payload)[0]
-      state.addUser={
+    addUserDataAddressInfo(state: User_State, action: User_Action) {
+      const [key, value] = Object.entries(action.payload)[0];
+      state.addUser = {
         ...state.addUser,
-         // userName: "",
+        // userName: "",
         // name: "",
         // email: "",
         // phone: "",
         address: {
           ...state.addUser.address,
-          [key] : value,
+          [key]: value,
         },
-      }
+      };
     },
 
     clearUserData: (state: User_State) => {
@@ -114,7 +112,7 @@ export const userSlice = createSlice({
           ...(state!.editUser!.user as User),
           [name]: value,
           address: {
-            ...Object.assign({}, state.editUser?.address)
+            ...Object.assign({}, state.editUser?.address),
           },
         },
       };
@@ -166,8 +164,8 @@ export const userSlice = createSlice({
       const newUserAdded = action.payload?.newUserAdded;
 
       state.users.push(newUserAdded);
-      
-      //come here 
+
+      //come here
       state.addUser = {
         name: action.payload?.addUser.name,
         email: "",

@@ -12,8 +12,9 @@ export const DashContentContainer = styled(Box)(({ theme }) => {
   return `
         border: 1px solid cyan;
 
+
         //make child flexy
-      
+        padding: 2rem;
         display: flex;
         height: 90vh;
     
