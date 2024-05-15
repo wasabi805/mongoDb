@@ -73,6 +73,7 @@ export const loginSlice = createSlice({
   },
 
   extraReducers: (builder) => {
+
     builder.addCase(submitHomeAuthLogin.pending, (state) => {
       state.loading = true;
     });

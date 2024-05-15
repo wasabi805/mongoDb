@@ -1,6 +1,6 @@
-// import React from "react";
+import React from "react";
 import { LoginForm } from "./styled";
-
+import { persistor } from "../../store";
 import { setInput } from "../../store/slices/loginSlice";
 import { submitHomeAuthLogin } from "../../thunks/login";
 
@@ -22,11 +22,13 @@ const Login = () => {
   const { userName, password, isHomeAuth, isSubmit } = useAppSelector(
     (state) => {
       return state?.loginSlice;
-    },
+    }
   );
 
+  const users = useAppSelector((state) => state.userSlice.users);
+
   const handleUpdateInput = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const name = e.target?.name;
     dispatch(setInput({ [name]: e.target?.value }));
@@ -40,6 +42,15 @@ const Login = () => {
       navigate("dashboard");
     }
   };
+
+  const clearReducer = () => {
+    // persistor.purge();
+    // console.log("PURGED_PRESISTED DATA", users);
+  };
+
+  React.useEffect(() => {
+    clearReducer();
+  }, []);
 
   return (
     <LoginForm className="login-form">

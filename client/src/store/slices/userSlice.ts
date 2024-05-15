@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { PURGE } from "redux-persist";
 /* APIS */
 import {
   getAllUsers,
@@ -140,6 +140,10 @@ export const userSlice = createSlice({
   },
 
   extraReducers: (builder) => {
+    builder.addCase(PURGE, () => {
+      return initialState;
+    });
+
     /* ------ GET ALL USERS ------ */
     builder.addCase(getAllUsers.pending, (state) => {
       state.loading = true;
