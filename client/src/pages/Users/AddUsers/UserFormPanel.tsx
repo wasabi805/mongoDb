@@ -133,7 +133,9 @@ const UserFormPanel = () => {
           // sx={{ width: "8rem" }}
           // onClick={handleSubmitNewUser}
           onClick={() =>
-            dispatch(setPanelAddUserForm({ addUser: { panel: "avatar" } }))
+            dispatch(
+              setPanelAddUserForm({ addUser: { panel: "add-user-avatar" } }),
+            )
           }
         >
           next

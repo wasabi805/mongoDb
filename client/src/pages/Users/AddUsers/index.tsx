@@ -8,6 +8,8 @@ import {
 import { userApis } from "../../../store/slices/userSlice";
 import { AddUsersContainer } from "../styled";
 import UserFormPanel from "./UserFormPanel";
+import UserAddAvatar from "./UserAddAvatar";
+import UserConfirmPanel from "./UserConfirmPanel";
 import { dummyData } from "./consts";
 
 const AddUsers = () => {
@@ -67,8 +69,9 @@ const AddUsers = () => {
           {/* END */}
 
           {userSlice.addUser.panel === "form-data" && <UserFormPanel />}
-          {userSlice.addUser.panel !== "add-user-avatar" && (
-            <div className="add-user-avatar">avatar</div>
+          {userSlice.addUser.panel === "add-user-avatar" && <UserAddAvatar />}
+          {userSlice.addUser.panel === "user-confirm-panel" && (
+            <UserConfirmPanel />
           )}
 
           {/* ----- ------  ----  ----- ----   */}
