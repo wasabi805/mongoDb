@@ -27,6 +27,7 @@ export type AddUser = {
     state?: string;
     zipcode?: string;
   };
+  panel?: string;
 };
 export type EditUser = {
   [name: string]: unknown | string;
@@ -72,6 +73,9 @@ type User_Payload = {
   email?: string | undefined;
   editUser?: EditUser | unknown | undefined;
   editedUser?: User | undefined;
+  addUser?: {
+    panel?: string | undefined;
+  };
 };
 
 export type User_Action = {

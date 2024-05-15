@@ -23,6 +23,14 @@ export const AddUsersContainer = styled(Box)(({ theme }) => {
         flex-basis: 100%;
       }
 
+
+      div[class^="add-user-avatar"]{
+        background: blue;
+        width: 100%;
+      }
+    }
+
+
     //ch1
       .inputs{
         border : 1px solid orange;

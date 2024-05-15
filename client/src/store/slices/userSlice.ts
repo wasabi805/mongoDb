@@ -26,6 +26,8 @@ const initialState: User_State = {
       state: "",
       zipcode: "",
     },
+
+    panel: "form-data",
   },
 
   editUser: {
@@ -137,6 +139,10 @@ export const userSlice = createSlice({
         },
       };
     },
+
+    setPanelAddUserForm: (state: User_State, action: User_Action) => {
+      state.addUser.panel = action.payload?.addUser?.panel;
+    },
   },
 
   extraReducers: (builder) => {
@@ -237,6 +243,7 @@ export const {
   setEditUser,
   setEditUserInputs,
   setCancelEditUser,
+  setPanelAddUserForm,
 } = userSlice.actions;
 
 export const userApis = {

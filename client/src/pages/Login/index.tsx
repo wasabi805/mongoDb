@@ -22,13 +22,13 @@ const Login = () => {
   const { userName, password, isHomeAuth, isSubmit } = useAppSelector(
     (state) => {
       return state?.loginSlice;
-    }
+    },
   );
 
   const users = useAppSelector((state) => state.userSlice.users);
 
   const handleUpdateInput = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const name = e.target?.name;
     dispatch(setInput({ [name]: e.target?.value }));
