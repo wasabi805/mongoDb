@@ -1,9 +1,14 @@
-import React from "react";
 import { Typography } from "@mui/material";
 
-const InlineKeyValue = ({ inlineKey, value }) => {
+const InlineKeyValue = ({
+  inlineKey,
+  value,
+}: {
+  inlineKey: string;
+  value: string | undefined;
+}) => {
   return (
-    <div sx={{ display: "flex", flexDirection: "row" }}>
+    <div style={{ display: "flex", flexDirection: "row" }}>
       <Typography
         variant={"h6"}
         sx={{ display: "inline", marginRight: "0.25rem" }}

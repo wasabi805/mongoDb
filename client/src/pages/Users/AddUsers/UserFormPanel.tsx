@@ -7,7 +7,7 @@ import {
   InputLabel,
   OutlinedInput,
 } from "@mui/material";
-import { userApis } from "../../../store/slices/userSlice";
+
 import { useAppDispatch, useAppSelector } from "../../../store";
 import {
   addUserData,
@@ -19,7 +19,6 @@ const UserFormPanel = () => {
   const dispatch = useAppDispatch();
 
   const userSlice = useAppSelector((state) => state.userSlice);
-  const { createUser } = userApis;
 
   const handleUpdateAddUserForm = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

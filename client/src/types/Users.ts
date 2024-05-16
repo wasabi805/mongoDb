@@ -14,6 +14,14 @@ export type User = {
 
   _id?: string | undefined;
 };
+
+export type UserAddress = {
+  street?: string;
+  city?: string;
+  state?: string;
+  zipcode?: string;
+};
+
 export type AddUser = {
   [key: string]: unknown | string;
   userName: string;
@@ -21,12 +29,7 @@ export type AddUser = {
   email: string;
   phone: string;
 
-  address?: {
-    street?: string;
-    city?: string;
-    state?: string;
-    zipcode?: string;
-  };
+  address?: UserAddress;
   panel?: string;
 };
 export type EditUser = {

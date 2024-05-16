@@ -1,17 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../store";
 
 import { userApis } from "../../store/slices/userSlice";
 import { toggleEditUserModal, setEditUser } from "../../store/slices/userSlice";
 
 import EditUserModal from "./EditUserModal";
-import { Box, Button, Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 
 import { EditUser } from "../../types/Users";
 import { AllUsersGrid } from "./UsersTable";
 import InlineKeyValue from "../../common/InlineKeyValue";
+import { User, UserAddress } from "../../types/Users";
 
-const Users = () => {
+export type Data = {
+  data: {
+    id?: string | undefined;
+    userName?: string;
+    users?: User[] | object;
+    address?: UserAddress;
+  };
+};
+
+const Users: FC = () => {
   const dispatch = useAppDispatch();
   const { fetchUsers, deleteUser } = userApis;
 
@@ -31,6 +41,8 @@ const Users = () => {
     dispatch(deleteUser({ userId }));
   };
 
+  console.log(handleDeleteUser);
+
   const handleEditUser = (
     e: React.MouseEvent<HTMLButtonElement>,
     { userId }: EditUser,
@@ -44,11 +56,14 @@ const Users = () => {
     dispatch(toggleEditUserModal());
   };
 
-  const [localState, setLocalState] = useState({
+  console.log(handleEditUser);
+
+  const [localState, setLocalState] = useState<Data>({
     data: {},
   });
 
-  const setViewAdditionalData = ({ data }) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const setViewAdditionalData = ({ data }: any) => {
     setLocalState({
       ...localState,
       data,
@@ -107,7 +122,7 @@ const Users = () => {
                       fontSize: "8rem",
                     }}
                   >
-                    {localState.data.userName.split("")[0]}
+                    {localState?.data?.userName?.split("")[0]}
                   </Typography>
                 </div>
               </Box>
@@ -116,19 +131,19 @@ const Users = () => {
                 <InlineKeyValue inlineKey={"ID"} value={localState.data.id} />
                 <InlineKeyValue
                   inlineKey={"Street"}
-                  value={localState.data.address.street}
+                  value={localState?.data?.address?.street}
                 />
                 <InlineKeyValue
                   inlineKey={"City"}
-                  value={localState.data.address.city}
+                  value={localState?.data?.address?.city}
                 />
                 <InlineKeyValue
                   inlineKey={"State"}
-                  value={localState.data.address.state}
+                  value={localState?.data?.address?.state}
                 />
                 <InlineKeyValue
                   inlineKey={"Zip Code"}
-                  value={localState.data.address.zipcode}
+                  value={localState?.data?.address?.zipcode}
                 />
               </Box>
             </Paper>

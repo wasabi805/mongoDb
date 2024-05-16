@@ -1,6 +1,6 @@
 import React from "react";
 import { LoginForm } from "./styled";
-import { persistor } from "../../store";
+// import { persistor } from "../../store";
 import { setInput } from "../../store/slices/loginSlice";
 import { submitHomeAuthLogin } from "../../thunks/login";
 
@@ -25,7 +25,7 @@ const Login = () => {
     },
   );
 
-  const users = useAppSelector((state) => state.userSlice.users);
+  // const users = useAppSelector((state) => state.userSlice.users);
 
   const handleUpdateInput = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

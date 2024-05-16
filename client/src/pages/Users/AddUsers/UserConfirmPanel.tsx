@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Button } from "@mui/material";
 import { useAppDispatch } from "../../../store";
 import { setPanelAddUserForm } from "../../../store/slices/userSlice";

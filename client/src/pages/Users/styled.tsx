@@ -25,7 +25,7 @@ export const AddUsersContainer = styled(Box)(({ theme }) => {
 
 
       div[class^="add-user-avatar"]{
-        background: blue;
+        // background: blue;
         width: 100%;
       }
     }

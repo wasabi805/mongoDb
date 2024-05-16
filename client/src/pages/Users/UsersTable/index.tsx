@@ -1,4 +1,4 @@
-// import * as React from "react";
+import { FC } from "react";
 import { Box, Button } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useAppSelector, useAppDispatch } from "../../../store";
@@ -8,9 +8,16 @@ import {
   setEditUser,
 } from "../../../store/slices/userSlice";
 
-export const AllUsersGrid = ({ onRowClick }) => {
+interface AllUsersGridProp {
+  onRowClick: ({
+    data: {
+      e: {},
+    },
+  }) => void;
+}
+
+export const AllUsersGrid: FC<AllUsersGridProp> = ({ onRowClick }) => {
   const { users } = useAppSelector((state) => state.userSlice);
-  const { userName, name, email, phone, address } = users;
 
   const dispatch = useAppDispatch();
   const { deleteUser } = userApis;
@@ -27,7 +34,7 @@ export const AllUsersGrid = ({ onRowClick }) => {
     dispatch(deleteUser({ userId }));
   };
 
-  const handleEditUser = ({ userId }) => {
+  const handleEditUser = ({ userId }: { userId: string }) => {
     const user = users?.find((user) => user?._id === userId);
     dispatch(setEditUser({ user, userId }));
 
@@ -35,7 +42,7 @@ export const AllUsersGrid = ({ onRowClick }) => {
     dispatch(toggleEditUserModal());
   };
 
-  const columns: GridColDef<(typeof rows)[number]>[] = [
+  const columns: GridColDef<(typeof newRows)[number]>[] = [
     { field: "userName", headerName: "User name", width: 120 },
     {
       field: "name",
@@ -80,9 +87,9 @@ export const AllUsersGrid = ({ onRowClick }) => {
               name="edit"
               onClick={(e) => {
                 e.stopPropagation();
-                console.log("what is name", e.target.name);
+
                 console.log("what is id clicked", id);
-                return handleEditUser({ userId: id });
+                return handleEditUser({ userId: id.toString() });
               }}
             >
               edit
@@ -92,7 +99,7 @@ export const AllUsersGrid = ({ onRowClick }) => {
               onClick={(e) => {
                 e.stopPropagation();
                 console.log("what is type", typeof id);
-                return handleDeleteUser({ userId: id });
+                return handleDeleteUser({ userId: id.toString() });
               }}
             >
               delete
