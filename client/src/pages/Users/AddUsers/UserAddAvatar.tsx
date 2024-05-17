@@ -1,9 +1,10 @@
-import { useCallback } from "react";
+import React, { useCallback, useState, useEffect, useRef } from "react";
 import { Box, Button } from "@mui/material";
 import { useAppDispatch } from "../../../store";
 import { setPanelAddUserForm } from "../../../store/slices/userSlice";
 
 import { useDropzone } from "react-dropzone";
+import Canvas from "../../../common/Canvas/Canvas";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function MyDropzone({ handleDrop }: any) {
@@ -49,6 +50,12 @@ const UserAddAvatar = () => {
   //     avatar: null,
   //   });
   const dispatch = useAppDispatch();
+  const [localState, setLocalState] = useState({
+    base64str: "",
+    name: "",
+    fileType: "",
+    size: "",
+  });
 
   const handleDrop = async ({
     file,
@@ -57,23 +64,35 @@ const UserAddAvatar = () => {
   }: {
     file: string;
     name: string;
-    size: number;
+    size: string;
   }) => {
     const droppedFileB64 = await file;
 
     const fileType = droppedFileB64.substring(
       "data:image/".length,
-      droppedFileB64.indexOf(";base64"),
+      droppedFileB64.indexOf(";base64")
     );
 
     console.log("what is the fileType", { name, fileType, size });
-    // console.log('what is droppedFileB64', droppedFileB64)
+    setLocalState({
+      ...localState,
+      base64str: droppedFileB64,
+      name,
+      fileType,
+      size,
+    });
   };
+
+  useEffect(() => {}, [localState.base64str]);
 
   return (
     <Box className="add-user-avatar">
       <Box className={"drag-and-drop-container"}>
         {<MyDropzone handleDrop={handleDrop} />}
+      </Box>
+
+      <Box>
+        <canvas id="preview-avatar"></canvas>
       </Box>
 
       <div className="button-row">
@@ -90,6 +109,10 @@ const UserAddAvatar = () => {
           Prev
         </Button>
 
+        <div className="temp-img-preview">
+          <Canvas height={500} width={500} b64Str={localState.base64str} />
+        </div>
+
         <Button
           sx={{ maxHeight: "3rem" }}
           className={"submit-button"}
@@ -98,7 +121,7 @@ const UserAddAvatar = () => {
           // onClick={handleSubmitNewUser}
           onClick={() =>
             dispatch(
-              setPanelAddUserForm({ addUser: { panel: "user-confirm-panel" } }),
+              setPanelAddUserForm({ addUser: { panel: "user-confirm-panel" } })
             )
           }
         >
