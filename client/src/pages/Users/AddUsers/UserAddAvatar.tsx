@@ -87,12 +87,15 @@ const UserAddAvatar = () => {
 
   return (
     <Box className="add-user-avatar">
-      <Box className={"drag-and-drop-container"}>
-        {<MyDropzone handleDrop={handleDrop} />}
-      </Box>
+      <Box className={"drag-and-drop-container"} sx={{ display: "flex" }}>
+        {<MyDropzone className="drop-zone" handleDrop={handleDrop} />}
 
-      <Box>
-        <canvas id="preview-avatar"></canvas>
+        <Canvas
+          className={""}
+          height={300}
+          width={300}
+          b64Str={localState.base64str}
+        />
       </Box>
 
       <div className="button-row">
@@ -108,10 +111,6 @@ const UserAddAvatar = () => {
         >
           Prev
         </Button>
-
-        <div className="temp-img-preview">
-          <Canvas height={500} width={500} b64Str={localState.base64str} />
-        </div>
 
         <Button
           sx={{ maxHeight: "3rem" }}
