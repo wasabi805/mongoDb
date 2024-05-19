@@ -87,13 +87,13 @@ const UserAddAvatar = () => {
 
   return (
     <Box className="add-user-avatar">
-      <Box className={"drag-and-drop-container"} sx={{ display: "flex" }}>
+      <Box className={"drag-and-drop-container"}>
         {<MyDropzone className="drop-zone" handleDrop={handleDrop} />}
 
         <Canvas
           className={""}
-          height={300}
-          width={300}
+          height={200}
+          width={200}
           b64Str={localState.base64str}
         />
       </Box>
