@@ -21,7 +21,7 @@ const persistConfig = {
   whitelist: [
     "loginSlice",
     "dashboardSlice",
-    // "userSlice"
+    "userSlice"
   ],
 };
 

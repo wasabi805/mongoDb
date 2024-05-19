@@ -73,13 +73,27 @@ export const AddUsersContainer = styled(Box)(({ theme }) => {
 
     //ch2
       .text-container{
-        border : 1px solid red;
-        flex : 1 0 0;
+        // border : 1px solid red;
+        // flex : 1 0 0;
         display: ${!isDesktop ? `none` : ``};
 
-        padding: 4rem;
+        // padding: 4rem;
 
       }
 
     `;
 });
+
+export const UserAddAvatarPreviewContainer = styled(Box)`
+  background: aqua;
+  display: flex;
+  border: 2px solid brown;
+  flex-direction: column;
+  width: 30vw;
+
+  .avatar-preview {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+  }
+`;

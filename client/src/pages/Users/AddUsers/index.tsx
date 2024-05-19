@@ -5,6 +5,7 @@ import { AddUsersContainer } from "../styled";
 import UserFormPanel from "./UserFormPanel";
 import UserAddAvatar from "./UserAddAvatar";
 import UserConfirmPanel from "./UserConfirmPanel";
+import UserAddAvatarPreview from "./UserAddAvatarPreview";
 import { dummyData } from "./consts";
 
 const AddUsers = () => {
@@ -32,7 +33,15 @@ const AddUsers = () => {
           )}
         </Box>
 
-        <Typography className={"text-container"}>{dummyData}</Typography>
+        {userSlice.addUser.panel === "form-data" && (
+          <div className={"text-container"}>
+            <Typography>{dummyData}</Typography>
+          </div>
+        )}
+
+        {userSlice.addUser.panel === "add-user-avatar" && (
+          <UserAddAvatarPreview />
+        )}
       </AddUsersContainer>
     </div>
   );

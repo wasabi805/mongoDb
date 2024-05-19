@@ -1,14 +1,14 @@
 import React, { useRef, useEffect } from "react";
 const test = `https://cdn.marvel.com/u/prod/marvel/i/mg/6/70/603d5b82a7e65/clean.jpg`;
-const Canvas = ({ b64Str, height, width, className }) => {
+const Canvas = ({ b64Str, height, width, className, shape }) => {
   const canvas = React.useRef(null);
 
   const image = new Image();
 
-  React.useEffect(() => {
-    /*circular image*/
+  const handleCircleAvatar = async ({ canvas, b64Str, shape }) => {
+    console.log("what was loaded", { canvas, b64Str, shape });
 
-    if (canvas.current && b64Str) {
+    if (canvas.current && b64Str && shape === "circle") {
       const ctx = canvas?.current?.getContext("2d");
       ctx.fillStyle = "#6f6f6f";
       ctx.fillRect(0, 0, canvas.current.width, canvas.current.height);
@@ -28,44 +28,50 @@ const Canvas = ({ b64Str, height, width, className }) => {
         ctx.drawImage(image, 0, 0, width, height);
       };
       /*!important : setting the image.src has to wait for ctx draw to finish
-          https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images
-          "...If you try to call drawImage() before the image has finished loading, it won't do anything ."
-          */
+            https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images
+            "...If you try to call drawImage() before the image has finished loading, it won't do anything ."
+            */
       image.src = b64Str;
     }
+  };
 
+  const handleSqaureAvatar = ({ canvas, b64Str, shape }) => {
+    if (canvas.current && b64Str && shape === "square") {
+      const ctx = canvas?.current?.getContext("2d");
+      const hRatio = canvas.current.width / image.width;
+      const vRatio = canvas.current.height / image.height;
+      const ratio = Math.min(hRatio, vRatio);
+      const centerShift_x = (canvas.current.width - image.width * ratio) / 2;
+      const centerShift_y = (canvas.current.height - image.height * ratio) / 2;
+      ctx.clearRect(0, 0, canvas.current.width, canvas.current.height);
+      ctx.drawImage(
+        image,
+        0,
+        0,
+        image.width,
+        image.height,
+        centerShift_x,
+        centerShift_y,
+        image.width * ratio,
+        image.height * ratio
+      );
+      image.onload = function () {
+        ctx.drawImage(image, 0, 0, width, height);
+      };
+      /*!important : setting the image.src has to wait for ctx draw to finish
+        https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images
+        "...If you try to call drawImage() before the image has finished loading, it won't do anything ."
+        */
+      image.src = b64Str;
+    }
+  };
+
+  React.useEffect(() => {
+    handleCircleAvatar({ canvas, b64Str, shape });
+    handleSqaureAvatar({ canvas, b64Str, shape });
+    /*circular image*/
     /** square image */
-    // if (canvas.current && b64Str) {
-    //   const ctx = canvas?.current?.getContext("2d");
-    //   const hRatio = canvas.current.width / image.width;
-    //   const vRatio = canvas.current.height / image.height;
-    //   const ratio = Math.min(hRatio, vRatio);
-    //   const centerShift_x = (canvas.current.width - image.width * ratio) / 2;
-    //   const centerShift_y = (canvas.current.height - image.height * ratio) / 2;
-
-    //   ctx.clearRect(0, 0, canvas.current.width, canvas.current.height);
-    //   ctx.drawImage(
-    //     image,
-    //     0,
-    //     0,
-    //     image.width,
-    //     image.height,
-    //     centerShift_x,
-    //     centerShift_y,
-    //     image.width * ratio,
-    //     image.height * ratio
-    //   );
-
-    //   image.onload = function () {
-    //     ctx.drawImage(image, 0, 0, width, height);
-    //   };
-    //   /*!important : setting the image.src has to wait for ctx draw to finish
-    //     https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images
-    //     "...If you try to call drawImage() before the image has finished loading, it won't do anything ."
-    //     */
-    //   image.src = b64Str;
-    // }
-  }, [b64Str]);
+  }, [canvas, b64Str, shape]);
 
   return (
     <canvas

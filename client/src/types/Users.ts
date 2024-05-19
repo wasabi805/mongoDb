@@ -30,6 +30,9 @@ export type AddUser = {
   phone: string;
 
   address?: UserAddress;
+  avatar?:{
+    b64Str? : string | undefined
+  };
   panel?: string;
 };
 export type EditUser = {
@@ -77,6 +80,9 @@ type User_Payload = {
   editUser?: EditUser | unknown | undefined;
   editedUser?: User | undefined;
   addUser?: {
+    avatar?:{
+      b64Str? : string | undefined | unknown
+    };
     panel?: string | undefined;
   };
 };

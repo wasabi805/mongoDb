@@ -1,7 +1,10 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
 import { Box, Button } from "@mui/material";
 import { useAppDispatch } from "../../../store";
-import { setPanelAddUserForm } from "../../../store/slices/userSlice";
+import {
+  setPanelAddUserForm,
+  addUserAvatar,
+} from "../../../store/slices/userSlice";
 
 import { useDropzone } from "react-dropzone";
 import Canvas from "../../../common/Canvas/Canvas";
@@ -74,6 +77,9 @@ const UserAddAvatar = () => {
     );
 
     console.log("what is the fileType", { name, fileType, size });
+
+    dispatch(addUserAvatar({ addUser: { b64Str: droppedFileB64 } }));
+
     setLocalState({
       ...localState,
       base64str: droppedFileB64,
@@ -90,12 +96,13 @@ const UserAddAvatar = () => {
       <Box className={"drag-and-drop-container"}>
         {<MyDropzone className="drop-zone" handleDrop={handleDrop} />}
 
-        <Canvas
+        {/* <Canvas
+          shape={"circle"}
           className={""}
           height={200}
           width={200}
           b64Str={localState.base64str}
-        />
+        /> */}
       </Box>
 
       <div className="button-row">

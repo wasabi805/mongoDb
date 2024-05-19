@@ -27,6 +27,10 @@ const initialState: User_State = {
       zipcode: "",
     },
 
+    avatar:{
+      b64Str : "",
+    },
+
     panel: "form-data",
   },
 
@@ -73,6 +77,12 @@ export const userSlice = createSlice({
         },
       };
     },
+
+    addUserAvatar:(state: User_State, action: User_Action)=>{
+      state!.addUser!.avatar!.b64Str = action?.payload?.addUser!.b64Str
+    },
+
+
 
     addUserDataAddressInfo(state: User_State, action: User_Action) {
       const [key, value] = Object.entries(action.payload)[0];
@@ -236,6 +246,7 @@ export const userSlice = createSlice({
 export default userSlice.reducer;
 
 export const {
+  addUserAvatar,
   addUserData,
   addUserDataAddressInfo,
   clearUserData,
