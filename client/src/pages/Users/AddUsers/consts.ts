@@ -15,3 +15,9 @@ section 1.10.32. The standard chunk of Lorem Ipsum used since the
 reproduced in their exact original form, accompanied by English
 versions from the 1914 translation by H. Rackham. Contrary to popular
 belief, Lorem Ipsum is not simply random text. It has roots in a piece`;
+
+export const addUserConsts = {
+  FORM_DATA: "form-data",
+  ADD_USER_AVATAR: "add-user-avatar",
+  USER_CONFIRM_PANNEL: "user-confirm-panel",
+};

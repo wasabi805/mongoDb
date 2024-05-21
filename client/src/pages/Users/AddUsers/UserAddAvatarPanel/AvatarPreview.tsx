@@ -1,7 +1,7 @@
 import React from "react";
-import Canvas from "../../../common/Canvas/Canvas";
-import { useAppSelector } from "../../../store";
-import { UserAddAvatarPreviewContainer } from "../styled";
+import Canvas from "../../../../common/Canvas/Canvas";
+import { useAppSelector } from "../../../../store";
+import { UserAddAvatarPreviewContainer } from "./styled";
 
 const UserAddAvatarPreview = () => {
   const { b64Str } = useAppSelector((state) => state.userSlice.addUser.avatar);

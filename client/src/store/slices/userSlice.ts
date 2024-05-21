@@ -15,10 +15,12 @@ const initialState: User_State = {
   users: [],
 
   addUser: {
-    name: "",
-    userName: "",
-    email: "",
-    phone: "",
+    info: {
+      name: "",
+      userName: "",
+      email: "",
+      phone: "",
+    },
 
     address: {
       street: "",
@@ -27,8 +29,8 @@ const initialState: User_State = {
       zipcode: "",
     },
 
-    avatar:{
-      b64Str : "",
+    avatar: {
+      b64Str: "",
     },
 
     panel: "form-data",
@@ -62,15 +64,19 @@ export const userSlice = createSlice({
 
   reducers: {
     addUserData(state: User_State, action: User_Action) {
-      const [key, value] = Object.entries(action.payload)[0];
+      const [key, value] = Object.entries(action.payload.info)[0];
 
       state.addUser = {
         ...state.addUser,
-        [key]: value,
+
         // userName: "",
         // name: "",
         // email: "",
         // phone: "",
+        info: {
+          ...state.addUser.info,
+          [key]: value,
+        },
 
         address: {
           ...state.addUser.address,
@@ -78,11 +84,9 @@ export const userSlice = createSlice({
       };
     },
 
-    addUserAvatar:(state: User_State, action: User_Action)=>{
-      state!.addUser!.avatar!.b64Str = action?.payload?.addUser!.b64Str
+    addUserAvatar: (state: User_State, action: User_Action) => {
+      state!.addUser!.avatar!.b64Str = action?.payload?.addUser!.b64Str;
     },
-
-
 
     addUserDataAddressInfo(state: User_State, action: User_Action) {
       const [key, value] = Object.entries(action.payload)[0];

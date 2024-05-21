@@ -10,13 +10,14 @@ const Canvas = ({ b64Str, height, width, className, shape }) => {
 
     if (canvas.current && b64Str && shape === "circle") {
       const ctx = canvas?.current?.getContext("2d");
-      ctx.fillStyle = "#6f6f6f";
+      ctx.fillStyle = "#ffffff";
       ctx.fillRect(0, 0, canvas.current.width, canvas.current.height);
 
       const circle = {
         x: canvas.current.width / 2,
         y: canvas.current.height / 2,
-        radius: 70,
+        radius: 50,
+        // radius: 70,
       };
 
       ctx.beginPath();
@@ -41,6 +42,7 @@ const Canvas = ({ b64Str, height, width, className, shape }) => {
       const hRatio = canvas.current.width / image.width;
       const vRatio = canvas.current.height / image.height;
       const ratio = Math.min(hRatio, vRatio);
+      console.log("what is the ratio", ratio);
       const centerShift_x = (canvas.current.width - image.width * ratio) / 2;
       const centerShift_y = (canvas.current.height - image.height * ratio) / 2;
       ctx.clearRect(0, 0, canvas.current.width, canvas.current.height);
@@ -53,7 +55,7 @@ const Canvas = ({ b64Str, height, width, className, shape }) => {
         centerShift_x,
         centerShift_y,
         image.width * ratio,
-        image.height * ratio
+        image.height * ratio,
       );
       image.onload = function () {
         ctx.drawImage(image, 0, 0, width, height);

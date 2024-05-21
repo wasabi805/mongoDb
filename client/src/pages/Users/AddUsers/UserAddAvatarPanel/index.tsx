@@ -1,16 +1,17 @@
-import React, { useCallback, useState, useEffect, useRef } from "react";
+import { useCallback, useState, useEffect, useRef } from "react";
 import { Box, Button } from "@mui/material";
-import { useAppDispatch } from "../../../store";
+import { useAppDispatch } from "../../../../store";
 import {
   setPanelAddUserForm,
   addUserAvatar,
-} from "../../../store/slices/userSlice";
+} from "../../../../store/slices/userSlice";
 
 import { useDropzone } from "react-dropzone";
-import Canvas from "../../../common/Canvas/Canvas";
+import { DropzoneContainer } from "../../styled";
+import PortraitIcon from "@mui/icons-material/Portrait";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function MyDropzone({ handleDrop }: any) {
+function Dropzone({ handleDrop }: any) {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     acceptedFiles.forEach((file) => {
       const reader = new FileReader();
@@ -35,16 +36,15 @@ function MyDropzone({ handleDrop }: any) {
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
-    <div
-      {...getRootProps()}
-      style={{ background: "lime", border: "1px solid blue" }}
-    >
+    <DropzoneContainer {...getRootProps()}>
       <input
+        className="drop-input"
         {...getInputProps()}
-        style={{ minHeight: "10rem", background: "magenta" }}
+        // style={{ minHeight: "10rem", background: "magenta", width: "100%" }}
       />
+      <PortraitIcon sx={{ fontSize: 80 }} />
       <p>Drag 'n' drop some files here, or click to select files</p>
-    </div>
+    </DropzoneContainer>
   );
 }
 
@@ -73,7 +73,7 @@ const UserAddAvatar = () => {
 
     const fileType = droppedFileB64.substring(
       "data:image/".length,
-      droppedFileB64.indexOf(";base64")
+      droppedFileB64.indexOf(";base64"),
     );
 
     console.log("what is the fileType", { name, fileType, size });
@@ -94,15 +94,7 @@ const UserAddAvatar = () => {
   return (
     <Box className="add-user-avatar">
       <Box className={"drag-and-drop-container"}>
-        {<MyDropzone className="drop-zone" handleDrop={handleDrop} />}
-
-        {/* <Canvas
-          shape={"circle"}
-          className={""}
-          height={200}
-          width={200}
-          b64Str={localState.base64str}
-        /> */}
+        {<Dropzone className="drop-zone" handleDrop={handleDrop} />}
       </Box>
 
       <div className="button-row">
@@ -127,7 +119,7 @@ const UserAddAvatar = () => {
           // onClick={handleSubmitNewUser}
           onClick={() =>
             dispatch(
-              setPanelAddUserForm({ addUser: { panel: "user-confirm-panel" } })
+              setPanelAddUserForm({ addUser: { panel: "user-confirm-panel" } }),
             )
           }
         >

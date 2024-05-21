@@ -23,15 +23,17 @@ export type UserAddress = {
 };
 
 export type AddUser = {
-  [key: string]: unknown | string;
-  userName: string;
-  name: string;
-  email: string;
-  phone: string;
+  info: {
+    [key: string]: unknown | string;
+    userName?: string;
+    name?: string;
+    email?: string;
+    phone?: string;
+  };
 
   address?: UserAddress;
-  avatar?:{
-    b64Str? : string | undefined
+  avatar?: {
+    b64Str?: string | undefined;
   };
   panel?: string;
 };
@@ -71,17 +73,25 @@ export type User_State = {
 
 /* USER ACTION */
 type User_Payload = {
-  [key: string]: unknown;
-  user?: User | undefined;
-  userId?: string | undefined;
-  userName?: string | undefined;
-  name?: string | undefined;
-  email?: string | undefined;
+  // [key: string]: unknown;
+  // user?: User | undefined;
+  // userId?: string | undefined;
+  // userName?: string | undefined;
+  // name?: string | undefined;
+  // email?: string | undefined;
   editUser?: EditUser | unknown | undefined;
   editedUser?: User | undefined;
+
   addUser?: {
-    avatar?:{
-      b64Str? : string | undefined | unknown
+    info?: {
+      [key: string]: unknown | string;
+      userName?: string;
+      name?: string;
+      email?: string;
+      phone?: string;
+    };
+    avatar?: {
+      b64Str?: string | undefined | unknown;
     };
     panel?: string | undefined;
   };

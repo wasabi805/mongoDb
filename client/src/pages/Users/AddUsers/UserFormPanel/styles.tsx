@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { styled, useMediaQuery, Box } from "@mui/material";
-import useAppMedia from "../../hooks/useAppMedia";
+import useAppMedia from "../../../../hooks/useAppMedia";
 
 export const AddUsersContainer = styled(Box)(({ theme }) => {
   const { isDevice, isMobile, isTablet, isDesktop, isTv } = useAppMedia({
@@ -59,33 +59,3 @@ export const AddUsersContainer = styled(Box)(({ theme }) => {
 
     `;
 });
-
-const getColor = (props) => {
-  if (props.isDragAccept) {
-    return "#00e676";
-  }
-  if (props.isDragReject) {
-    return "#ff1744";
-  }
-  if (props.isFocused) {
-    return "#2196f3";
-  }
-  return "#eeeeee";
-};
-export const DropzoneContainer = styled(Box)`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  border-width: 2px;
-  border-radius: 2px;
-  border-color: ${(props) => getColor(props)};
-  border-style: dashed;
-  background-color: #fafafa;
-  color: #bdbdbd;
-  outline: none;
-  transition: border 0.24s ease-in-out;
-
-  height: 9rem;
-`;
