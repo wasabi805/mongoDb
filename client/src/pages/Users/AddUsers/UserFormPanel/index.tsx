@@ -25,21 +25,21 @@ const UserFormPanel = () => {
   const userSlice = useAppSelector((state) => state.userSlice);
 
   const handleUpdateAddUserForm = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     dispatch(addUserData({ info: { [name]: value } }));
   };
 
   const handleAddUserDataAddressInfo = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     dispatch(addUserDataAddressInfo({ [name]: value }));
   };
 
-  const Input = ({ inputKey, value }) => (
-    <FormControl>
+  const Input = ({ inputKey, value, className }) => (
+    <FormControl className={className}>
       <FormLabel>{inputKey}</FormLabel>
       <InputLabel htmlFor={inputKey} />
       <OutlinedInput
@@ -55,11 +55,11 @@ const UserFormPanel = () => {
     <AddUsersContainer>
       <div className="form_inputs">
         {Object.entries(userSlice.addUser.info).map(([key, value]) => (
-          <Input inputKey={key} value={value} />
+          <Input inputKey={key} value={value} className={`add-user-${key}`} />
         ))}
 
         {Object.entries(userSlice?.addUser?.address).map(([key, value]) => (
-          <Input inputKey={key} value={value} />
+          <Input inputKey={key} value={value} className={`add-user-${key}`} />
         ))}
 
         <div className="button-row">
@@ -71,7 +71,7 @@ const UserFormPanel = () => {
             // onClick={handleSubmitNewUser}
             onClick={() =>
               dispatch(
-                setPanelAddUserForm({ addUser: { panel: "add-user-avatar" } }),
+                setPanelAddUserForm({ addUser: { panel: "add-user-avatar" } })
               )
             }
           >

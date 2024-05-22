@@ -2,7 +2,7 @@ import { styled, Box } from "@mui/material";
 import useAppMedia from "../../../../hooks/useAppMedia";
 // div[class^="add-user-avatar"]
 export const AddUsersContainer = styled(Box)(({ theme }) => {
-  const { isMobile, isTablet } = useAppMedia({
+  const { isMobile, isTablet, isDesktop, isTv } = useAppMedia({
     theme,
   });
 
@@ -18,6 +18,15 @@ export const AddUsersContainer = styled(Box)(({ theme }) => {
                 width: 100%;
                 margin-bottom: 2rem;
             }
+
+            .add-user-email, .add-user-phone{
+                width: ${isMobile ? `100%` : isDesktop ? `50%` : isTv ? `50%` : `100%`};
+            }
+
+            .add-user-state, .add-user-zipcode{
+                width: ${isMobile ? `100%` : isDesktop ? `50%` : isTv ? `50%` : `100%`};
+            }
+
           
             flex: 0 0 ${isMobile ? `100%` : isTablet ? `100%` : `50%`};
 
