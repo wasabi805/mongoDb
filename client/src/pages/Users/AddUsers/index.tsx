@@ -5,12 +5,16 @@ import { AddUsersContainer } from "../styled";
 import UserFormPanel from "./UserFormPanel";
 import UserAddAvatar from "./UserAddAvatarPanel";
 import UserConfirmPanel from "./UserConfirmPanel";
-import UserAddAvatarPreview from "./UserAddAvatarPanel/AvatarPreview";
 import { dummyData, addUserConsts } from "./consts";
 import UserSummaryAvatar from "./UserConfirmPanel/UserSummaryAvatar";
+import Canvas from "../../../common/Canvas/Canvas";
+import useAppMedia from "../../../hooks/useAppMedia";
+import { useTheme } from "@mui/material/styles";
 
 const AddUsers = () => {
   const userSlice = useAppSelector((state) => state.userSlice);
+  const theme = useTheme();
+  const { isMobile, isTablet, isDesktop, isTv } = useAppMedia({ theme });
 
   React.useEffect(() => {
     console.log("userSlice on mount", userSlice);
@@ -37,12 +41,28 @@ const AddUsers = () => {
     <AddUsersContainer className="add-users-container">
       <div className="inputs-title">
         <div className={"title"}>
-          <Typography variant={"h4"}>
-            {titles[userSlice.addUser.panel]?.title}
-          </Typography>
-          <Typography variant="body1">
-            {titles[userSlice.addUser.panel]?.info}
-          </Typography>
+          <div className="text">
+            <Typography variant={"h4"}>
+              {titles[userSlice.addUser.panel]?.title}
+            </Typography>
+
+            <Typography variant="body1">
+              {titles[userSlice.addUser.panel]?.info}
+            </Typography>
+          </div>
+
+          {userSlice.addUser.panel === USER_CONFIRM_PANNEL && (
+            <Canvas
+              className={"title-avatar"}
+              style={{
+                display: `${isMobile ? `inline` : isTablet ? `inline` : isDesktop ? `none` : isTv ? `none` : `inline`}`,
+              }}
+              shape={"circle"}
+              b64Str={userSlice.addUser.avatar.b64Str}
+              width={150}
+              height={150}
+            />
+          )}
         </div>
 
         {userSlice.addUser.panel === USER_CONFIRM_PANNEL && (
@@ -59,10 +79,6 @@ const AddUsers = () => {
           <UserConfirmPanel />
         )}
       </>
-
-      {userSlice.addUser.panel === "add-user-avatar" && (
-        <UserAddAvatarPreview />
-      )}
     </AddUsersContainer>
   );
 };

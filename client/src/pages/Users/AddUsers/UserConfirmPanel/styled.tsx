@@ -20,7 +20,7 @@ export const UserConfirmPanelContainer = styled(Box)(({ theme }) => {
         margin-bottom: 1rem;
 
         span:nth-of-type(1){
-            flex: 0 0 ${!isMobile ? `40%` : `0`};
+            flex: 0 0 ${!isMobile ? `10rem` : isTablet ? `0` : `0`};
             background: pink;
         }
 

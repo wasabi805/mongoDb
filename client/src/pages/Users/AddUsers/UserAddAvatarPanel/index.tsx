@@ -9,6 +9,8 @@ import {
 import { useDropzone } from "react-dropzone";
 import { DropzoneContainer } from "../../styled";
 import PortraitIcon from "@mui/icons-material/Portrait";
+import UserAddAvatarPreview from "./AvatarPreview";
+import { UserAddAvatarPreviewContainer } from "./styled";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function Dropzone({ handleDrop }: any) {
@@ -92,41 +94,47 @@ const UserAddAvatar = () => {
   useEffect(() => {}, [localState.base64str]);
 
   return (
-    <Box className="add-user-avatar">
-      <Box className={"drag-and-drop-container"}>
-        {<Dropzone className="drop-zone" handleDrop={handleDrop} />}
+    <UserAddAvatarPreviewContainer className="user-add-avatar-preview-container">
+      <Box className="add-user-avatar">
+        <Box className={"drag-and-drop-container"}>
+          {<Dropzone className="drop-zone" handleDrop={handleDrop} />}
+        </Box>
+
+        <div className="button-row">
+          <Button
+            sx={{ maxHeight: "3rem" }}
+            className={"submit-button"}
+            variant={"contained"}
+            // sx={{ width: "8rem" }}
+            // onClick={handleSubmitNewUser}
+            onClick={() =>
+              dispatch(setPanelAddUserForm({ addUser: { panel: "form-data" } }))
+            }
+          >
+            Prev
+          </Button>
+
+          <Button
+            sx={{ maxHeight: "3rem" }}
+            className={"submit-button"}
+            variant={"contained"}
+            // sx={{ width: "8rem" }}
+            // onClick={handleSubmitNewUser}
+            onClick={() =>
+              dispatch(
+                setPanelAddUserForm({
+                  addUser: { panel: "user-confirm-panel" },
+                }),
+              )
+            }
+          >
+            Next
+          </Button>
+        </div>
       </Box>
 
-      <div className="button-row">
-        <Button
-          sx={{ maxHeight: "3rem" }}
-          className={"submit-button"}
-          variant={"contained"}
-          // sx={{ width: "8rem" }}
-          // onClick={handleSubmitNewUser}
-          onClick={() =>
-            dispatch(setPanelAddUserForm({ addUser: { panel: "form-data" } }))
-          }
-        >
-          Prev
-        </Button>
-
-        <Button
-          sx={{ maxHeight: "3rem" }}
-          className={"submit-button"}
-          variant={"contained"}
-          // sx={{ width: "8rem" }}
-          // onClick={handleSubmitNewUser}
-          onClick={() =>
-            dispatch(
-              setPanelAddUserForm({ addUser: { panel: "user-confirm-panel" } }),
-            )
-          }
-        >
-          Next
-        </Button>
-      </div>
-    </Box>
+      <UserAddAvatarPreview />
+    </UserAddAvatarPreviewContainer>
   );
 };
 

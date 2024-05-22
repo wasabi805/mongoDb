@@ -12,9 +12,19 @@ export const AddUsersContainer = styled(Box)(({ theme }) => {
   return `
       
       .inputs-title{
+        display: flex;    
+        width: 80%;
        
         .title{
-         
+         display: flex;
+         width: 100%;
+         .text{
+          color: cyan;
+
+          .title-avatar {
+            display: ${isMobile ? `none` : isTv ? `none` : `inline`};
+          }
+         }
         }
 
         .avatar{

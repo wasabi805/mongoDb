@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 const test = `https://cdn.marvel.com/u/prod/marvel/i/mg/6/70/603d5b82a7e65/clean.jpg`;
-const Canvas = ({ b64Str, height, width, className, shape }) => {
+const Canvas = ({ b64Str, height, width, className, shape, style }) => {
   const canvas = React.useRef(null);
 
   const image = new Image();
@@ -32,6 +32,7 @@ const Canvas = ({ b64Str, height, width, className, shape }) => {
             https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Using_images
             "...If you try to call drawImage() before the image has finished loading, it won't do anything ."
             */
+
       image.src = b64Str;
     }
   };
@@ -65,6 +66,9 @@ const Canvas = ({ b64Str, height, width, className, shape }) => {
         "...If you try to call drawImage() before the image has finished loading, it won't do anything ."
         */
       image.src = b64Str;
+      canvas.current;
+
+      console.log(canvas.current.id, "canvas.current ");
     }
   };
 
@@ -78,9 +82,10 @@ const Canvas = ({ b64Str, height, width, className, shape }) => {
   return (
     <canvas
       ref={canvas}
-      className={className}
+      className={className && className}
       height={height}
       width={width}
+      style={{ ...(style && style) }}
     ></canvas>
   );
 };

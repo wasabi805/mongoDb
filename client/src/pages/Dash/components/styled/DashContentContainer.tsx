@@ -4,7 +4,10 @@ export const DashContentContainer = styled(Box)(({ theme }) => {
   const { breakpoints } = theme;
 
   return `
-       background: beige;
+        width: 100%;
+        background: beige;
+        padding: 2rem;
+        min-height: 88vh;
    
     `;
 });

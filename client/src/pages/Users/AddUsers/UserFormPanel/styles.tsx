@@ -1,13 +1,10 @@
-import { useState, useEffect } from "react";
-import { styled, useMediaQuery, Box } from "@mui/material";
+import { styled, Box } from "@mui/material";
 import useAppMedia from "../../../../hooks/useAppMedia";
 // div[class^="add-user-avatar"]
 export const AddUsersContainer = styled(Box)(({ theme }) => {
-  const { isDevice, isMobile, isTablet, isDesktop, isTv } = useAppMedia({
+  const { isMobile, isTablet } = useAppMedia({
     theme,
   });
-
-  console.log("useHook", isMobile, isTablet);
 
   return `
         display: flex;

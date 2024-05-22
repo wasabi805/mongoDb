@@ -25,14 +25,14 @@ const UserFormPanel = () => {
   const userSlice = useAppSelector((state) => state.userSlice);
 
   const handleUpdateAddUserForm = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     dispatch(addUserData({ info: { [name]: value } }));
   };
 
   const handleAddUserDataAddressInfo = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     dispatch(addUserDataAddressInfo({ [name]: value }));
@@ -71,7 +71,7 @@ const UserFormPanel = () => {
             // onClick={handleSubmitNewUser}
             onClick={() =>
               dispatch(
-                setPanelAddUserForm({ addUser: { panel: "add-user-avatar" } })
+                setPanelAddUserForm({ addUser: { panel: "add-user-avatar" } }),
               )
             }
           >
