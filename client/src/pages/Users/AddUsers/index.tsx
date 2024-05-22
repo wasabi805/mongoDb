@@ -60,12 +60,6 @@ const AddUsers = () => {
         )}
       </>
 
-      {userSlice.addUser.panel === "form-data" && (
-        <div className={"text-container"}>
-          <Typography>{dummyData}</Typography>
-        </div>
-      )}
-
       {userSlice.addUser.panel === "add-user-avatar" && (
         <UserAddAvatarPreview />
       )}

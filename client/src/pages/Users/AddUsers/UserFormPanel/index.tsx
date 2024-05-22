@@ -6,6 +6,7 @@ import {
   FormLabel,
   InputLabel,
   OutlinedInput,
+  Typography,
 } from "@mui/material";
 
 import { useAppDispatch, useAppSelector } from "../../../../store";
@@ -16,6 +17,7 @@ import {
 } from "../../../../store/slices/userSlice";
 
 import { AddUsersContainer } from "./styles";
+import { dummyData } from "../consts";
 
 const UserFormPanel = () => {
   const dispatch = useAppDispatch();
@@ -59,23 +61,27 @@ const UserFormPanel = () => {
         {Object.entries(userSlice?.addUser?.address).map(([key, value]) => (
           <Input inputKey={key} value={value} />
         ))}
+
+        <div className="button-row">
+          <Button
+            sx={{ maxHeight: "3rem" }}
+            className={"submit-button"}
+            variant={"contained"}
+            // sx={{ width: "8rem" }}
+            // onClick={handleSubmitNewUser}
+            onClick={() =>
+              dispatch(
+                setPanelAddUserForm({ addUser: { panel: "add-user-avatar" } })
+              )
+            }
+          >
+            next
+          </Button>
+        </div>
       </div>
 
-      <div className="button-row">
-        <Button
-          sx={{ maxHeight: "3rem" }}
-          className={"submit-button"}
-          variant={"contained"}
-          // sx={{ width: "8rem" }}
-          // onClick={handleSubmitNewUser}
-          onClick={() =>
-            dispatch(
-              setPanelAddUserForm({ addUser: { panel: "add-user-avatar" } })
-            )
-          }
-        >
-          next
-        </Button>
+      <div className={"text-container"}>
+        <Typography>{dummyData}</Typography>
       </div>
     </AddUsersContainer>
   );
